@@ -4,12 +4,14 @@ export default {
       id: 'qwerqwer',
       name: 'Bed',
       img: './img/bed.png',
+      HP: 200,
       text:
         'The bed can be used as a spawn point, just like the sleeping bag, but it has reduced cooldown use; instead of waiting 5 minutes like the Sleeping Bag, you just wait 2 minutes.',
     },
     {
       id: 'lkjhsdlfkg',
       name: 'Chair',
+      HP: 100,
       img: './img/chair.png',
       text:
         'The chair is normally made for decorative purpose. But you can mount it to receive 100% comfort. Hover over it and press the E key to mount it and press the space bar to dismount it.',
@@ -24,6 +26,7 @@ export default {
     {
       id: 'fnfnfnf',
       name: 'Rug Bear Skin',
+      HP: 100,
       img: './img/rug.bear.png',
       text:
         'Bear Rug skin that can be placed on most walls, floors, and ceilings. Note: If placed on a ceiling, standing directly below its head/neck will provide 100% comfort, even when alone.',
@@ -31,6 +34,7 @@ export default {
     {
       id: 'efekfekfe',
       name: 'Small Stash',
+      HP: 150,
       img: './img/stash.small.png',
       text:
         'Small stashes are a very useful tool in the early game, especially when saving enough resources to build a starter base, or hiding your key to your door.',
@@ -39,6 +43,8 @@ export default {
       id: 'rhtjj',
       name: 'Repair Bench',
       img: './img/box.repair.bench.png',
+      HP: 200,
+      Decay: '8 hours',
       text:
         "Repair benches offer a cost-effective way to repair once-broken items back to a usable state. Each repair costs half of the original cost of a new version of the item, and does not use components. Every time an item is repaired, it loses some of it's maximum durability. This is represented with a red portion on the durability bar of the item.",
     },
@@ -46,12 +52,16 @@ export default {
       id: 'rjtjtjtjt',
       name: 'Christmas Tree',
       img: './img/xmas.tree.png',
+      HP: 1000,
+      Decay: '96 hours',
       text:
         'The Christmas Tree is a festive item that can be placed on most horizontal surfaces. Many things can be placed onto it to make it look better, such as; decorative baubles, Decorative Gingerbread Men, Decorative Pinecones, Decorative Plastic Candy Canes, Decorative Tinsel, Star Tree Topper and Tree Lights.',
     },
     {
       id: 'kukukuk',
       name: 'Jack O Lantern Angry',
+      HP: 50,
+      Decay: '48 hours',
       img: './img/jackolantern.angry.png',
       text: 'A Lantern. Place it where you need light.',
     },
