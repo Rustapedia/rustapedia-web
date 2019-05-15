@@ -21,6 +21,12 @@ const makeSelectLoading = () =>
     globalState => globalState.loading,
   );
 
+const makeSelectData = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.data,
+  );
+
 const makeSelectError = () =>
   createSelector(
     selectGlobal,
@@ -39,6 +45,12 @@ const makeSelectLocation = () =>
     routerState => routerState.location,
   );
 
+const makeSelectCurrentItem = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.currentItem,
+  );
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -46,4 +58,6 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocation,
+  makeSelectData,
+  makeSelectCurrentItem,
 };
