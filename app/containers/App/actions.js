@@ -20,7 +20,7 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
   CURRENT_ITEM_CHANGED,
-  CURRENT_ITEMS_CHANGED,
+  CURRENT_CATEGORY_CHANGED,
 } from './constants';
 
 /**
@@ -78,9 +78,9 @@ export function currentItemChange(item) {
   };
 }
 
-export function currentItemsChange(items) {
+export function currentCategoryChange(category) {
   return {
-    type: CURRENT_ITEMS_CHANGED,
-    items,
+    type: CURRENT_CATEGORY_CHANGED,
+    category,
   };
 }

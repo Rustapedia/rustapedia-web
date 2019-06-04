@@ -8,15 +8,15 @@ import ListItem from './ListItem';
 import Img from './Img';
 import Wrapper from './Wrapper';
 
-import { currentItemChange, currentItemsChange } from '../App/actions';
+import { currentItemChange, currentCategoryChange } from '../App/actions';
 import {
   makeSelectCurrentItem,
-  makeSelectCurrentItems,
+  makeSelectCurrentCategory,
 } from '../App/selectors';
 
-const ItemsPage = ({ currentItems, onCurrentItemChanged }) => (
+const ItemsPage = ({ currentCategory, onCurrentItemChanged }) => (
   <ItemsContainer>
-    {currentItems.map(item => (
+    {currentCategory.map(item => (
       <Wrapper key={`wrapper:${item.id}`}>
         <ListItem
           key={item.id}
@@ -38,19 +38,20 @@ const ItemsPage = ({ currentItems, onCurrentItemChanged }) => (
 );
 
 ItemsPage.propTypes = {
-  currentItems: PropTypes.array,
+  currentCategory: PropTypes.array,
   onCurrentItemChanged: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItems: makeSelectCurrentItems(),
+  currentItems: makeSelectCurrentCategory(),
   currentItem: makeSelectCurrentItem(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onCurrentItemChanged: item => dispatch(currentItemChange(item)),
-    onCurrentItemsChanged: items => dispatch(currentItemsChange(items)),
+    onCurrentItemsChanged: category =>
+      dispatch(currentCategoryChange(category)),
   };
 }
 
