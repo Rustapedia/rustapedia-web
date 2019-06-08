@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
-import { makeSelectCurrentItems, makeSelectData } from '../App/selectors';
-import { currentItemsChange } from '../App/actions';
+import { makeSelectCurrentCategory, makeSelectData } from '../App/selectors';
+import { currentCategoryChange } from '../App/actions';
 
-const Header = ({ onCurrentItemsChanged, data }) => (
+const Header = ({ onCurrentCategoryChanged, data }) => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
@@ -19,7 +19,7 @@ const Header = ({ onCurrentItemsChanged, data }) => (
             <div key={category}>
               <Link
                 to={`/${category}`}
-                onClick={() => onCurrentItemsChanged(data[category])}
+                onClick={() => onCurrentCategoryChanged(data[category])}
               >
                 {category}
               </Link>
@@ -44,17 +44,18 @@ const Header = ({ onCurrentItemsChanged, data }) => (
 
 Header.propTypes = {
   data: PropTypes.object,
-  onCurrentItemsChanged: PropTypes.func,
+  onCurrentCategoryChanged: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItems: makeSelectCurrentItems(),
+  currentItems: makeSelectCurrentCategory(),
   data: makeSelectData(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onCurrentItemsChanged: items => dispatch(currentItemsChange(items)),
+    onCurrentCategoryChanged: category =>
+      dispatch(currentCategoryChange(category)),
   };
 }
 

@@ -14,7 +14,7 @@ import {
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
   CURRENT_ITEM_CHANGED,
-  CURRENT_ITEMS_CHANGED,
+  CURRENT_CATEGORY_CHANGED,
 } from './constants';
 
 // The initial state of the App
@@ -27,7 +27,7 @@ export const initialState = {
   },
   data,
   currentItem: {},
-  currentItems: [],
+  currentCategory: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -55,8 +55,8 @@ const appReducer = (state = initialState, action) =>
         draft.currentItem = action.item;
         break;
 
-      case CURRENT_ITEMS_CHANGED:
-        draft.currentItems = action.items;
+      case CURRENT_CATEGORY_CHANGED:
+        draft.currentCategory = action.Category;
         break;
     }
   });

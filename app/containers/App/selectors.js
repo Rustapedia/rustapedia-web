@@ -51,10 +51,10 @@ const makeSelectCurrentItem = () =>
     globalState => globalState.currentItem,
   );
 
-const makeSelectCurrentItems = () =>
+const makeSelectCurrentCategory = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.currentItems,
+    globalState => globalState.currentCategory,
   );
 
 export {
@@ -66,5 +66,5 @@ export {
   makeSelectLocation,
   makeSelectData,
   makeSelectCurrentItem,
-  makeSelectCurrentItems,
+  makeSelectCurrentCategory,
 };

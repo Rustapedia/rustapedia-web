@@ -23,8 +23,8 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import data from './data';
 import ItemPage from '../ItemPage';
-import { makeSelectCurrentItems, makeSelectData } from './selectors';
-import { currentItemsChange } from './actions';
+import { makeSelectCurrentCategory, makeSelectData } from './selectors';
+import { currentCategoryChange } from './actions';
 
 import GlobalStyle from '../../global-styles';
 
@@ -37,7 +37,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-const App = ({ onCurrentItemsChanged }) => (
+const App = ({ onCurrentCategoryChanged }) => (
   <AppWrapper>
     <Helmet
       titleTemplate="%s - React.js Boilerplate"
@@ -54,8 +54,8 @@ const App = ({ onCurrentItemsChanged }) => (
           key={category}
           path={`/${category}`}
           render={() => {
-            onCurrentItemsChanged(data[category]);
-            return <ItemsPage currentItems={data[category]} />;
+            onCurrentCategoryChanged(data[category]);
+            return <ItemsPage currentCategory={data[category]} />;
           }}
         />
       ))}
@@ -68,17 +68,18 @@ const App = ({ onCurrentItemsChanged }) => (
 );
 
 App.propTypes = {
-  onCurrentItemsChanged: PropTypes.func,
+  onCurrentCategoryChanged: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItems: makeSelectCurrentItems(),
+  currentItems: makeSelectCurrentCategory(),
   data: makeSelectData(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onCurrentItemsChanged: items => dispatch(currentItemsChange(items)),
+    onCurrentCategoryChanged: category =>
+      dispatch(currentCategoryChange(category)),
   };
 }
 
