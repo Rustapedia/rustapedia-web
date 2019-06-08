@@ -23,8 +23,12 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import data from './data';
 import ItemPage from '../ItemPage';
-import { makeSelectCurrentCategory, makeSelectData } from './selectors';
-import { currentCategoryChange } from './actions';
+import {
+  makeSelectCurrentCategory,
+  makeSelectData,
+  makeSelectImages,
+} from './selectors';
+import { currentCategoryChange, loadImages } from './actions';
 
 import GlobalStyle from '../../global-styles';
 
@@ -37,49 +41,77 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-const App = ({ onCurrentCategoryChanged }) => (
-  <AppWrapper>
-    <Helmet
-      titleTemplate="%s - React.js Boilerplate"
-      defaultTitle="React.js Boilerplate"
-    >
-      <meta name="description" content="A React.js Boilerplate application" />
-    </Helmet>
-    <Header />
-    <Switch>
-      <Route exact path="/home" component={HomePage} />
-      <Route path="/features" component={FeaturePage} />
-      {Object.keys(data).map(category => (
-        <Route
-          key={category}
-          path={`/${category}`}
-          render={() => {
-            onCurrentCategoryChanged(data[category]);
-            return <ItemsPage currentCategory={data[category]} />;
-          }}
-        />
-      ))}
-      <Route path={data.items.name} component={ItemPage} />
-      <Route path="" component={NotFoundPage} />
-    </Switch>
-    <Footer />
-    <GlobalStyle />
-  </AppWrapper>
-);
+function importAll(r) {
+  const images = {};
+  // eslint-disable-next-line array-callback-return
+  r.keys().map(item => {
+    images[item.replace('./', '')] = r(item);
+  });
+  return images;
+}
+
+// eslint-disable-next-line react/prefer-stateless-function
+class App extends React.Component {
+  componentDidMount() {
+    const images = importAll(
+      require.context('../../images', false, /\.(png|jpe?g|svg)$/),
+    );
+    this.props.onLoadImages(images);
+  }
+
+  render() {
+    const { onCurrentCategoryChanged } = this.props;
+    return (
+      <AppWrapper>
+        <Helmet
+          titleTemplate="%s - React.js Boilerplate"
+          defaultTitle="React.js Boilerplate"
+        >
+          <meta
+            name="description"
+            content="A React.js Boilerplate application"
+          />
+        </Helmet>
+        <Header />
+        <Switch>
+          <Route exact path="/home" component={HomePage} />
+          <Route path="/features" component={FeaturePage} />
+          {Object.keys(data).map(category => (
+            <Route
+              key={category}
+              path={`/${category}`}
+              render={() => {
+                onCurrentCategoryChanged(data[category]);
+                return <ItemsPage currentCategory={data[category]} />;
+              }}
+            />
+          ))}
+          <Route path={data.items.name} component={ItemPage} />
+          <Route path="" component={NotFoundPage} />
+        </Switch>
+        <Footer />
+        <GlobalStyle />
+      </AppWrapper>
+    );
+  }
+}
 
 App.propTypes = {
   onCurrentCategoryChanged: PropTypes.func,
+  onLoadImages: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   currentItems: makeSelectCurrentCategory(),
   data: makeSelectData(),
+  images: makeSelectImages(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onCurrentCategoryChanged: category =>
       dispatch(currentCategoryChange(category)),
+    onLoadImages: images => dispatch(loadImages(images)),
   };
 }
 

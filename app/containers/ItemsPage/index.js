@@ -5,16 +5,17 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import ItemsContainer from './ItemsContainer';
 import ListItem from './ListItem';
-import Img from './Img';
 import Wrapper from './Wrapper';
+import Img from './Img';
 
 import { currentItemChange, currentCategoryChange } from '../App/actions';
 import {
   makeSelectCurrentItem,
   makeSelectCurrentCategory,
+  makeSelectImages,
 } from '../App/selectors';
 
-const ItemsPage = ({ currentCategory, onCurrentItemChanged }) => (
+const ItemsPage = ({ currentCategory, onCurrentItemChanged, images }) => (
   <ItemsContainer>
     {currentCategory.map(item => (
       <Wrapper key={`wrapper:${item.id}`}>
@@ -27,8 +28,8 @@ const ItemsPage = ({ currentCategory, onCurrentItemChanged }) => (
           <Img
             key={`img:${item.id}`}
             // eslint-disable-next-line global-require
-            src={require(`${item.img}`)}
-            alt=""
+            src={images[`${item.img}.png`]}
+            alt={item.name}
           />
           <div key={item.name}>{item.name}</div>
         </ListItem>
@@ -40,11 +41,13 @@ const ItemsPage = ({ currentCategory, onCurrentItemChanged }) => (
 ItemsPage.propTypes = {
   currentCategory: PropTypes.array,
   onCurrentItemChanged: PropTypes.func,
+  images: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   currentItems: makeSelectCurrentCategory(),
   currentItem: makeSelectCurrentItem(),
+  images: makeSelectImages(),
 });
 
 export function mapDispatchToProps(dispatch) {

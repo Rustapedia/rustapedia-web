@@ -15,6 +15,7 @@ import {
   LOAD_REPOS_ERROR,
   CURRENT_ITEM_CHANGED,
   CURRENT_CATEGORY_CHANGED,
+  LOAD_IMAGES,
 } from './constants';
 
 // The initial state of the App
@@ -25,6 +26,7 @@ export const initialState = {
   userData: {
     repositories: false,
   },
+  images: {},
   data,
   currentItem: {},
   currentCategory: [],
@@ -49,6 +51,10 @@ const appReducer = (state = initialState, action) =>
       case LOAD_REPOS_ERROR:
         draft.error = action.error;
         draft.loading = false;
+        break;
+
+      case LOAD_IMAGES:
+        draft.images = action.images;
         break;
 
       case CURRENT_ITEM_CHANGED:

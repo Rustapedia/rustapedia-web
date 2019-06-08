@@ -27,6 +27,12 @@ const makeSelectData = () =>
     globalState => globalState.data,
   );
 
+const makeSelectImages = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.images,
+  );
+
 const makeSelectError = () =>
   createSelector(
     selectGlobal,
@@ -65,6 +71,7 @@ export {
   makeSelectRepos,
   makeSelectLocation,
   makeSelectData,
+  makeSelectImages,
   makeSelectCurrentItem,
   makeSelectCurrentCategory,
 };
