@@ -28,7 +28,7 @@ const ItemsPage = ({ currentCategory, onCurrentItemChanged, images }) => (
           <Img
             key={`img:${item.id}`}
             // eslint-disable-next-line global-require
-            src={images[`${item.img}.png`]}
+            src={images[`${item.shortName}.png`]}
             alt={item.name}
           />
           <div key={item.name}>{item.name}</div>

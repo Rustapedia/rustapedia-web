@@ -8,7 +8,7 @@ import { makeSelectCurrentItem, makeSelectImages } from '../App/selectors';
 
 const ItemPage = ({ currentItem, images }) => (
   <div>
-    <img alt={currentItem.name} src={images[`${currentItem.img}.png`]} />
+    <img alt={currentItem.name} src={images[`${currentItem.shortName}.png`]} />
   </div>
 );
 
