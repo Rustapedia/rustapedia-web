@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectCurrentItem, makeSelectImages } from '../App/selectors';
+import { makeSelectImages } from '../App/selectors';
 
 const ItemPage = ({ currentItem, images }) => (
   <div>
@@ -18,7 +18,6 @@ ItemPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItem: makeSelectCurrentItem(),
   images: makeSelectImages(),
 });
 

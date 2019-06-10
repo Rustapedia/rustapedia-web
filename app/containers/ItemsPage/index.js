@@ -7,13 +7,8 @@ import ItemsContainer from './ItemsContainer';
 import ListItem from './ListItem';
 import Wrapper from './Wrapper';
 import Img from './Img';
-
-import { currentItemChange, currentCategoryChange } from '../App/actions';
-import {
-  makeSelectCurrentItem,
-  makeSelectCurrentCategory,
-  makeSelectImages,
-} from '../App/selectors';
+import { currentItemChange } from '../App/actions';
+import { makeSelectImages } from '../App/selectors';
 
 const ItemsPage = ({ currentCategory, onCurrentItemChanged, images }) => (
   <ItemsContainer>
@@ -45,16 +40,12 @@ ItemsPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItems: makeSelectCurrentCategory(),
-  currentItem: makeSelectCurrentItem(),
   images: makeSelectImages(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onCurrentItemChanged: item => dispatch(currentItemChange(item)),
-    onCurrentItemsChanged: category =>
-      dispatch(currentCategoryChange(category)),
   };
 }
 

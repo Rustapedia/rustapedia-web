@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
-import { makeSelectCurrentCategory, makeSelectData } from '../App/selectors';
+import { makeSelectData } from '../App/selectors';
 import { currentCategoryChange } from '../App/actions';
 
 const Header = ({ onCurrentCategoryChanged, data }) => (
@@ -48,7 +48,6 @@ Header.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItems: makeSelectCurrentCategory(),
   data: makeSelectData(),
 });
 
