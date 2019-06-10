@@ -23,12 +23,12 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import data from './data';
 import ItemPage from '../ItemPage';
+import { makeSelectData, makeSelectImages } from './selectors';
 import {
-  makeSelectCurrentCategory,
-  makeSelectData,
-  makeSelectImages,
-} from './selectors';
-import { currentCategoryChange, loadImages } from './actions';
+  currentCategoryChange,
+  currentItemChange,
+  loadImages,
+} from './actions';
 
 import GlobalStyle from '../../global-styles';
 
@@ -61,6 +61,7 @@ class App extends React.Component {
 
   render() {
     const { onCurrentCategoryChanged } = this.props;
+    const { onCurrentItemChanged } = this.props;
     return (
       <AppWrapper>
         <Helmet
@@ -76,17 +77,30 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/home" component={HomePage} />
           <Route path="/features" component={FeaturePage} />
-          {Object.keys(data).map(category => (
-            <Route
-              key={category}
-              path={`/${category}`}
-              render={() => {
-                onCurrentCategoryChanged(data[category]);
-                return <ItemsPage currentCategory={data[category]} />;
-              }}
-            />
-          ))}
-          <Route path={data.items.name} component={ItemPage} />
+          <div>
+            {Object.keys(data).map(category => (
+              <div key={category}>
+                <Route
+                  key={category}
+                  path={`/${category}`}
+                  render={() => {
+                    onCurrentCategoryChanged(data[category]);
+                    return <ItemsPage currentCategory={data[category]} />;
+                  }}
+                />
+                {data[category].map(item => (
+                  <Route
+                    key={item.name}
+                    path={`/${item.name}`}
+                    render={() => {
+                      onCurrentItemChanged(item);
+                      return <ItemPage currentItem={item} />;
+                    }}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
           <Route path="" component={NotFoundPage} />
         </Switch>
         <Footer />
@@ -99,10 +113,10 @@ class App extends React.Component {
 App.propTypes = {
   onCurrentCategoryChanged: PropTypes.func,
   onLoadImages: PropTypes.func,
+  onCurrentItemChanged: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentItems: makeSelectCurrentCategory(),
   data: makeSelectData(),
   images: makeSelectImages(),
 });
@@ -112,6 +126,7 @@ export function mapDispatchToProps(dispatch) {
     onCurrentCategoryChanged: category =>
       dispatch(currentCategoryChange(category)),
     onLoadImages: images => dispatch(loadImages(images)),
+    onCurrentItemChanged: item => dispatch(currentItemChange(item)),
   };
 }
 
