@@ -80,8 +80,8 @@ export function ItemPage({
         </tbody>
       </table>
 
-      <div>{lootStatus ? <h1>Case 1</h1> : null}</div>
-      <div>{craftStatus ? <h1>Case 2</h1> : null}</div>
+      <div>{lootStatus ? <h1>Ты лох!!!</h1> : null}</div>
+      <div>{craftStatus ? <h1>Ты идиот!!!</h1> : null}</div>
     </div>
   );
 }
@@ -89,25 +89,14 @@ export function ItemPage({
 ItemPage.propTypes = {
   currentItem: PropTypes.object,
   images: PropTypes.object,
-  onCurrentLootStatusChanged: PropTypes.func,
-  onCurrentCraftStatusChanged: PropTypes.func,
-  lootStatus: PropTypes.bool,
-  craftStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   images: makeSelectImages(),
-  lootStatus: makeSelectLootStatus(),
-  craftStatus: makeSelectCraftStatus(),
 });
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    onCurrentLootStatusChanged: lootStatus =>
-      dispatch(lootStatusChange(lootStatus)),
-    onCurrentCraftStatusChanged: craftStatus =>
-      dispatch(craftStatusChange(craftStatus)),
-  };
+export function mapDispatchToProps() {
+  return {};
 }
 
 const withConnect = connect(
