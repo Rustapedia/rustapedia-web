@@ -7,10 +7,14 @@ export default {
       HP: 300,
       text:
         'The bed can be used as a spawn point, just like the sleeping bag, but it has reduced cooldown use; instead of waiting 5 minutes like the Sleeping Bag, you just wait 2 minutes.',
-      respawnTimer: 2,
-      identifier: -1273339005,
-      stackSize: 1,
-      despawnTime: 20,
+      infoBox: {
+        respawnTimer: 2,
+      },
+      mainInfo: {
+        identifier: 1273339005,
+        stackSize: 1,
+        despawnTime: 20,
+      },
       loot: [
         {
           container: 'Sunken Chest',
@@ -31,6 +35,27 @@ export default {
           chance: 0.3,
         },
       ],
+      craft: [
+        {
+          blueprint: 'Bed Blueprint',
+          ingredients: {
+            cloth: 60,
+            metalFragments: 100,
+            sewingKit: 2,
+          },
+          time: '15 sec - 1 min',
+          workBenchLevel: 'Work Bench Level 1',
+        },
+        {
+          blueprint: 'Sewing Kit Blueprint',
+          ingredients: {
+            cloth: 20,
+            rope: 3,
+          },
+          time: '1 sec',
+          workBenchLevel: 'Work Bench Level 3',
+        },
+      ],
     },
     {
       id: 'lkjhsdlfkg',
@@ -39,9 +64,11 @@ export default {
       shortName: 'chair',
       text:
         'The chair is normally made for decorative purpose. But you can mount it to receive 100% comfort. Hover over it and press the E key to mount it and press the space bar to dismount it.',
-      identifier: 1534542921,
-      stackSize: 1,
-      despawnTime: 5,
+      mainInfo: {
+        identifier: 1534542921,
+        stackSize: 1,
+        despawnTime: 5,
+      },
       loot: [
         {
           container: 'Sunken Chest',
@@ -69,10 +96,14 @@ export default {
       shortName: 'botabag',
       text:
         'The Bota Bag is a handmade pouch for the collection and transportation of drinkable water.',
-      capacity: 500,
-      identifier: 613961768,
-      stackSize: 1,
-      despawnTime: 5,
+      weaponBox: {
+        capacity: 500,
+      },
+      mainInfo: {
+        identifier: 613961768,
+        stackSize: 1,
+        despawnTime: 5,
+      },
     },
   ],
   Weapons: [
@@ -82,13 +113,14 @@ export default {
       shortName: 'rifle.ak',
       text:
         'The Assault Rifle is an accurate, powerful, and fully automatic rifle that fires 5.56 rifle rounds. It has a moderate rate of fire which allows for proficiency at close to medium range.',
-
-      damage: 50,
-      rateOfFire: 450,
-      aimCone: 0.2,
-      capacity: 30,
-      reload: 4.4,
-      draw: 1,
+      weaponBox: {
+        damage: 50,
+        rateOfFire: 450,
+        aimCone: 0.2,
+        capacity: 30,
+        reload: 4.4,
+        draw: 1,
+      },
       loot: [
         {
           container: 'Locked Crate',
@@ -134,12 +166,14 @@ export default {
       shortName: 'm249',
       text:
         'A military-grade Light Machine Gun that only spawns in helicopter crates and Bradly APC, the M249 holds the most bullets in-game out of all the guns, with a magazine capacity of 100. Does an extremely high amount of damage with a high rate of fire and is extremely accurate, but has a large amount of recoil. Melts Everybody.',
-      damage: 65,
-      rateOfFire: 500,
-      aimCone: 0.2,
-      capacity: 100,
-      reload: 7.5,
-      draw: 1.8,
+      weaponBox: {
+        damage: 65,
+        rateOfFire: 500,
+        aimCone: 0.2,
+        capacity: 100,
+        reload: 7.5,
+        draw: 1.8,
+      },
       loot: [
         {
           container: 'Helicopter Crate',
@@ -161,12 +195,14 @@ export default {
       shortName: 'rifle.semiauto',
       text:
         'The Semi-Automatic Rifle is a staple of low quality weapons due to its high cost-efficiency. With its medium-tier damage, comparatively low recoil and high accuracy, the Semi-Automatic Rifle is the jack of all trades, but master of none.',
-      damage: 40,
-      rateOfFire: 400,
-      aimCone: 0.75,
-      capacity: 10,
-      reload: 2.9,
-      draw: 0.5,
+      weaponBox: {
+        damage: 40,
+        rateOfFire: 400,
+        aimCone: 0.75,
+        capacity: 10,
+        reload: 2.9,
+        draw: 0.5,
+      },
       loot: [
         {
           container: 'Locked Crate',
@@ -211,9 +247,7 @@ export default {
       identifier: 1548091822,
       stackSize: 10,
       despawnTime: 5,
-      calories: +30,
-      hydration: +15,
-      health: +2,
+      foodBox: { calories: 30, hydration: 15, health: 2 },
       loot: [
         {
           container: 'Food Crate',
@@ -238,9 +272,7 @@ export default {
       identifier: 363467698,
       stackSize: 10,
       despawnTime: 5,
-      calories: +100,
-      hydration: +1,
-      healthOverTime: +2,
+      foodBox: { calories: 100, hydration: 1, healthOverTime: 2 },
       loot: [
         {
           container: 'Food Crate',

@@ -3,100 +3,117 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { useInjectReducer } from 'utils/injectReducer';
 import { makeSelectImages } from '../App/selectors';
 import H1 from '../../components/H1';
+import MainItemInfo from '../ItemMainInfo';
+import ItemInfoBox from '../ItemInfoBox';
+import WeaponBox from '../WeaponBox';
+import FoodBox from '../FoodBox';
+import reducer from './reducer';
+import { lootStatusChange, craftStatusChange } from './actions';
+import { makeSelectLootStatus, makeSelectCraftStatus } from './selectors';
 
-const ItemPage = ({ currentItem, images }) => (
-  <div>
+const key = 'item';
+
+export function ItemPage({
+  currentItem,
+  images,
+  onCurrentLootStatusChanged,
+  onCurrentCraftStatusChanged,
+  lootStatus,
+  craftStatus,
+}) {
+  useInjectReducer({ key, reducer });
+
+  return (
     <div>
-      <H1>{currentItem.name}</H1>
-      <div>{currentItem.text}</div>
-    </div>
-    <div>
-      <img
-        alt={currentItem.name}
-        src={images[`${currentItem.shortName}.png`]}
-      />
-      {currentItem.HP !== undefined && (
-        <table>
-          <tbody>
-            <tr>
-              <th>HP</th>
-              <th>{currentItem.HP}</th>
-            </tr>
-          </tbody>
-        </table>
+      <div>
+        <H1>{currentItem.name}</H1>
+        <div>{currentItem.text}</div>
+      </div>
+      <div>
+        <img
+          alt={currentItem.name}
+          src={images[`${currentItem.shortName}.png`]}
+        />
+        {currentItem.HP !== undefined && (
+          <table>
+            <tbody>
+              <tr>
+                <th>HP</th>
+                <th>{currentItem.HP}</th>
+              </tr>
+            </tbody>
+          </table>
+        )}
+      </div>
+      {currentItem.mainInfo !== undefined && (
+        <MainItemInfo currentItem={currentItem.mainInfo} />
       )}
-    </div>
-    <div>
+      {currentItem.infoBox !== undefined && (
+        <ItemInfoBox currentItem={currentItem.infoBox} />
+      )}
+      {currentItem.foodBox !== undefined && (
+        <FoodBox currentItem={currentItem.foodBox} />
+      )}
+      {currentItem.weaponBox !== undefined && (
+        <WeaponBox currentItem={currentItem.weaponBox} />
+      )}
       <table>
         <tbody>
           <tr>
-            <td>Damage</td>
-            <td>{currentItem.damage}</td>
-          </tr>
-          <tr>
-            <td>Rate of Fire</td>
-            <td>{currentItem.rateOfFire}</td>
-          </tr>
-          <tr>
-            <td>Aim Cone</td>
-            <td>{currentItem.aimCone}</td>
-          </tr>
-          <tr>
-            <td>Capacity</td>
-            <td>{currentItem.capacity}</td>
-          </tr>
-          <tr>
-            <td>Reload</td>
-            <td>{currentItem.reload}</td>
-          </tr>
-          <tr>
-            <td>Draw</td>
-            <td>{currentItem.draw}</td>
+            {currentItem.loot !== undefined && (
+              <th onClick={() => onCurrentLootStatusChanged()}>Loot</th>
+            )}
+            {currentItem.craft !== undefined && (
+              <th onClick={() => onCurrentCraftStatusChanged()}>Craft</th>
+            )}
+            {currentItem.experiment !== undefined && <th>Experiment</th>}
+            {currentItem.research !== undefined && <th>Research</th>}
+            {currentItem.repair !== undefined && <th>Repair</th>}
+            {currentItem.recycle !== undefined && <th>Recycle</th>}
+            {currentItem.mods !== undefined && <th>Mods</th>}
+            {currentItem.damage !== undefined && <th>Damage</th>}
+            {currentItem.ammoFor !== undefined && <th>Ammo For</th>}
           </tr>
         </tbody>
       </table>
+
+      <div>{lootStatus ? <h1>Case 1</h1> : null}</div>
+      <div>{craftStatus ? <h1>Case 2</h1> : null}</div>
     </div>
-    <div>
-      {currentItem.loot !== undefined && (
-        <table>
-          <tbody>
-            <tr>
-              <th>Container</th>
-              <th>Condition</th>
-              <th>Amount</th>
-              <th>Chance</th>
-            </tr>
-            {currentItem.loot.map(elems => (
-              <tr key={elems.container}>
-                <td>{elems.container}</td>
-                <td>{elems.condition}</td>
-                <td>{elems.amount}</td>
-                <td>{elems.chance}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  </div>
-);
+  );
+}
 
 ItemPage.propTypes = {
   currentItem: PropTypes.object,
   images: PropTypes.object,
+  onCurrentLootStatusChanged: PropTypes.func,
+  onCurrentCraftStatusChanged: PropTypes.func,
+  lootStatus: PropTypes.bool,
+  craftStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   images: makeSelectImages(),
+  lootStatus: makeSelectLootStatus(),
+  craftStatus: makeSelectCraftStatus(),
 });
 
-export function mapDispatchToProps() {
-  return {};
+export function mapDispatchToProps(dispatch) {
+  return {
+    onCurrentLootStatusChanged: lootStatus =>
+      dispatch(lootStatusChange(lootStatus)),
+    onCurrentCraftStatusChanged: craftStatus =>
+      dispatch(craftStatusChange(craftStatus)),
+  };
 }
 
-const withConnect = connect(mapStateToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 export default compose(
   withConnect,
