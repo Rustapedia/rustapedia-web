@@ -62,7 +62,7 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case CURRENT_CATEGORY_CHANGED:
-        draft.currentCategory = action.Category;
+        draft.currentCategory = action.category;
         break;
     }
   });
