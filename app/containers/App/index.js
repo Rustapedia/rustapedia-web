@@ -24,11 +24,7 @@ import PropTypes from 'prop-types';
 import data from './data';
 import ItemPage from '../ItemPage';
 import { makeSelectData, makeSelectImages } from './selectors';
-import {
-  currentCategoryChange,
-  currentItemChange,
-  loadImages,
-} from './actions';
+import { loadImages } from './actions';
 
 import GlobalStyle from '../../global-styles';
 
@@ -60,8 +56,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { onCurrentCategoryChanged } = this.props;
-    const { onCurrentItemChanged } = this.props;
     return (
       <AppWrapper>
         <Helmet
@@ -75,32 +69,30 @@ class App extends React.Component {
         </Helmet>
         <Header />
         <Switch>
-          <Route exact path="/home" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/features" component={FeaturePage} />
-          <div>
-            {Object.keys(data).map(category => (
-              <div key={category}>
-                <Route
-                  key={category}
-                  path={`/${category}`}
-                  render={() => {
-                    onCurrentCategoryChanged(data[category]);
-                    return <ItemsPage currentCategory={data[category]} />;
-                  }}
-                />
-                {data[category].map(item => (
+          {Object.keys(data).map(nav => (
+            <div>
+              {Object.keys(data[nav]).map(category => (
+                <div key={category}>
                   <Route
-                    key={item.name}
-                    path={`/${item.name}`}
-                    render={() => {
-                      onCurrentItemChanged(item);
-                      return <ItemPage currentItem={item} />;
-                    }}
+                    key={category}
+                    path={`/${category}`}
+                    render={() => (
+                      <ItemsPage currentCategory={data[nav][category]} />
+                    )}
                   />
-                ))}
-              </div>
-            ))}
-          </div>
+                  {data[nav][category].map(item => (
+                    <Route
+                      key={item.name}
+                      path={`/${item.name}`}
+                      render={() => <ItemPage currentItem={item} />}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
           <Route path="" component={NotFoundPage} />
         </Switch>
         <Footer />
@@ -111,9 +103,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  onCurrentCategoryChanged: PropTypes.func,
   onLoadImages: PropTypes.func,
-  onCurrentItemChanged: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -123,10 +113,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onCurrentCategoryChanged: category =>
-      dispatch(currentCategoryChange(category)),
     onLoadImages: images => dispatch(loadImages(images)),
-    onCurrentItemChanged: item => dispatch(currentItemChange(item)),
   };
 }
 

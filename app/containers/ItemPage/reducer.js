@@ -1,7 +1,7 @@
 import produce from 'immer';
 import { LOOT_STATUS_CHANGED, CRAFT_STATUS_CHANGED } from './constants';
 
-// The initial state of the App
+// The initial state of the ItemPage
 export const initialState = {
   lootStatus: false,
   craftStatus: false,

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
+import Img from 'components/Img';
 import { makeSelectImages } from '../App/selectors';
 import H1 from '../../components/H1';
 import MainItemInfo from '../ItemMainInfo';
@@ -13,7 +14,6 @@ import FoodBox from '../FoodBox';
 import reducer from './reducer';
 import { lootStatusChange, craftStatusChange } from './actions';
 import { makeSelectLootStatus, makeSelectCraftStatus } from './selectors';
-
 const key = 'item';
 
 export function ItemPage({
@@ -80,8 +80,61 @@ export function ItemPage({
         </tbody>
       </table>
 
-      <div>{lootStatus ? <h1>Case 1</h1> : null}</div>
-      <div>{craftStatus ? <h1>Case 2</h1> : null}</div>
+      <div>
+        {lootStatus && (
+          <table>
+            <thead>
+              <tr>
+                <th>Container</th>
+                <th>Condition</th>
+                <th>Amount</th>
+                <th>Chance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItem.loot.map(elems => (
+                <tr key={elems.container}>
+                  <td>{elems.container}</td>
+                  <td>{elems.condition}</td>
+                  <td>{elems.amount}</td>
+                  <td>{elems.chance}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+      <div>
+        {craftStatus && (
+          <table>
+            <thead>
+              <tr>
+                <th>Blueprint</th>
+                <th>Ingredients</th>
+                <th>Time</th>
+                <th>Workbench Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItem.craft.map(elems => (
+                <tr key={elems.blueprint}>
+                  <td>{elems.blueprint}</td>
+                  <td>
+                    {Object.keys(elems.ingredients).map(res => (
+                      <span key={res}>
+                        <Img alt={res} src={images[`${res}.png`]} />
+                        {elems.ingredients[res]}
+                      </span>
+                    ))}
+                  </td>
+                  <td>{elems.time}</td>
+                  <td>{elems.workBenchLevel}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }
