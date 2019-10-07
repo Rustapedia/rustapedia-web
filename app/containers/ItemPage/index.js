@@ -30,7 +30,11 @@ export function ItemPage({
     <div>
       <div>
         <H1>{currentItem.name}</H1>
-        <div>{currentItem.text}</div>
+        <p>{currentItem.text}</p>
+        <p>
+          {currentItem.additionalText !== undefined &&
+            currentItem.additionalText}
+        </p>
       </div>
       <div>
         <img

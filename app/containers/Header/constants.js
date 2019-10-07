@@ -9,5 +9,4 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const SHOW_SUB_MENU = 'SHOW_SUB_MENU';
 export const CURRENT_NAV_CHANGED = 'CURRENT_NAV_CHANGED';
