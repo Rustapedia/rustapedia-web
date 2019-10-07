@@ -1,11 +1,4 @@
-import { SHOW_SUB_MENU, CURRENT_NAV_CHANGED } from './constants';
-
-export function showSubMenuStatus(showSubMenu) {
-  return {
-    type: SHOW_SUB_MENU,
-    showSubMenu,
-  };
-}
+import { CURRENT_NAV_CHANGED } from './constants';
 
 export function currentNavChange(nav) {
   return {

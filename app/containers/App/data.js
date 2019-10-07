@@ -292,7 +292,27 @@ export default {
     ],
   },
   Environment: {
-    Animals: [],
+    Animals: [
+      {
+        id: 'sgdgdg',
+        name: 'Bear',
+        shortName: 'bear',
+        text:
+          'A powerful predator, bears are a large and fast enemy capable of injuring and killing weak or strong players within several seconds.',
+
+        additionalText:
+          'Bears are found in most biomes, especially in forested areas. It is recommended that a player avoid bears as much as possible, until they have weapons (preferably firearms), or others to help kill the foe.',
+        HP: 400,
+      },
+      {
+        id: 'sgdgdgfwwfw',
+        name: 'Boar',
+        shortName: 'boar',
+        text:
+          'A boar is a small, black animal that can be found in any biome. Like other animals, boars are attracted to seeds and will fight any competing animals for them. Typically, they run slower than the rest of the animals and are thus more easily killed. They may initiate combat if a players strays too close.',
+        HP: 150,
+      },
+    ],
     Ores: [],
     LootContainers: [],
     Trees: [],

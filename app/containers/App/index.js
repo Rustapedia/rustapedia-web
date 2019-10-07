@@ -71,28 +71,30 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/features" component={FeaturePage} />
-          {Object.keys(data).map(nav => (
-            <div>
-              {Object.keys(data[nav]).map(category => (
-                <div key={category}>
-                  <Route
-                    key={category}
-                    path={`/${category}`}
-                    render={() => (
-                      <ItemsPage currentCategory={data[nav][category]} />
-                    )}
-                  />
-                  {data[nav][category].map(item => (
+          <div>
+            {Object.keys(data).map(prop => (
+              <div key={prop}>
+                {Object.keys(data[prop]).map(category => (
+                  <div key={category}>
                     <Route
-                      key={item.name}
-                      path={`/${item.name}`}
-                      render={() => <ItemPage currentItem={item} />}
+                      key={category}
+                      path={`/${category}`}
+                      render={() => (
+                        <ItemsPage currentCategory={data[prop][category]} />
+                      )}
                     />
-                  ))}
-                </div>
-              ))}
-            </div>
-          ))}
+                    {data[prop][category].map(item => (
+                      <Route
+                        key={item.name}
+                        path={`/${item.name}`}
+                        render={() => <ItemPage currentItem={item} />}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
           <Route path="" component={NotFoundPage} />
         </Switch>
         <Footer />
