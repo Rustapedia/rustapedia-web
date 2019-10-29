@@ -5,6 +5,8 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import Img from 'components/Img';
+import Table from 'components/Table/Table';
+import P from 'components/P';
 import { makeSelectImages } from '../App/selectors';
 import H1 from '../../components/H1';
 import MainItemInfo from '../ItemMainInfo';
@@ -12,8 +14,10 @@ import ItemInfoBox from '../ItemInfoBox';
 import WeaponBox from '../WeaponBox';
 import FoodBox from '../FoodBox';
 import reducer from './reducer';
+import FlexWrapper from './FlexWrapper';
 import { lootStatusChange, craftStatusChange } from './actions';
 import { makeSelectLootStatus, makeSelectCraftStatus } from './selectors';
+import Button from './Button';
 const key = 'item';
 
 export function ItemPage({
@@ -28,115 +32,113 @@ export function ItemPage({
 
   return (
     <div>
+      <FlexWrapper>
+        <div>
+          <H1>{currentItem.name}</H1>
+          <P>{currentItem.text}</P>
+          <P>
+            {currentItem.additionalText !== undefined &&
+              currentItem.additionalText}
+          </P>
+          {currentItem.infoBox !== undefined && (
+            <ItemInfoBox currentItem={currentItem.infoBox} />
+          )}
+          {currentItem.foodBox !== undefined && (
+            <FoodBox currentItem={currentItem.foodBox} />
+          )}
+          {currentItem.weaponBox !== undefined && (
+            <WeaponBox currentItem={currentItem.weaponBox} />
+          )}
+        </div>
+        <div>
+          <div className="center">
+            <Img
+              alt={currentItem.name}
+              src={images[`${currentItem.shortName}.png`]}
+            />
+          </div>
+          {currentItem.mainInfo !== undefined && (
+            <MainItemInfo currentItem={currentItem.mainInfo} />
+          )}
+        </div>
+      </FlexWrapper>
       <div>
-        <H1>{currentItem.name}</H1>
-        <p>{currentItem.text}</p>
-        <p>
-          {currentItem.additionalText !== undefined &&
-            currentItem.additionalText}
-        </p>
-      </div>
-      <div>
-        <img
-          alt={currentItem.name}
-          src={images[`${currentItem.shortName}.png`]}
-        />
-        {currentItem.HP !== undefined && (
-          <table>
-            <tbody>
-              <tr>
-                <th>HP</th>
-                <th>{currentItem.HP}</th>
-              </tr>
-            </tbody>
-          </table>
+        {currentItem.loot !== undefined && (
+          <Button type="button" onClick={() => onCurrentLootStatusChanged()}>
+            Loot
+          </Button>
         )}
-      </div>
-      {currentItem.mainInfo !== undefined && (
-        <MainItemInfo currentItem={currentItem.mainInfo} />
-      )}
-      {currentItem.infoBox !== undefined && (
-        <ItemInfoBox currentItem={currentItem.infoBox} />
-      )}
-      {currentItem.foodBox !== undefined && (
-        <FoodBox currentItem={currentItem.foodBox} />
-      )}
-      {currentItem.weaponBox !== undefined && (
-        <WeaponBox currentItem={currentItem.weaponBox} />
-      )}
-      <table>
-        <tbody>
-          <tr>
-            {currentItem.loot !== undefined && (
-              <th onClick={() => onCurrentLootStatusChanged()}>Loot</th>
-            )}
-            {currentItem.craft !== undefined && (
-              <th onClick={() => onCurrentCraftStatusChanged()}>Craft</th>
-            )}
-            {currentItem.experiment !== undefined && <th>Experiment</th>}
-            {currentItem.research !== undefined && <th>Research</th>}
-            {currentItem.repair !== undefined && <th>Repair</th>}
-            {currentItem.recycle !== undefined && <th>Recycle</th>}
-            {currentItem.mods !== undefined && <th>Mods</th>}
-            {currentItem.damage !== undefined && <th>Damage</th>}
-            {currentItem.ammoFor !== undefined && <th>Ammo For</th>}
-          </tr>
-        </tbody>
-      </table>
+        {currentItem.craft !== undefined && (
+          <Button type="button" onClick={() => onCurrentCraftStatusChanged()}>
+            Craft
+          </Button>
+        )}
+        {currentItem.experiment !== undefined && (
+          <button type="button">Experiment</button>
+        )}
+        {currentItem.research !== undefined && (
+          <button type="button">Research</button>
+        )}
+        {currentItem.repair !== undefined && (
+          <button type="button">Repair</button>
+        )}
+        {currentItem.recycle !== undefined && (
+          <button type="button">Recycle</button>
+        )}
+        {currentItem.mods !== undefined && <button type="button">Mods</button>}
+        {currentItem.damage !== undefined && (
+          <button type="button">Damage</button>
+        )}
+        {currentItem.ammoFor !== undefined && (
+          <button type="button">Ammo For</button>
+        )}
 
-      <div>
         {lootStatus && (
-          <table>
-            <thead>
-              <tr>
-                <th>Container</th>
-                <th>Condition</th>
-                <th>Amount</th>
-                <th>Chance</th>
+          <Table>
+            <tr className="center">
+              <th>Container</th>
+              <th>Condition</th>
+              <th>Amount</th>
+              <th>Chance</th>
+            </tr>
+            {currentItem.loot.map(elems => (
+              <tr key={elems.container}>
+                <td className="tableCell">{elems.container}</td>
+                <td className="tableCell center">{elems.condition}</td>
+                <td className="tableCell center">{elems.amount}</td>
+                <td className="tableCell center">{elems.chance}%</td>
               </tr>
-            </thead>
-            <tbody>
-              {currentItem.loot.map(elems => (
-                <tr key={elems.container}>
-                  <td>{elems.container}</td>
-                  <td>{elems.condition}</td>
-                  <td>{elems.amount}</td>
-                  <td>{elems.chance}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </Table>
         )}
-      </div>
-      <div>
         {craftStatus && (
-          <table>
-            <thead>
-              <tr>
-                <th>Blueprint</th>
-                <th>Ingredients</th>
-                <th>Time</th>
-                <th>Workbench Level</th>
+          <Table>
+            <tr className="center">
+              <th>Blueprint</th>
+              <th>Ingredients</th>
+              <th>Time</th>
+              <th>Workbench Level</th>
+            </tr>
+            {currentItem.craft.map(elems => (
+              <tr key={elems.blueprint}>
+                <td className="tableCell">{elems.blueprint}</td>
+                <td className="tableCell center">
+                  {Object.keys(elems.ingredients).map(res => (
+                    <span key={res}>
+                      <Img
+                        className="ingredients"
+                        alt={res}
+                        src={images[`${res}.png`]}
+                      />
+                      {elems.ingredients[res]}
+                    </span>
+                  ))}
+                </td>
+                <td className="tableCell center">{elems.time}</td>
+                <td className="tableCell center">{elems.workBenchLevel}</td>
               </tr>
-            </thead>
-            <tbody>
-              {currentItem.craft.map(elems => (
-                <tr key={elems.blueprint}>
-                  <td>{elems.blueprint}</td>
-                  <td>
-                    {Object.keys(elems.ingredients).map(res => (
-                      <span key={res}>
-                        <Img alt={res} src={images[`${res}.png`]} />
-                        {elems.ingredients[res]}
-                      </span>
-                    ))}
-                  </td>
-                  <td>{elems.time}</td>
-                  <td>{elems.workBenchLevel}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </Table>
         )}
       </div>
     </div>

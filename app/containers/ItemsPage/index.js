@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Img from 'components/Img';
 import ItemsContainer from './ItemsContainer';
 import ListItem from './ListItem';
 import Wrapper from './Wrapper';
-import Img from './Img';
 import { currentItemChange } from '../App/actions';
 import { makeSelectImages } from '../App/selectors';
 
@@ -21,6 +21,7 @@ const ItemsPage = ({ currentCategory, onCurrentItemChanged, images }) => (
           to={`/${item.name}`}
         >
           <Img
+            className="small"
             key={`img:${item.id}`}
             // eslint-disable-next-line global-require
             src={images[`${item.shortName}.png`]}

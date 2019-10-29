@@ -1,22 +1,18 @@
-/**
- *
- * Img.js
- *
- * Renders an image, enforcing the usage of the alt="" tag
- */
+import styled from 'styled-components';
 
-import React from 'react';
-import PropTypes from 'prop-types';
+const Img = styled.img`
+  width: 180px;
+  height: 180px;
 
-function Img(props) {
-  return <img className={props.className} src={props.src} alt={props.alt} />;
-}
+  &.small {
+    width: 60px;
+    height: 60px;
+  }
 
-// We require the use of src and alt, only enforced by react in dev mode
-Img.propTypes = {
-  src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  alt: PropTypes.string.isRequired,
-  className: PropTypes.string,
-};
+  &.ingredients {
+    width: 40px;
+    height: 40px;
+  }
+`;
 
 export default Img;

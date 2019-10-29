@@ -20,8 +20,6 @@ export function Header({
   currentNav,
 }) {
   useInjectReducer({ key, reducer });
-  // eslint-disable-next-line no-debugger
-  debugger;
   return (
     <div>
       <nav>

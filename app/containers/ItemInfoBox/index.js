@@ -6,31 +6,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Table from './Table';
 
 const ItemInfoBox = ({ currentItem }) => (
   <div>
-    <table>
+    <Table>
       <tbody>
         {currentItem.respawnTimer !== undefined && (
           <tr>
-            <td>Respawn Timer</td>
-            <td>{currentItem.respawnTimer}</td>
+            <td className="tableCell">Respawn Timer</td>
+            <td className="tableCell">{currentItem.respawnTimer}</td>
           </tr>
         )}
         {currentItem.upkeep !== undefined && (
           <tr>
-            <td>Upkeep</td>
-            <td>{currentItem.upkeep}</td>
+            <td className="tableCell">Upkeep</td>
+            <td className="tableCell">{currentItem.upkeep}</td>
           </tr>
         )}
         {currentItem.decay !== undefined && (
           <tr>
-            <td>Decay</td>
-            <td>{currentItem.decay}</td>
+            <td className="tableCell">Decay</td>
+            <td className="tableCell">{currentItem.decay}</td>
           </tr>
         )}
       </tbody>
-    </table>
+    </Table>
   </div>
 );
 
