@@ -29,7 +29,7 @@ import { loadImages } from './actions';
 import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
-  max-width: 80%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   min-height: 100%;

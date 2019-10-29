@@ -5,7 +5,8 @@ export default {
         id: 'qwerqwer',
         name: 'Bed',
         shortName: 'bed',
-        HP: 300,
+        additionalText:
+          'You should have a bed if your base is upgraded and quite decent, because if you are getting raided and you have to respawn to defend your base, you cannot afford 5 minutes of respawn delay.',
         text:
           'The bed can be used as a spawn point, just like the sleeping bag, but it has reduced cooldown use; instead of waiting 5 minutes like the Sleeping Bag, you just wait 2 minutes.',
         infoBox: {
@@ -15,6 +16,7 @@ export default {
           identifier: 1273339005,
           stackSize: 1,
           despawnTime: 20,
+          HP: 300,
         },
         loot: [
           {
@@ -35,14 +37,20 @@ export default {
             amount: 1,
             chance: 0.3,
           },
+          {
+            container: 'Scarecrow',
+            condition: '-',
+            amount: 1,
+            chance: 0.2,
+          },
         ],
         craft: [
           {
             blueprint: 'Bed Blueprint',
             ingredients: {
               cloth: 60,
-              metalFragments: 100,
-              sewingKit: 2,
+              metalfragments: 100,
+              sewingkit: 2,
             },
             time: '15 sec - 1 min',
             workBenchLevel: 'Work Bench Level 1',
@@ -61,7 +69,6 @@ export default {
       {
         id: 'lkjhsdlfkg',
         name: 'Chair',
-        HP: 100,
         shortName: 'chair',
         text:
           'The chair is normally made for decorative purpose. But you can mount it to receive 100% comfort. Hover over it and press the E key to mount it and press the space bar to dismount it.',
@@ -69,6 +76,7 @@ export default {
           identifier: 1534542921,
           stackSize: 1,
           despawnTime: 5,
+          HP: 100,
         },
         loot: [
           {

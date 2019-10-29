@@ -6,49 +6,50 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Table from './Table';
 
 const WeaponBox = ({ currentItem }) => (
   <div>
-    <table>
+    <Table>
       <tbody>
         {currentItem.damage !== undefined && (
           <tr>
-            <td>Damage</td>
-            <td>{currentItem.damage}</td>
+            <td className="tableCell">Damage</td>
+            <td className="tableCell">{currentItem.damage}</td>
           </tr>
         )}
         {currentItem.damage !== undefined && (
           <tr>
-            <td>Rate of Fire</td>
-            <td>{currentItem.rateOfFire}</td>
+            <td className="tableCell">Rate of Fire</td>
+            <td className="tableCell">{currentItem.rateOfFire}</td>
           </tr>
         )}
         {currentItem.damage !== undefined && (
           <tr>
-            <td>Aim Cone</td>
-            <td>{currentItem.aimCone}</td>
+            <td className="tableCell">Aim Cone</td>
+            <td className="tableCell">{currentItem.aimCone}</td>
           </tr>
         )}
         {currentItem.damage !== undefined && (
           <tr>
-            <td>Capacity</td>
-            <td>{currentItem.capacity}</td>
+            <td className="tableCell">Capacity</td>
+            <td className="tableCell">{currentItem.capacity}</td>
           </tr>
         )}
         {currentItem.damage !== undefined && (
           <tr>
-            <td>Reload</td>
-            <td>{currentItem.reload}</td>
+            <td className="tableCell">Reload</td>
+            <td className="tableCell">{currentItem.reload}</td>
           </tr>
         )}
         {currentItem.damage !== undefined && (
           <tr>
-            <td>Draw</td>
-            <td>{currentItem.draw}</td>
+            <td className="tableCell">Draw</td>
+            <td className="tableCell">{currentItem.draw}</td>
           </tr>
         )}
       </tbody>
-    </table>
+    </Table>
   </div>
 );
 

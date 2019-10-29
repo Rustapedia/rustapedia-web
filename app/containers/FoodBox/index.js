@@ -6,37 +6,38 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Table from './Table';
 
 const FoodBox = ({ currentItem }) => (
   <div>
-    <table>
+    <Table>
       <tbody>
         {currentItem.calories !== undefined && (
           <tr>
-            <td>Calories</td>
-            <td>{currentItem.calories}</td>
+            <td className="tableCell">Calories</td>
+            <td className="tableCell">{currentItem.calories}</td>
           </tr>
         )}
         {currentItem.hydration !== undefined && (
-          <tr>
-            <td>Hydration</td>
-            <td>{currentItem.hydration}</td>
+          <tr className="tableRow">
+            <td className="tableCell">Hydration</td>
+            <td className="tableCell">{currentItem.hydration}</td>
           </tr>
         )}
         {currentItem.health !== undefined && (
           <tr>
-            <td>Health</td>
-            <td>{currentItem.health}</td>
+            <td className="tableCell">Health</td>
+            <td className="tableCell">{currentItem.health}</td>
           </tr>
         )}
         {currentItem.healthOverTime !== undefined && (
           <tr>
-            <td>Health Over Time</td>
-            <td>{currentItem.healthOverTime}</td>
+            <td className="tableCell">Health Over Time</td>
+            <td className="tableCell">{currentItem.healthOverTime}</td>
           </tr>
         )}
       </tbody>
-    </table>
+    </Table>
   </div>
 );
 

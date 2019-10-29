@@ -6,31 +6,36 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Table from './Table';
 
 const ItemMainInfo = ({ currentItem }) => (
   <div>
-    <table>
-      <tbody>
-        {currentItem.identifier !== undefined && (
-          <tr>
-            <td>Indentifier</td>
-            <td>{currentItem.identifier}</td>
-          </tr>
-        )}
-        {currentItem.stackSize !== undefined && (
-          <tr>
-            <td>Stack Size</td>
-            <td>{currentItem.stackSize}</td>
-          </tr>
-        )}
-        {currentItem.despawnTime !== undefined && (
-          <tr>
-            <td>Despawn Time</td>
-            <td>{currentItem.despawnTime}</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+    <Table>
+      {currentItem.identifier !== undefined && (
+        <tr>
+          <td className="tableCell">Indentifier</td>
+          <td className="tableCell">{currentItem.identifier}</td>
+        </tr>
+      )}
+      {currentItem.stackSize !== undefined && (
+        <tr>
+          <td className="tableCell">Stack Size</td>
+          <td className="tableCell">{currentItem.stackSize}</td>
+        </tr>
+      )}
+      {currentItem.despawnTime !== undefined && (
+        <tr>
+          <td className="tableCell">Despawn Time</td>
+          <td className="tableCell">{currentItem.despawnTime} min</td>
+        </tr>
+      )}
+      {currentItem.HP !== undefined && (
+        <tr>
+          <td className="tableCell">HP</td>
+          <td className="tableCell">{currentItem.HP}</td>
+        </tr>
+      )}
+    </Table>
   </div>
 );
 
