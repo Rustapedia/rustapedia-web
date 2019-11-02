@@ -23,9 +23,12 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import data from './data';
 import ItemPage from '../ItemPage';
-import { makeSelectData, makeSelectImages } from './selectors';
-import { loadImages } from './actions';
-
+import {
+  makeSelectData,
+  makeSelectImages,
+  makeSelectCurrentItem,
+} from './selectors';
+import { loadImages, currentItemChange } from './actions';
 import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
@@ -87,7 +90,10 @@ class App extends React.Component {
                       <Route
                         key={item.name}
                         path={`/${item.name}`}
-                        render={() => <ItemPage currentItem={item} />}
+                        render={() => {
+                          this.props.onCurrentItemChange(item);
+                          return <ItemPage />;
+                        }}
                       />
                     ))}
                   </div>
@@ -106,16 +112,19 @@ class App extends React.Component {
 
 App.propTypes = {
   onLoadImages: PropTypes.func,
+  onCurrentItemChange: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   data: makeSelectData(),
   images: makeSelectImages(),
+  item: makeSelectCurrentItem(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadImages: images => dispatch(loadImages(images)),
+    onCurrentItemChange: item => dispatch(currentItemChange(item)),
   };
 }
 
