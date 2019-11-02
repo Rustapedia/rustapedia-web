@@ -11,30 +11,32 @@ import Table from './Table';
 const ItemMainInfo = ({ currentItem }) => (
   <div>
     <Table>
-      {currentItem.identifier !== undefined && (
-        <tr>
-          <td className="tableCell">Indentifier</td>
-          <td className="tableCell">{currentItem.identifier}</td>
-        </tr>
-      )}
-      {currentItem.stackSize !== undefined && (
-        <tr>
-          <td className="tableCell">Stack Size</td>
-          <td className="tableCell">{currentItem.stackSize}</td>
-        </tr>
-      )}
-      {currentItem.despawnTime !== undefined && (
-        <tr>
-          <td className="tableCell">Despawn Time</td>
-          <td className="tableCell">{currentItem.despawnTime} min</td>
-        </tr>
-      )}
-      {currentItem.HP !== undefined && (
-        <tr>
-          <td className="tableCell">HP</td>
-          <td className="tableCell">{currentItem.HP}</td>
-        </tr>
-      )}
+      <tbody>
+        {currentItem.identifier !== undefined && (
+          <tr>
+            <td className="tableCell">Indentifier</td>
+            <td className="tableCell">{currentItem.identifier}</td>
+          </tr>
+        )}
+        {currentItem.stackSize !== undefined && (
+          <tr>
+            <td className="tableCell">Stack Size</td>
+            <td className="tableCell">{currentItem.stackSize}</td>
+          </tr>
+        )}
+        {currentItem.despawnTime !== undefined && (
+          <tr>
+            <td className="tableCell">Despawn Time</td>
+            <td className="tableCell">{currentItem.despawnTime} min</td>
+          </tr>
+        )}
+        {currentItem.HP !== undefined && (
+          <tr>
+            <td className="tableCell">HP</td>
+            <td className="tableCell">{currentItem.HP}</td>
+          </tr>
+        )}
+      </tbody>
     </Table>
   </div>
 );
