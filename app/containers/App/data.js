@@ -65,6 +65,12 @@ export default {
             workBenchLevel: 'Work Bench Level 3',
           },
         ],
+        experiment: [
+          {
+            workBenchImg: 'workbench1',
+            workBenchLevel: 'Work Bench Level 1',
+          },
+        ],
       },
       {
         id: 'lkjhsdlfkg',
@@ -118,7 +124,7 @@ export default {
     Weapons: [
       {
         id: 'fghjfghjfghj',
-        name: 'AssaultRifle',
+        name: 'Assault Rifle',
         shortName: 'rifle.ak',
         text:
           'The Assault Rifle is an accurate, powerful, and fully automatic rifle that fires 5.56 rifle rounds. It has a moderate rate of fire which allows for proficiency at close to medium range.',
@@ -261,13 +267,13 @@ export default {
           {
             container: 'Food Crate',
             condition: '-',
-            amount: 1 - 3,
+            amount: '1 - 3',
             chance: 21,
           },
           {
             container: 'Ration Box',
             condition: '-',
-            amount: 1 - 2,
+            amount: '1 - 2',
             chance: 21,
           },
         ],
@@ -286,14 +292,78 @@ export default {
           {
             container: 'Food Crate',
             condition: '-',
-            amount: 1 - 3,
+            amount: '1 - 3',
             chance: 21,
           },
           {
             container: 'Ration Box',
             condition: '-',
-            amount: 1 - 2,
+            amount: '1 - 2',
             chance: 21,
+          },
+        ],
+      },
+    ],
+    Resources: [
+      {
+        id: 'fjfjef',
+        name: 'Metal Fragments',
+        shortName: 'metalfragments',
+        text:
+          'Metal Fragments. Smelted from Metal Ore, used in lots of different crafting recipes. apple is a food that gives the player food and water. Unlike most other foods the apple gives lots more hydration when consumed. Can be found in food crates and medical crates.',
+        identifier: 69511070,
+        stackSize: 1000,
+        despawnTime: '20 min',
+        loot: [
+          {
+            container: 'Mine Crate',
+            condition: '-',
+            amount: '30 -49',
+            chance: 16,
+          },
+          {
+            container: 'Minecard',
+            condition: '-',
+            amount: '30 - 49',
+            chance: 15,
+          },
+        ],
+      },
+      {
+        id: 'htjtjtjyjfewfwfw',
+        name: 'Rope',
+        shortName: 'rope',
+        text:
+          'Chocolate Bar Rope is quite common component used in many items like wooden armor, satchel charges, ladders and shotgun traps. Because of that it remains relatively useful throughout the whole game.',
+        additionalText:
+          'It can be often found in barrels alongside sewing kits which can be recycled for even more rope.',
+        identifier: 1414245522,
+        stackSize: 50,
+        despawnTime: ' 20 min',
+        loot: [
+          {
+            container: 'Sunken Chest',
+            condition: '-',
+            amount: '1 - 6',
+            chance: 63,
+          },
+          {
+            container: 'Scarecrow',
+            condition: '-',
+            amount: '1 - 6',
+            chance: 39,
+          },
+          {
+            container: 'Sunken Crate',
+            condition: '-',
+            amount: '1 - 2',
+            chance: 28,
+          },
+          {
+            container: 'Barrel',
+            condition: '-',
+            amount: '1 - 2',
+            chance: 15,
           },
         ],
       },
