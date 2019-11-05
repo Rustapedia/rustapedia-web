@@ -89,7 +89,7 @@ class App extends React.Component {
                     {data[prop][category].map(item => (
                       <Route
                         key={item.name}
-                        path={`/${item.name}`}
+                        path={`/${item.shortName}`}
                         render={() => {
                           this.props.onCurrentItemChange(item);
                           return <ItemPage />;

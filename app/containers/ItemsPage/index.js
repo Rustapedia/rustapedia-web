@@ -17,7 +17,7 @@ function ItemsPage({ currentCategory, images }) {
           <ListItem
             key={item.id}
             // href={item.name}
-            to={`/${item.name}`}
+            to={`/${item.shortName}`}
           >
             <Img
               className="small"

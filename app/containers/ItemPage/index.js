@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -67,33 +68,49 @@ export function ItemPage({
       </FlexWrapper>
       <div>
         {currentItem.loot !== undefined && (
-          <Button type="button" onClick={() => onCurrentLootStatusChanged()}>
+          <Button
+            type="button"
+            onClick={() => onCurrentLootStatusChanged()}
+            style={
+              lootStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
             Loot
           </Button>
         )}
         {currentItem.craft !== undefined && (
-          <Button type="button" onClick={() => onCurrentCraftStatusChanged()}>
+          <Button
+            type="button"
+            onClick={() => onCurrentCraftStatusChanged()}
+            style={
+              craftStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
             Craft
           </Button>
         )}
         {currentItem.experiment !== undefined && (
-          <button type="button">Experiment</button>
+          <Button type="button">Experiment</Button>
         )}
         {currentItem.research !== undefined && (
-          <button type="button">Research</button>
+          <Button type="button">Research</Button>
         )}
         {currentItem.repair !== undefined && (
-          <button type="button">Repair</button>
+          <Button type="button">Repair</Button>
         )}
         {currentItem.recycle !== undefined && (
-          <button type="button">Recycle</button>
+          <Button type="button">Recycle</Button>
         )}
-        {currentItem.mods !== undefined && <button type="button">Mods</button>}
+        {currentItem.mods !== undefined && <Button type="button">Mods</Button>}
         {currentItem.damage !== undefined && (
-          <button type="button">Damage</button>
+          <Button type="button">Damage</Button>
         )}
         {currentItem.ammoFor !== undefined && (
-          <button type="button">Ammo For</button>
+          <Button type="button">Ammo For</Button>
         )}
 
         {lootStatus && (
@@ -131,11 +148,13 @@ export function ItemPage({
                   <td className="tableCell center">
                     {Object.keys(elems.ingredients).map(res => (
                       <span key={res}>
-                        <Img
-                          className="ingredients"
-                          alt={res}
-                          src={images[`${res}.png`]}
-                        />
+                        <Link key={res} to={`/${res}`}>
+                          <Img
+                            className="ingredients"
+                            alt={res}
+                            src={images[`${res}.png`]}
+                          />
+                        </Link>
                         {elems.ingredients[res]}
                       </span>
                     ))}
