@@ -19,4 +19,22 @@ const makeSelectCraftStatus = () =>
     itemState => itemState.craftStatus,
   );
 
-export { selectItem, makeSelectLootStatus, makeSelectCraftStatus };
+const makeSelectExperimentStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.experimentStatus,
+  );
+
+const makeSelectResearchStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.researchStatus,
+  );
+
+export {
+  selectItem,
+  makeSelectLootStatus,
+  makeSelectCraftStatus,
+  makeSelectExperimentStatus,
+  makeSelectResearchStatus,
+};
