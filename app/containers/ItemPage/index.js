@@ -1,26 +1,39 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import Img from 'components/Img';
-import Table from 'components/Table/Table';
 import P from 'components/P';
+import MainItemInfo from 'components/ItemMainInfo';
+import ItemInfoBox from 'components/ItemInfoBox';
+import WeaponBox from 'components/WeaponBox';
+import FoodBox from 'components/FoodBox';
+import { LootTable } from 'components/LootTable';
+import { CraftTable } from 'components/CraftTable';
+import { ExperimentTable } from 'components/ExperimentTable';
+import { ResearchTable } from 'components/ResearchTable';
 import { makeSelectImages, makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
-import MainItemInfo from '../ItemMainInfo';
-import ItemInfoBox from '../ItemInfoBox';
-import WeaponBox from '../WeaponBox';
-import FoodBox from '../FoodBox';
 import reducer from './reducer';
 import saga from './saga';
 import FlexWrapper from './FlexWrapper';
-import { lootStatusChange, craftStatusChange } from './actions';
-import { makeSelectLootStatus, makeSelectCraftStatus } from './selectors';
+import {
+  lootStatusChange,
+  craftStatusChange,
+  experimentStatusChange,
+  researchStatusChange,
+} from './actions';
+import {
+  makeSelectLootStatus,
+  makeSelectCraftStatus,
+  makeSelectExperimentStatus,
+  makeSelectResearchStatus,
+} from './selectors';
 import Button from './Button';
+
 const key = 'item';
 
 export function ItemPage({
@@ -28,8 +41,12 @@ export function ItemPage({
   images,
   onCurrentLootStatusChanged,
   onCurrentCraftStatusChanged,
+  onCurrentExperimentStatusChanged,
+  onCurrentResearchStatusChanged,
   lootStatus,
   craftStatus,
+  experimentStatus,
+  researchStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -37,7 +54,7 @@ export function ItemPage({
   return (
     <div>
       <FlexWrapper>
-        <div>
+        <div style={{ padding: '0 20px 0 0' }}>
           <H1>{currentItem.name}</H1>
           <P>{currentItem.text}</P>
           <P>
@@ -94,10 +111,30 @@ export function ItemPage({
           </Button>
         )}
         {currentItem.experiment !== undefined && (
-          <Button type="button">Experiment</Button>
+          <Button
+            type="button"
+            onClick={() => onCurrentExperimentStatusChanged()}
+            style={
+              experimentStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Experiment
+          </Button>
         )}
         {currentItem.research !== undefined && (
-          <Button type="button">Research</Button>
+          <Button
+            type="button"
+            onClick={() => onCurrentResearchStatusChanged()}
+            style={
+              researchStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Research
+          </Button>
         )}
         {currentItem.repair !== undefined && (
           <Button type="button">Repair</Button>
@@ -113,58 +150,15 @@ export function ItemPage({
           <Button type="button">Ammo For</Button>
         )}
 
-        {lootStatus && (
-          <Table>
-            <tbody>
-              <tr className="center">
-                <th>Container</th>
-                <th>Condition</th>
-                <th>Amount</th>
-                <th>Chance</th>
-              </tr>
-              {currentItem.loot.map(elems => (
-                <tr key={elems.container}>
-                  <td className="tableCell">{elems.container}</td>
-                  <td className="tableCell center">{elems.condition}</td>
-                  <td className="tableCell center">{elems.amount}</td>
-                  <td className="tableCell center">{elems.chance}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
+        {lootStatus && <LootTable currentItem={currentItem} />}
         {craftStatus && (
-          <Table>
-            <tbody>
-              <tr className="center">
-                <th>Blueprint</th>
-                <th>Ingredients</th>
-                <th>Time</th>
-                <th>Workbench Level</th>
-              </tr>
-              {currentItem.craft.map(elems => (
-                <tr key={elems.blueprint}>
-                  <td className="tableCell">{elems.blueprint}</td>
-                  <td className="tableCell center">
-                    {Object.keys(elems.ingredients).map(res => (
-                      <span key={res}>
-                        <Link key={res} to={`/${res}`}>
-                          <Img
-                            className="ingredients"
-                            alt={res}
-                            src={images[`${res}.png`]}
-                          />
-                        </Link>
-                        {elems.ingredients[res]}
-                      </span>
-                    ))}
-                  </td>
-                  <td className="tableCell center">{elems.time}</td>
-                  <td className="tableCell center">{elems.workBenchLevel}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <CraftTable currentItem={currentItem} images={images} />
+        )}
+        {experimentStatus && (
+          <ExperimentTable currentItem={currentItem} images={images} />
+        )}
+        {researchStatus && (
+          <ResearchTable currentItem={currentItem} images={images} />
         )}
       </div>
     </div>
@@ -176,14 +170,20 @@ ItemPage.propTypes = {
   images: PropTypes.object,
   onCurrentLootStatusChanged: PropTypes.func,
   onCurrentCraftStatusChanged: PropTypes.func,
+  onCurrentExperimentStatusChanged: PropTypes.func,
+  onCurrentResearchStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
+  experimentStatus: PropTypes.bool,
+  researchStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   images: makeSelectImages(),
   lootStatus: makeSelectLootStatus(),
   craftStatus: makeSelectCraftStatus(),
+  researchStatus: makeSelectResearchStatus(),
+  experimentStatus: makeSelectExperimentStatus(),
   currentItem: makeSelectCurrentItem(),
 });
 
@@ -193,6 +193,10 @@ export function mapDispatchToProps(dispatch) {
       dispatch(lootStatusChange(lootStatus)),
     onCurrentCraftStatusChanged: craftStatus =>
       dispatch(craftStatusChange(craftStatus)),
+    onCurrentExperimentStatusChanged: experimentStatus =>
+      dispatch(experimentStatusChange(experimentStatus)),
+    onCurrentResearchStatusChanged: researchStatus =>
+      dispatch(researchStatusChange(researchStatus)),
   };
 }
 

@@ -21,6 +21,7 @@ export default {
         loot: [
           {
             container: 'Sunken Chest',
+            shortName: 'sunkenchest',
             condition: '-',
             amount: 1,
             chance: 1,
@@ -28,18 +29,21 @@ export default {
           {
             container: 'Crate',
             condition: '-',
+            shortName: 'crate',
             amount: 1,
             chance: 1,
           },
           {
             container: 'Oil Rig Scientist',
             condition: '-',
+            shortName: 'oilrigscientist',
             amount: 1,
             chance: 0.3,
           },
           {
             container: 'Scarecrow',
             condition: '-',
+            shortName: 'scarecrow',
             amount: 1,
             chance: 0.2,
           },
@@ -67,10 +71,81 @@ export default {
         ],
         experiment: [
           {
-            workBenchImg: 'workbench1',
-            workBenchLevel: 'Work Bench Level 1',
+            shortName: 'workbench1',
+            workbench: 'Work Bench Level 1',
+            experimentCoast: {
+              scrap: 75,
+            },
           },
         ],
+        research: [
+          {
+            researchTable: 'Research Table',
+            shortName: 'researchtable',
+            researching: {
+              scrap: 75,
+            },
+          },
+        ],
+        repair: [
+          {
+            tool: {
+              name: 'Hammer',
+              shortName: 'hammers',
+            },
+            maxRepairCost: {
+              cloth: 30,
+              metalfragments: 48,
+              sewingkit: 3,
+            },
+            conditionLoss: '-',
+            blueprintRequired: 'No',
+          },
+        ],
+        recycle: [
+          {
+            recycler: 'Recycler',
+            yield: {
+              cloth: 30,
+              metalfragments: 50,
+              sewingkit: 1,
+            },
+          },
+        ],
+        durabillity: {
+          explosive: {
+            f1Grenade: {
+              name: 'F1 Grenade',
+              shortName: 'f1grenade',
+              time: '18 sec',
+              sulfur: '360',
+              quantity: '6',
+            },
+            satchel: {
+              name: 'Satchel Charge',
+              shortName: 'satchelcharge',
+              time: '12 sec',
+              sulfur: '460',
+              quantity: '1',
+            },
+            beancanGrenade: {
+              name: 'Beancan Grenade',
+              shortName: 'beancancrenade',
+              time: '20 sec',
+              sulfur: '600',
+              quantity: '5',
+            },
+          },
+          melee: {
+            salvagedAxe: {
+              name: 'Salvaged Axe',
+              shortName: 'salvagedaxe',
+              time: '18 sec',
+              sulfur: '-',
+              quantity: '1',
+            },
+          },
+        },
       },
       {
         id: 'lkjhsdlfkg',
