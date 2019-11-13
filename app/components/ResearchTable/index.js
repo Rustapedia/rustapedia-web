@@ -16,7 +16,7 @@ export function ResearchTable({ currentItem, images }) {
           <th>Researching</th>
         </tr>
         {currentItem.research.map(elems => (
-          <tr key={elems.research}>
+          <tr key={elems}>
             <td className="tableCell">
               <Img
                 className="ingredients"
@@ -28,7 +28,7 @@ export function ResearchTable({ currentItem, images }) {
             <td className="tableCell center">
               {Object.keys(elems.researching).map(res => (
                 <span key={res}>
-                  <Link key={res} to={`/${res}`}>
+                  <Link to={`/${res}`}>
                     <Img
                       className="ingredients"
                       alt={res}

@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
+import HomePage from 'components/HomePage/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import ItemsPage from 'containers/ItemsPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';

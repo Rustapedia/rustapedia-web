@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FlexWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   margin: 50px 0;
 
@@ -13,4 +13,4 @@ const FlexWrapper = styled.div`
   }
 `;
 
-export default FlexWrapper;
+export default Wrapper;

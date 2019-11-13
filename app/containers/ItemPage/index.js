@@ -19,7 +19,7 @@ import { makeSelectImages, makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
-import FlexWrapper from './FlexWrapper';
+import Wrapper from './Wrapper';
 import {
   lootStatusChange,
   craftStatusChange,
@@ -53,7 +53,7 @@ export function ItemPage({
 
   return (
     <div>
-      <FlexWrapper>
+      <Wrapper>
         <div style={{ padding: '0 20px 0 0' }}>
           <H1>{currentItem.name}</H1>
           <P>{currentItem.text}</P>
@@ -82,7 +82,7 @@ export function ItemPage({
             <MainItemInfo currentItem={currentItem.mainInfo} />
           )}
         </div>
-      </FlexWrapper>
+      </Wrapper>
       <div>
         {currentItem.loot !== undefined && (
           <Button
