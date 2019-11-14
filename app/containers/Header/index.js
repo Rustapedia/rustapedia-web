@@ -1,10 +1,13 @@
 import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import ChapterNav from './ChapterNav';
+import GlobalNav from './GlobalNav';
+import Wrapper from './Wrapper';
+import StyledLink from './StyledLink';
 import reducer from './reducer';
 import { currentNavChange } from './actions';
 import { makeSelectData } from '../App/selectors';
@@ -22,30 +25,34 @@ export function Header({
   useInjectReducer({ key, reducer });
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link>
-        {Object.keys(data).map(prop => (
-          <div key={prop}>
-            <button
+      <GlobalNav>
+        <Wrapper>
+          <StyledLink to="/">Home</StyledLink>
+          {Object.keys(data).map(prop => (
+            <StyledLink
+              to="#"
               key={prop}
-              type="button"
               onClick={() => onCurrentNavChanged(data[prop])}
             >
               {prop}
-            </button>
-          </div>
-        ))}
-      </nav>
-      {currentNav !== undefined &&
-        Object.keys(currentNav).map(category => (
-          <Link
-            key={category}
-            to={`/${category}`}
-            onClick={() => onCurrentCategoryChanged(currentNav[category])}
-          >
-            {category}
-          </Link>
-        ))}
+            </StyledLink>
+          ))}
+        </Wrapper>
+      </GlobalNav>
+      <ChapterNav>
+        <Wrapper>
+          {currentNav !== undefined &&
+            Object.keys(currentNav).map(category => (
+              <StyledLink
+                key={category}
+                to={`/${category}`}
+                onClick={() => onCurrentCategoryChanged(currentNav[category])}
+              >
+                {category}
+              </StyledLink>
+            ))}
+        </Wrapper>
+      </ChapterNav>
     </div>
   );
 }
