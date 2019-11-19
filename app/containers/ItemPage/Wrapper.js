@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 50px 0;
+  max-width: 1200px;
+  margin: 0 auto;
 
   .gray-bg {
     background-color: rgba(0, 0, 0, 0.1);

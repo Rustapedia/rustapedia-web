@@ -16,7 +16,6 @@ import FeaturePage from 'containers/FeaturePage/Loadable';
 import ItemsPage from 'containers/ItemsPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'containers/Header';
-import Footer from 'components/Footer';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -101,7 +100,6 @@ class App extends React.Component {
           </div>
           <Route path="" component={NotFoundPage} />
         </Switch>
-        <Footer />
         <GlobalStyle />
       </AppWrapper>
     );

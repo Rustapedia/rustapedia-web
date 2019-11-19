@@ -24,7 +24,7 @@ export function Header({
 }) {
   useInjectReducer({ key, reducer });
   return (
-    <div>
+    <div style={{ zIndex: '2' }}>
       <GlobalNav>
         <Wrapper>
           <StyledLink to="/">Home</StyledLink>
