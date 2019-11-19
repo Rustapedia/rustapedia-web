@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const GlobalNav = styled.div`
-  background: rgba(45, 45, 45, 0.98);
+  background: rgb(45, 45, 45);
 
   a {
     color: #fff;

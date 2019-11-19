@@ -54,7 +54,7 @@ export function ItemPage({
   return (
     <div>
       <Wrapper>
-        <div style={{ padding: '0 20px 0 0' }}>
+        <div>
           <H1>{currentItem.name}</H1>
           <P>{currentItem.text}</P>
           <P>
@@ -83,7 +83,7 @@ export function ItemPage({
           )}
         </div>
       </Wrapper>
-      <div>
+      <Wrapper>
         {currentItem.loot !== undefined && (
           <Button
             type="button"
@@ -149,7 +149,8 @@ export function ItemPage({
         {currentItem.ammoFor !== undefined && (
           <Button type="button">Ammo For</Button>
         )}
-
+      </Wrapper>
+      <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
         {craftStatus && (
           <CraftTable currentItem={currentItem} images={images} />
@@ -160,7 +161,7 @@ export function ItemPage({
         {researchStatus && (
           <ResearchTable currentItem={currentItem} images={images} />
         )}
-      </div>
+      </Wrapper>
     </div>
   );
 }

@@ -6,6 +6,7 @@
 
 import React from 'react';
 import H1 from 'components/H1';
+import Footer from 'components/Footer';
 import Wrapper from './Wrapper';
 
 export function HomePage() {
@@ -17,6 +18,7 @@ export function HomePage() {
         <input placeholder="What are you looking for?" />
         <button type="button">Search</button>
       </div>
+      <Footer />
     </Wrapper>
   );
 }
