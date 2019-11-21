@@ -1,28 +1,16 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-
 import A from 'components/A';
-import LocaleToggle from 'containers/LocaleToggle';
+import mail from 'images/mail-icon.png';
+import Img from 'components/Img';
 import Wrapper from './Wrapper';
-import messages from './messages';
 
 function Footer() {
   return (
     <Wrapper>
-      <section>
-        <FormattedMessage {...messages.licenseMessage} />
-      </section>
-      <section>
-        <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
-          }}
-        />
-      </section>
+      <A href="mailto:vlad@htmlbook.ru">
+        <Img src={mail} className="icon" />
+        Feedback
+      </A>
     </Wrapper>
   );
 }

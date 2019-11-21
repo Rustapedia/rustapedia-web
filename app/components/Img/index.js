@@ -13,6 +13,13 @@ const Img = styled.img`
     width: 40px;
     height: 40px;
   }
+
+  &.icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 7px;
+    margin-bottom: 5px;
+  }
 `;
 
 export default Img;
