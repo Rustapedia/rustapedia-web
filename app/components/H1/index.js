@@ -11,6 +11,7 @@ const H1 = styled.h1`
     font-weight: 400;
     font-size: 4rem;
     line-height: 1em;
+    color: white;
   }
 `;
 

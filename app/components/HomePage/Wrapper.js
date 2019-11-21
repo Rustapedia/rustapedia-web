@@ -7,6 +7,9 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export default Wrapper;

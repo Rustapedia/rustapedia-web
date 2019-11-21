@@ -7,16 +7,19 @@
 import React from 'react';
 import H1 from 'components/H1';
 import Footer from 'components/Footer';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import P from 'components/P';
 import Wrapper from './Wrapper';
 
 export function HomePage() {
   return (
     <Wrapper>
       <H1 className="headline">Rustapedia</H1>
-      <p>your pocket encyclopedia</p>
+      <P>your pocket encyclopedia</P>
       <div>
-        <input placeholder="What are you looking for?" />
-        <button type="button">Search</button>
+        <Input placeholder="What are you looking for?" />
+        <Button>Search</Button>
       </div>
       <Footer />
     </Wrapper>
