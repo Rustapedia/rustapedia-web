@@ -6,9 +6,12 @@ const P = styled.p`
     'Arial', sans-serif;
   font-weight: 450;
   color: rgba(0, 0, 0, 0.7);
-  margin-top: -5px;
-  margin-left: 250px;
-  margin-bottom: 40px;
+
+  &.logo {
+    margin-top: -5px;
+    margin-left: 250px;
+    margin-bottom: 40px;
+  }
 `;
 
 export default P;

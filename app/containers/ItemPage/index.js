@@ -20,6 +20,7 @@ import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
 import Wrapper from './Wrapper';
+import ItemContainer from './ItemContainer';
 import {
   lootStatusChange,
   craftStatusChange,
@@ -52,7 +53,7 @@ export function ItemPage({
   useInjectSaga({ key, saga });
 
   return (
-    <div>
+    <ItemContainer>
       <Wrapper>
         <div>
           <H1>{currentItem.name}</H1>
@@ -162,7 +163,7 @@ export function ItemPage({
           <ResearchTable currentItem={currentItem} images={images} />
         )}
       </Wrapper>
-    </div>
+    </ItemContainer>
   );
 }
 

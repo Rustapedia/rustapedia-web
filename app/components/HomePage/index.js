@@ -16,7 +16,7 @@ export function HomePage() {
   return (
     <Wrapper>
       <H1 className="headline">Rustapedia</H1>
-      <P>your pocket encyclopedia</P>
+      <P className="logo">your pocket encyclopedia</P>
       <div>
         <Input placeholder="What are you looking for?" />
         <Button>Search</Button>
