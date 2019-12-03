@@ -5,6 +5,7 @@ const ItemsContainer = styled.div`
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto;
+  padding-top: 84px;
 `;
 
 export default ItemsContainer;
