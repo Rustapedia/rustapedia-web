@@ -7,26 +7,24 @@ import Img from 'components/Img';
 import ItemsContainer from './ItemsContainer';
 import ListItem from './ListItem';
 import Wrapper from './Wrapper';
-import { makeSelectImages } from '../App/selectors';
 
-function ItemsPage({ currentCategory, images }) {
+function ItemsPage({ currentCategory }) {
   return (
     <ItemsContainer>
-      {currentCategory.map(item => (
-        <Wrapper key={`wrapper:${item.id}`}>
+      {currentCategory.items.map(items => (
+        <Wrapper key={`wrapper:${items.id}`}>
           <ListItem
-            key={item.id}
+            key={items.id}
             // href={item.name}
-            to={`/${item.shortName}`}
+            to={`/${items.name}`}
           >
             <Img
               className="small"
-              key={`img:${item.id}`}
+              key={`img:${items.id}`}
               // eslint-disable-next-line global-require
-              src={images[`${item.shortName}.png`]}
-              alt={item.name}
+              alt={ItemsContainer.name}
             />
-            <div key={item.name}>{item.name}</div>
+            <div key={items.name}>{items.name}</div>
           </ListItem>
         </Wrapper>
       ))}
@@ -35,13 +33,10 @@ function ItemsPage({ currentCategory, images }) {
 }
 
 ItemsPage.propTypes = {
-  currentCategory: PropTypes.array,
-  images: PropTypes.object,
+  currentCategory: PropTypes.object,
 };
 
-const mapStateToProps = createStructuredSelector({
-  images: makeSelectImages(),
-});
+const mapStateToProps = createStructuredSelector({});
 
 export function mapDispatchToProps() {
   return {};

@@ -18,7 +18,7 @@ import { makeSelectCurrentNav } from './selectors';
 const key = 'header';
 
 export function Header({
-  data,
+  categories,
   onCurrentNavChanged,
   onCurrentCategoryChanged,
   currentNav,
@@ -29,13 +29,13 @@ export function Header({
       <GlobalNav>
         <Wrapper>
           <StyledLink to="/">Home</StyledLink>
-          {Object.keys(data).map(prop => (
+          {categories.map(category => (
             <StyledLink
               to="#"
-              key={prop}
-              onClick={() => onCurrentNavChanged(data[prop])}
+              key={category.id}
+              onClick={() => onCurrentNavChanged(category)}
             >
-              {prop}
+              {category.name}
             </StyledLink>
           ))}
           <section>
@@ -46,13 +46,16 @@ export function Header({
       <ChapterNav>
         <Wrapper>
           {currentNav !== undefined &&
-            Object.keys(currentNav).map(category => (
+            currentNav.subCategory !== undefined &&
+            currentNav.subCategory.map(subCategory => (
               <StyledLink
-                key={category}
-                to={`/${category}`}
-                onClick={() => onCurrentCategoryChanged(currentNav[category])}
+                key={subCategory.id}
+                to={`/${subCategory.name}`}
+                onClick={() =>
+                  onCurrentCategoryChanged(currentNav[subCategory])
+                }
               >
-                {category}
+                {subCategory.name}
               </StyledLink>
             ))}
         </Wrapper>
@@ -62,14 +65,14 @@ export function Header({
 }
 
 Header.propTypes = {
-  data: PropTypes.object,
+  categories: PropTypes.array,
   onCurrentCategoryChanged: PropTypes.func,
   onCurrentNavChanged: PropTypes.func,
   currentNav: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectData(),
+  categories: makeSelectData(),
   currentNav: makeSelectCurrentNav(),
 });
 

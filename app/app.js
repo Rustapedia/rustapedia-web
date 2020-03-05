@@ -15,12 +15,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
-import ApolloClient, { gql } from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
 // Import root app
 import App from 'containers/App';
-import config from 'config';
-
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
@@ -32,23 +30,12 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+import config from './config';
+
 require('dotenv').config();
 const client = new ApolloClient({
   uri: config.apiUrl,
 });
-
-client
-  .query({
-    query: gql`
-      {
-        allItems {
-          name
-        }
-      }
-    `,
-  })
-  // eslint-disable-next-line no-console
-  .then(result => console.log(result));
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)

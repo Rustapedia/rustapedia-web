@@ -15,7 +15,7 @@ import { LootTable } from 'components/LootTable';
 import { CraftTable } from 'components/CraftTable';
 import { ExperimentTable } from 'components/ExperimentTable';
 import { ResearchTable } from 'components/ResearchTable';
-import { makeSelectImages, makeSelectCurrentItem } from '../App/selectors';
+import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
@@ -39,7 +39,6 @@ const key = 'item';
 
 export function ItemPage({
   currentItem,
-  images,
   onCurrentLootStatusChanged,
   onCurrentCraftStatusChanged,
   onCurrentExperimentStatusChanged,
@@ -74,10 +73,7 @@ export function ItemPage({
         </div>
         <div>
           <div className="center">
-            <Img
-              alt={currentItem.name}
-              src={images[`${currentItem.shortName}.png`]}
-            />
+            <Img alt={currentItem.name} />
           </div>
           {currentItem.mainInfo !== undefined && (
             <MainItemInfo currentItem={currentItem.mainInfo} />
@@ -153,15 +149,9 @@ export function ItemPage({
       </Wrapper>
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
-        {craftStatus && (
-          <CraftTable currentItem={currentItem} images={images} />
-        )}
-        {experimentStatus && (
-          <ExperimentTable currentItem={currentItem} images={images} />
-        )}
-        {researchStatus && (
-          <ResearchTable currentItem={currentItem} images={images} />
-        )}
+        {craftStatus && <CraftTable currentItem={currentItem} />}
+        {experimentStatus && <ExperimentTable currentItem={currentItem} />}
+        {researchStatus && <ResearchTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -169,7 +159,6 @@ export function ItemPage({
 
 ItemPage.propTypes = {
   currentItem: PropTypes.object,
-  images: PropTypes.object,
   onCurrentLootStatusChanged: PropTypes.func,
   onCurrentCraftStatusChanged: PropTypes.func,
   onCurrentExperimentStatusChanged: PropTypes.func,
@@ -181,7 +170,6 @@ ItemPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  images: makeSelectImages(),
   lootStatus: makeSelectLootStatus(),
   craftStatus: makeSelectCraftStatus(),
   researchStatus: makeSelectResearchStatus(),
