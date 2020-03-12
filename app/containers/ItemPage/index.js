@@ -7,20 +7,21 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import Img from 'components/Img';
 import P from 'components/P';
-import MainItemInfo from 'components/ItemMainInfo';
-import ItemInfoBox from 'components/ItemInfoBox';
-import WeaponBox from 'components/WeaponBox';
-import FoodBox from 'components/FoodBox';
-import { LootTable } from 'components/LootTable';
-import { CraftTable } from 'components/CraftTable';
-import { ExperimentTable } from 'components/ExperimentTable';
-import { ResearchTable } from 'components/ResearchTable';
+import MainItemInfo from 'components/Table/ItemMainInfo';
+import ItemInfo from 'components/Table/InfoBox/ItemInfo';
+import FoodInfo from 'components/Table/InfoBox/FoodInfo';
+import WeaponInfo from 'components/Table/InfoBox/WeaponInfo';
+import LootTable from 'components/Table/LootTable';
+import CraftTable from 'components/Table/CraftTable';
+import ExperimentTable from 'components/Table/ExperimentTable';
+import ResearchTable from 'components/Table/ResearchTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
 import Wrapper from './Wrapper';
 import ItemContainer from './ItemContainer';
+
 import {
   lootStatusChange,
   craftStatusChange,
@@ -55,33 +56,34 @@ export function ItemPage({
     <ItemContainer>
       <Wrapper>
         <div>
-          <H1>{currentItem.name}</H1>
-          <P>{currentItem.text}</P>
-          <P>
-            {currentItem.additionalText !== undefined &&
-              currentItem.additionalText}
-          </P>
-          {currentItem.infoBox !== undefined && (
-            <ItemInfoBox currentItem={currentItem.infoBox} />
+          {currentItem.image !== null && (
+            <div className="center">
+              <Img alt={currentItem.name} src={currentItem.image.publicUrl} />
+            </div>
           )}
-          {currentItem.foodBox !== undefined && (
-            <FoodBox currentItem={currentItem.foodBox} />
+          {currentItem.mainInfo !== null && (
+            <MainItemInfo currentItem={currentItem.mainInfo} />
           )}
-          {currentItem.weaponBox !== undefined && (
-            <WeaponBox currentItem={currentItem.weaponBox} />
+          {currentItem.itemInfo !== null && (
+            <ItemInfo currentItem={currentItem.itemInfo} />
+          )}
+          {currentItem.foodInfo !== null && (
+            <FoodInfo currentItem={currentItem.foodInfo} />
+          )}
+          {currentItem.weaponInfo !== null && (
+            <WeaponInfo currentItem={currentItem.weaponInfo} />
           )}
         </div>
         <div>
-          <div className="center">
-            <Img alt={currentItem.name} />
-          </div>
-          {currentItem.mainInfo !== undefined && (
-            <MainItemInfo currentItem={currentItem.mainInfo} />
-          )}
+          <H1>{currentItem.name}</H1>
+          <P>{currentItem.text}</P>
+          <P>
+            {currentItem.additionalText !== null && currentItem.additionalText}
+          </P>
         </div>
       </Wrapper>
       <Wrapper>
-        {currentItem.loot !== undefined && (
+        {currentItem.lootInfo.length > 0 && (
           <Button
             type="button"
             onClick={() => onCurrentLootStatusChanged()}
@@ -94,7 +96,7 @@ export function ItemPage({
             Loot
           </Button>
         )}
-        {currentItem.craft !== undefined && (
+        {currentItem.craft !== null > 0 && (
           <Button
             type="button"
             onClick={() => onCurrentCraftStatusChanged()}
@@ -107,7 +109,7 @@ export function ItemPage({
             Craft
           </Button>
         )}
-        {currentItem.experiment !== undefined && (
+        {currentItem.experiment !== null && (
           <Button
             type="button"
             onClick={() => onCurrentExperimentStatusChanged()}
@@ -120,7 +122,7 @@ export function ItemPage({
             Experiment
           </Button>
         )}
-        {currentItem.research !== undefined && (
+        {currentItem.research !== null && (
           <Button
             type="button"
             onClick={() => onCurrentResearchStatusChanged()}
@@ -133,17 +135,17 @@ export function ItemPage({
             Research
           </Button>
         )}
-        {currentItem.repair !== undefined && (
+        {currentItem.repairInfo !== null > 0 && (
           <Button type="button">Repair</Button>
         )}
-        {currentItem.recycle !== undefined && (
+        {currentItem.recycleResult !== null > 0 && (
           <Button type="button">Recycle</Button>
         )}
-        {currentItem.mods !== undefined && <Button type="button">Mods</Button>}
-        {currentItem.damage !== undefined && (
+        {currentItem.mods !== null && <Button type="button">Mods</Button>}
+        {currentItem.damageInfo !== null > 0 && (
           <Button type="button">Damage</Button>
         )}
-        {currentItem.ammoFor !== undefined && (
+        {currentItem.ammoFor !== null && (
           <Button type="button">Ammo For</Button>
         )}
       </Wrapper>

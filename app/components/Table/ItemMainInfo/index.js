@@ -30,10 +30,10 @@ const ItemMainInfo = ({ currentItem }) => (
             <td className="tableCell">{currentItem.despawnTime} min</td>
           </tr>
         )}
-        {currentItem.HP !== undefined && (
+        {currentItem.hp !== undefined && (
           <tr>
             <td className="tableCell">HP</td>
-            <td className="tableCell">{currentItem.HP}</td>
+            <td className="tableCell">{currentItem.hp}</td>
           </tr>
         )}
       </tbody>

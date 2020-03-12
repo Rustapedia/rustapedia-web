@@ -6,6 +6,7 @@ const Button = styled.button`
   background: rgba(0, 0, 0, 0.2);
   font-weight: bold;
   outline: none;
+  font-size: 1rem;
 
   &:active {
     color: gray;

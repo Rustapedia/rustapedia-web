@@ -8,7 +8,7 @@ const Table = styled.table`
   background: rgba(0, 0, 0, 0.1);
 
   .tableCell {
-    padding: 0 20px;
+    padding: 0 10px;
   }
 `;
 

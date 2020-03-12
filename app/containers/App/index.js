@@ -47,6 +47,88 @@ const GET_DATA = gql`
           name
           text
           additionalText
+          image {
+            publicUrl
+          }
+          workBench {
+            name
+          }
+          mainInfo {
+            id
+            identifier
+            stackSize
+            despawnTime
+            hp
+          }
+          itemInfo {
+            id
+            respawnTimer
+            decay
+            upkeep
+          }
+          weaponInfo {
+            id
+            damage
+            attackSpeed
+            range
+            rateOfFire
+            aimCone
+            capacity
+            reload
+            draw
+            throw
+            velocity
+            recoil
+            exposionRadius
+            explosionDelay
+            dugChance
+          }
+          foodInfo {
+            id
+            calories
+            hydration
+            health
+            healthOverTime
+            capacity
+          }
+          craft {
+            id
+            requiredItemCounts {
+              id
+              item {
+                id
+                name
+                image {
+                  publicUrl
+                }
+              }
+              count
+            }
+            time
+          }
+          lootInfo {
+            id
+            container {
+              id
+              name
+            }
+            condition
+            count
+            chance
+          }
+          loot {
+            id
+            itemToLoot {
+              id
+              name
+              subCategory {
+                id
+                name
+              }
+            }
+            condition
+            chance
+          }
         }
       }
     }

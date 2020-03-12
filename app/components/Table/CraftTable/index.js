@@ -7,7 +7,7 @@ import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export function CraftTable({ currentItem, images }) {
+export function CraftTable({ currentItem }) {
   return (
     <Table>
       <tbody>
@@ -18,24 +18,27 @@ export function CraftTable({ currentItem, images }) {
           <th>Workbench Level</th>
         </tr>
         {currentItem.craft.map(elems => (
-          <tr key={elems.blueprint}>
-            <td className="tableCell">{elems.blueprint}</td>
+          <tr key={elems.id}>
+            <td className="tableCell">{elems.itemToCraft.name}</td>
             <td className="tableCell center">
-              {Object.keys(elems.ingredients).map(res => (
-                <span key={res}>
-                  <Link key={res} to={`/${res}`}>
-                    <Img
-                      className="ingredients"
-                      alt={res}
-                      src={images[`${res}.png`]}
-                    />
+              {elems.requiredItemCounts.map(res => (
+                <span key={res.id}>
+                  <Link key={res.item.id} to={res.item.name}>
+                    {res.item.image !== null && (
+                      <Img
+                        key={res.item.id}
+                        className="ingredients"
+                        alt={res.item.name}
+                        src={res.item.image.publicUrl}
+                      />
+                    )}
                   </Link>
-                  {elems.ingredients[res]}
+                  {res.count}
                 </span>
               ))}
             </td>
             <td className="tableCell center">{elems.time}</td>
-            <td className="tableCell center">{elems.workBenchLevel}</td>
+            <td className="tableCell center">{currentItem.workBench.name}</td>
           </tr>
         ))}
       </tbody>
@@ -45,7 +48,6 @@ export function CraftTable({ currentItem, images }) {
 
 CraftTable.propTypes = {
   currentItem: PropTypes.object,
-  images: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({});

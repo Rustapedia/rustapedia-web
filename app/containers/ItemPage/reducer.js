@@ -51,7 +51,7 @@ const itemReducer = (state = initialState, action) =>
         draft.researchStatus = false;
         break;
       case SET_INITIAL_STATUS:
-        if (action.currentItem.loot !== undefined) {
+        if (action.currentItem.lootInfo !== undefined) {
           draft.lootStatus = true;
         } else if (action.currentItem.craft !== undefined) {
           draft.craftStatus = true;

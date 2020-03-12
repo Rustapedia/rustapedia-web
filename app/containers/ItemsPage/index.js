@@ -18,12 +18,15 @@ function ItemsPage({ currentCategory }) {
             // href={item.name}
             to={`/${items.name}`}
           >
-            <Img
-              className="small"
-              key={`img:${items.id}`}
-              // eslint-disable-next-line global-require
-              alt={ItemsContainer.name}
-            />
+            {items.image !== null && (
+              <Img
+                className="small"
+                key={`img:${items.id}`}
+                // eslint-disable-next-line global-require
+                alt={items.name}
+                src={items.image.publicUrl}
+              />
+            )}
             <div key={items.name}>{items.name}</div>
           </ListItem>
         </Wrapper>
