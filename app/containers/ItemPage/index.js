@@ -24,15 +24,19 @@ import ItemContainer from './ItemContainer';
 
 import {
   lootStatusChange,
+  lootInfoStatusChange,
   craftStatusChange,
   experimentStatusChange,
   researchStatusChange,
+  experimentationStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
+  makeSelectLootInfoStatus,
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
+  makeSelectExperimentationStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -41,13 +45,17 @@ const key = 'item';
 export function ItemPage({
   currentItem,
   onCurrentLootStatusChanged,
+  onCurrentLootInfoStatusChanged,
   onCurrentCraftStatusChanged,
   onCurrentExperimentStatusChanged,
   onCurrentResearchStatusChanged,
+  onCurrentExperimentationStatusChanged,
   lootStatus,
   craftStatus,
   experimentStatus,
   researchStatus,
+  lootInfoStatus,
+  experimentationStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -86,6 +94,19 @@ export function ItemPage({
         {currentItem.lootInfo.length > 0 && (
           <Button
             type="button"
+            onClick={() => onCurrentLootInfoStatusChanged()}
+            style={
+              lootInfoStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Loot
+          </Button>
+        )}
+        {currentItem.loot.length > 0 && (
+          <Button
+            type="button"
             onClick={() => onCurrentLootStatusChanged()}
             style={
               lootStatus
@@ -96,7 +117,7 @@ export function ItemPage({
             Loot
           </Button>
         )}
-        {currentItem.craft !== null > 0 && (
+        {currentItem.craft.length > 0 && (
           <Button
             type="button"
             onClick={() => onCurrentCraftStatusChanged()}
@@ -107,6 +128,19 @@ export function ItemPage({
             }
           >
             Craft
+          </Button>
+        )}
+        {currentItem.experimentation.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentExperimentationStatusChanged()}
+            style={
+              experimentationStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Experimentation
           </Button>
         )}
         {currentItem.experiment !== null && (
@@ -151,8 +185,10 @@ export function ItemPage({
       </Wrapper>
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
+        {lootInfoStatus && <LootTable currentItem={currentItem} />}
         {craftStatus && <CraftTable currentItem={currentItem} />}
         {experimentStatus && <ExperimentTable currentItem={currentItem} />}
+        {experimentationStatus && <ExperimentTable currentItem={currentItem} />}
         {researchStatus && <ResearchTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
@@ -162,20 +198,26 @@ export function ItemPage({
 ItemPage.propTypes = {
   currentItem: PropTypes.object,
   onCurrentLootStatusChanged: PropTypes.func,
+  onCurrentLootInfoStatusChanged: PropTypes.func,
   onCurrentCraftStatusChanged: PropTypes.func,
   onCurrentExperimentStatusChanged: PropTypes.func,
+  onCurrentExperimentationStatusChanged: PropTypes.func,
   onCurrentResearchStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
+  lootInfoStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
+  experimentationStatus: PropTypes.bool,
   researchStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   lootStatus: makeSelectLootStatus(),
+  lootInfoStatus: makeSelectLootInfoStatus(),
   craftStatus: makeSelectCraftStatus(),
   researchStatus: makeSelectResearchStatus(),
   experimentStatus: makeSelectExperimentStatus(),
+  experimentationStatus: makeSelectExperimentationStatus(),
   currentItem: makeSelectCurrentItem(),
 });
 
@@ -183,12 +225,16 @@ export function mapDispatchToProps(dispatch) {
   return {
     onCurrentLootStatusChanged: lootStatus =>
       dispatch(lootStatusChange(lootStatus)),
+    onCurrentLootInfoStatusChanged: lootInfoStatus =>
+      dispatch(lootInfoStatusChange(lootInfoStatus)),
     onCurrentCraftStatusChanged: craftStatus =>
       dispatch(craftStatusChange(craftStatus)),
     onCurrentExperimentStatusChanged: experimentStatus =>
       dispatch(experimentStatusChange(experimentStatus)),
     onCurrentResearchStatusChanged: researchStatus =>
       dispatch(researchStatusChange(researchStatus)),
+    onCurrentExperimentationStatusChanged: experimentationStatus =>
+      dispatch(experimentationStatusChange(experimentationStatus)),
   };
 }
 

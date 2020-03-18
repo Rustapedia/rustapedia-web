@@ -51,7 +51,11 @@ const GET_DATA = gql`
             publicUrl
           }
           workBench {
+            id
             name
+            image {
+              publicUrl
+            }
           }
           mainInfo {
             id
@@ -91,6 +95,13 @@ const GET_DATA = gql`
             healthOverTime
             capacity
           }
+          blueprint {
+            id
+            name
+            image {
+              publicUrl
+            }
+          }
           craft {
             id
             requiredItemCounts {
@@ -128,6 +139,39 @@ const GET_DATA = gql`
             }
             condition
             chance
+          }
+          experiment {
+            id
+            experimentNeeded {
+              id
+              name
+              image {
+                publicUrl
+              }
+            }
+            experimentCost
+          }
+          experimentation {
+            name
+            blueprint {
+              id
+              name
+              image {
+                publicUrl
+              }
+            }
+            subCategory {
+              name
+            }
+            experiment {
+              experimentNeeded {
+                name
+                image {
+                  publicUrl
+                }
+              }
+              experimentCost
+            }
           }
         }
       }

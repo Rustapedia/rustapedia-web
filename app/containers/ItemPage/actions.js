@@ -5,12 +5,20 @@ import {
   RESEARCH_STATUS_CHANGED,
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
+  LOOT_INFO_STATUS_CHANGED,
+  EXPERIMENTATION_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function lootInfoStatusChange(lootInfoStatus) {
+  return {
+    type: LOOT_INFO_STATUS_CHANGED,
+    lootInfoStatus,
   };
 }
 export function craftStatusChange(craftStatus) {
@@ -23,6 +31,12 @@ export function experimentStatusChange(experimentStatus) {
   return {
     type: EXPERIMENT_STATUS_CHANGED,
     experimentStatus,
+  };
+}
+export function experimentationStatusChange(experimentationStatus) {
+  return {
+    type: EXPERIMENTATION_STATUS_CHANGED,
+    experimentationStatus,
   };
 }
 export function researchStatusChange(researchStatus) {

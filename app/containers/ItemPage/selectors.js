@@ -13,6 +13,12 @@ const makeSelectLootStatus = () =>
     itemState => itemState.lootStatus,
   );
 
+const makeSelectLootInfoStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.lootInfoStatus,
+  );
+
 const makeSelectCraftStatus = () =>
   createSelector(
     selectItem,
@@ -25,6 +31,12 @@ const makeSelectExperimentStatus = () =>
     itemState => itemState.experimentStatus,
   );
 
+const makeSelectExperimentationStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.experimentationStatus,
+  );
+
 const makeSelectResearchStatus = () =>
   createSelector(
     selectItem,
@@ -34,7 +46,9 @@ const makeSelectResearchStatus = () =>
 export {
   selectItem,
   makeSelectLootStatus,
+  makeSelectLootInfoStatus,
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
+  makeSelectExperimentationStatus,
 };

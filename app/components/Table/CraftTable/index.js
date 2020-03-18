@@ -19,7 +19,17 @@ export function CraftTable({ currentItem }) {
         </tr>
         {currentItem.craft.map(elems => (
           <tr key={elems.id}>
-            <td className="tableCell">{elems.itemToCraft.name}</td>
+            <td className="tableCell">
+              {currentItem.blueprint.image !== null && (
+                <Img
+                  key={currentItem.blueprint.id}
+                  className="ingredients"
+                  alt={currentItem.blueprint.name}
+                  src={currentItem.blueprint.image.publicUrl}
+                />
+              )}
+              {currentItem.blueprint.name}
+            </td>
             <td className="tableCell center">
               {elems.requiredItemCounts.map(res => (
                 <span key={res.id}>
@@ -38,7 +48,22 @@ export function CraftTable({ currentItem }) {
               ))}
             </td>
             <td className="tableCell center">{elems.time}</td>
-            <td className="tableCell center">{currentItem.workBench.name}</td>
+            <td className="tableCell center">
+              <Link
+                key={currentItem.workBench.id}
+                to={currentItem.workBench.name}
+              >
+                {currentItem.workBench.image !== null && (
+                  <Img
+                    key={currentItem.workBench.id}
+                    className="ingredients"
+                    alt={currentItem.workBench.name}
+                    src={currentItem.workBench.image.publicUrl}
+                  />
+                )}
+                {currentItem.workBench.name}
+              </Link>
+            </td>
           </tr>
         ))}
       </tbody>
