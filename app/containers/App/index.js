@@ -120,6 +120,7 @@ const GET_DATA = gql`
                 id
                 name
                 image {
+                  id
                   publicUrl
                 }
                 craftInfo {
@@ -131,6 +132,7 @@ const GET_DATA = gql`
                       id
                       name
                       image {
+                        id
                         publicUrl
                       }
                     }
@@ -153,6 +155,30 @@ const GET_DATA = gql`
               id
               name
               image {
+                publicUrl
+              }
+            }
+          }
+          usedForCraft {
+            id
+            time
+            requiredItemCounts {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            item {
+              id
+              name
+              image {
+                id
                 publicUrl
               }
             }

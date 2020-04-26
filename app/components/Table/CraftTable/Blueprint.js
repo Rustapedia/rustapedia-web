@@ -10,15 +10,17 @@ export function Blueprint({ currentItem }) {
   return (
     <tr key={currentItem.craftInfo.id}>
       <td className="tableCell">
-        {currentItem.image !== null && (
-          <Img
-            key={currentItem.id}
-            className="ingredients"
-            alt={currentItem.craftInfo.blueprint}
-            src={currentItem.image.publicUrl}
-          />
-        )}
-        {currentItem.craftInfo.blueprint}
+        <Link key={currentItem.id} to={currentItem.name}>
+          {currentItem.image !== null && (
+            <Img
+              key={currentItem.image.id}
+              className="ingredients"
+              alt={currentItem.craftInfo.blueprint}
+              src={currentItem.image.publicUrl}
+            />
+          )}
+          {currentItem.craftInfo.blueprint}
+        </Link>
       </td>
       <td className="tableCell center">
         {currentItem.craftInfo.requiredItemCounts.map(res => (
@@ -26,7 +28,7 @@ export function Blueprint({ currentItem }) {
             <Link key={res.item.id} to={res.item.name}>
               {res.item.image !== null && (
                 <Img
-                  key={res.item.id}
+                  key={res.item.image.id}
                   className="ingredients"
                   alt={res.item.name}
                   src={res.item.image.publicUrl}

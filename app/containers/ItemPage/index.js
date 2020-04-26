@@ -124,6 +124,19 @@ export function ItemPage({
             Craft
           </Button>
         )}
+        {currentItem.usedForCraft.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentCraftStatusChanged()}
+            style={
+              craftStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Used for craft
+          </Button>
+        )}
         {currentItem.experimentation !== null && (
           <Button
             type="button"

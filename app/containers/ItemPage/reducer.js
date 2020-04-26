@@ -70,7 +70,10 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.lootInfo.length > 0
         ) {
           draft.lootStatus = true;
-        } else if (action.currentItem.craftInfo != null) {
+        } else if (
+          action.currentItem.craftInfo != null ||
+          action.currentItem.usedForCraft.length > 0
+        ) {
           draft.craftStatus = true;
         } else if (action.currentItem.experiment !== null) {
           draft.experimentStatus = true;
