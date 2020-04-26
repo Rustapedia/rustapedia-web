@@ -50,13 +50,6 @@ const GET_DATA = gql`
           image {
             publicUrl
           }
-          workBench {
-            id
-            name
-            image {
-              publicUrl
-            }
-          }
           mainInfo {
             id
             identifier
@@ -95,28 +88,6 @@ const GET_DATA = gql`
             healthOverTime
             capacity
           }
-          blueprint {
-            id
-            name
-            image {
-              publicUrl
-            }
-          }
-          craft {
-            id
-            requiredItemCounts {
-              id
-              item {
-                id
-                name
-                image {
-                  publicUrl
-                }
-              }
-              count
-            }
-            time
-          }
           lootInfo {
             id
             container {
@@ -140,37 +111,50 @@ const GET_DATA = gql`
             condition
             chance
           }
-          experiment {
+          craftInfo {
             id
-            experimentNeeded {
+            blueprint
+            requiredItemCounts {
               id
-              name
-              image {
-                publicUrl
-              }
-            }
-            experimentCost
-          }
-          experimentation {
-            name
-            blueprint {
-              id
-              name
-              image {
-                publicUrl
-              }
-            }
-            subCategory {
-              name
-            }
-            experiment {
-              experimentNeeded {
+              item {
+                id
                 name
                 image {
                   publicUrl
                 }
+                craftInfo {
+                  id
+                  blueprint
+                  requiredItemCounts {
+                    id
+                    item {
+                      id
+                      name
+                      image {
+                        publicUrl
+                      }
+                    }
+                    count
+                  }
+                  time
+                  workBench {
+                    id
+                    name
+                    image {
+                      publicUrl
+                    }
+                  }
+                }
               }
-              experimentCost
+              count
+            }
+            time
+            workBench {
+              id
+              name
+              image {
+                publicUrl
+              }
             }
           }
         }

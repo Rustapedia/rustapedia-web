@@ -6,14 +6,12 @@ import {
   RESEARCH_STATUS_CHANGED,
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
-  LOOT_INFO_STATUS_CHANGED,
   EXPERIMENTATION_STATUS_CHANGED,
 } from './constants';
 
 // The initial state of the ItemPage
 export const initialState = {
   lootStatus: false,
-  lootInfoStatus: false,
   craftStatus: false,
   experimentStatus: false,
   researchStatus: false,
@@ -26,15 +24,6 @@ const itemReducer = (state = initialState, action) =>
     switch (action.type) {
       case LOOT_STATUS_CHANGED:
         draft.lootStatus = true;
-        draft.lootInfoStatus = false;
-        draft.craftStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.experimentationStatus = false;
-        break;
-      case LOOT_INFO_STATUS_CHANGED:
-        draft.lootInfoStatus = true;
-        draft.lootStatus = false;
         draft.craftStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
@@ -43,7 +32,6 @@ const itemReducer = (state = initialState, action) =>
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
         draft.lootStatus = false;
-        draft.lootInfoStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
         draft.experimentationStatus = false;
@@ -51,7 +39,6 @@ const itemReducer = (state = initialState, action) =>
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
         draft.lootStatus = false;
-        draft.lootInfoStatus = false;
         draft.experimentStatus = true;
         draft.researchStatus = false;
         draft.experimentationStatus = false;
@@ -60,7 +47,6 @@ const itemReducer = (state = initialState, action) =>
         draft.experimentationStatus = true;
         draft.craftStatus = false;
         draft.lootStatus = false;
-        draft.lootInfoStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
         break;
@@ -68,24 +54,23 @@ const itemReducer = (state = initialState, action) =>
         draft.researchStatus = true;
         draft.craftStatus = false;
         draft.lootStatus = false;
-        draft.lootInfoStatus = false;
         draft.experimentStatus = false;
         draft.experimentationStatus = false;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
         draft.lootStatus = false;
-        draft.lootInfoStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
         draft.experimentationStatus = false;
         break;
       case SET_INITIAL_STATUS:
-        if (action.currentItem.lootInfo.length > 0) {
-          draft.lootInfoStatus = true;
-        } else if (action.currentItem.loot.length > 0) {
+        if (
+          action.currentItem.loot.length > 0 ||
+          action.currentItem.lootInfo.length > 0
+        ) {
           draft.lootStatus = true;
-        } else if (action.currentItem.craft.length > 0) {
+        } else if (action.currentItem.craftInfo != null) {
           draft.craftStatus = true;
         } else if (action.currentItem.experiment !== null) {
           draft.experimentStatus = true;

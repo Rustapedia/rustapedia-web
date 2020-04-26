@@ -13,12 +13,6 @@ const makeSelectLootStatus = () =>
     itemState => itemState.lootStatus,
   );
 
-const makeSelectLootInfoStatus = () =>
-  createSelector(
-    selectItem,
-    itemState => itemState.lootInfoStatus,
-  );
-
 const makeSelectCraftStatus = () =>
   createSelector(
     selectItem,
@@ -46,7 +40,6 @@ const makeSelectResearchStatus = () =>
 export {
   selectItem,
   makeSelectLootStatus,
-  makeSelectLootInfoStatus,
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,

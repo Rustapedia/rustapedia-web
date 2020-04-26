@@ -13,8 +13,6 @@ import FoodInfo from 'components/Table/InfoBox/FoodInfo';
 import WeaponInfo from 'components/Table/InfoBox/WeaponInfo';
 import LootTable from 'components/Table/LootTable';
 import CraftTable from 'components/Table/CraftTable';
-import ExperimentTable from 'components/Table/ExperimentTable';
-import ResearchTable from 'components/Table/ResearchTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
@@ -24,7 +22,6 @@ import ItemContainer from './ItemContainer';
 
 import {
   lootStatusChange,
-  lootInfoStatusChange,
   craftStatusChange,
   experimentStatusChange,
   researchStatusChange,
@@ -32,7 +29,6 @@ import {
 } from './actions';
 import {
   makeSelectLootStatus,
-  makeSelectLootInfoStatus,
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
@@ -45,7 +41,6 @@ const key = 'item';
 export function ItemPage({
   currentItem,
   onCurrentLootStatusChanged,
-  onCurrentLootInfoStatusChanged,
   onCurrentCraftStatusChanged,
   onCurrentExperimentStatusChanged,
   onCurrentResearchStatusChanged,
@@ -54,7 +49,6 @@ export function ItemPage({
   craftStatus,
   experimentStatus,
   researchStatus,
-  lootInfoStatus,
   experimentationStatus,
 }) {
   useInjectReducer({ key, reducer });
@@ -94,9 +88,9 @@ export function ItemPage({
         {currentItem.lootInfo.length > 0 && (
           <Button
             type="button"
-            onClick={() => onCurrentLootInfoStatusChanged()}
+            onClick={() => onCurrentLootStatusChanged()}
             style={
-              lootInfoStatus
+              lootStatus
                 ? { background: 'rgba(0, 0, 0, 0.1)' }
                 : { background: 'rgba(0, 0, 0, 0.2)' }
             }
@@ -117,7 +111,7 @@ export function ItemPage({
             Loot
           </Button>
         )}
-        {currentItem.craft.length > 0 && (
+        {currentItem.craftInfo !== null && (
           <Button
             type="button"
             onClick={() => onCurrentCraftStatusChanged()}
@@ -130,7 +124,7 @@ export function ItemPage({
             Craft
           </Button>
         )}
-        {currentItem.experimentation.length > 0 && (
+        {currentItem.experimentation !== null && (
           <Button
             type="button"
             onClick={() => onCurrentExperimentationStatusChanged()}
@@ -185,11 +179,7 @@ export function ItemPage({
       </Wrapper>
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
-        {lootInfoStatus && <LootTable currentItem={currentItem} />}
         {craftStatus && <CraftTable currentItem={currentItem} />}
-        {experimentStatus && <ExperimentTable currentItem={currentItem} />}
-        {experimentationStatus && <ExperimentTable currentItem={currentItem} />}
-        {researchStatus && <ResearchTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -198,13 +188,11 @@ export function ItemPage({
 ItemPage.propTypes = {
   currentItem: PropTypes.object,
   onCurrentLootStatusChanged: PropTypes.func,
-  onCurrentLootInfoStatusChanged: PropTypes.func,
   onCurrentCraftStatusChanged: PropTypes.func,
   onCurrentExperimentStatusChanged: PropTypes.func,
   onCurrentExperimentationStatusChanged: PropTypes.func,
   onCurrentResearchStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
-  lootInfoStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
   experimentationStatus: PropTypes.bool,
@@ -213,7 +201,6 @@ ItemPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   lootStatus: makeSelectLootStatus(),
-  lootInfoStatus: makeSelectLootInfoStatus(),
   craftStatus: makeSelectCraftStatus(),
   researchStatus: makeSelectResearchStatus(),
   experimentStatus: makeSelectExperimentStatus(),
@@ -225,8 +212,6 @@ export function mapDispatchToProps(dispatch) {
   return {
     onCurrentLootStatusChanged: lootStatus =>
       dispatch(lootStatusChange(lootStatus)),
-    onCurrentLootInfoStatusChanged: lootInfoStatus =>
-      dispatch(lootInfoStatusChange(lootInfoStatus)),
     onCurrentCraftStatusChanged: craftStatus =>
       dispatch(craftStatusChange(craftStatus)),
     onCurrentExperimentStatusChanged: experimentStatus =>
