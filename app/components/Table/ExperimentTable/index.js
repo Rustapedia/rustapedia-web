@@ -18,39 +18,41 @@ export function ExperimentTable({ currentItem }) {
           </tr>
           <tr>
             <td className="tableCell">
-              <Link
-                key={currentItem.workBench.id}
-                to={currentItem.workBench.name}
-              >
-                {currentItem.workBench.image !== null && (
-                  <Img
-                    key={currentItem.workBench.id}
-                    className="ingredients"
-                    alt={currentItem.workBench.name}
-                    src={currentItem.workBench.image.publicUrl}
-                  />
-                )}
-                {currentItem.workBench.name}
-              </Link>
-            </td>
-            <td className="tableCell center">
               <span key={currentItem.experiment.id}>
                 <Link
-                  key={currentItem.experiment.experimentNeeded.id}
-                  to={currentItem.experiment.experimentNeeded.name}
+                  key={currentItem.experiment.workBench.id}
+                  to={currentItem.experiment.workBench.name}
                 >
-                  {currentItem.experiment.experimentNeeded.image !== null && (
+                  {currentItem.experiment.workBench.image !== null && (
                     <Img
+                      key={currentItem.experiment.workBench.id}
                       className="ingredients"
-                      alt={currentItem.experiment.experimentNeeded.name}
-                      src={
-                        currentItem.experiment.experimentNeeded.image.publicUrl
-                      }
+                      alt={currentItem.experiment.workBench.name}
+                      src={currentItem.experiment.workBench.image.publicUrl}
                     />
                   )}
+                  {currentItem.experiment.workBench.name}
                 </Link>
-                {currentItem.experiment.experimentCost}
               </span>
+            </td>
+            <td className="tableCell center">
+              <Link
+                key={currentItem.experiment.experimentNeeded.id}
+                to={currentItem.experiment.experimentNeeded.item.name}
+              >
+                {currentItem.experiment.experimentNeeded.item.image !==
+                  null && (
+                  <Img
+                    className="ingredients"
+                    alt={currentItem.experiment.experimentNeeded.item.name}
+                    src={
+                      currentItem.experiment.experimentNeeded.item.image
+                        .publicUrl
+                    }
+                  />
+                )}
+              </Link>
+              {currentItem.experiment.experimentNeeded.count}
             </td>
           </tr>
         </tbody>
@@ -63,36 +65,38 @@ export function ExperimentTable({ currentItem }) {
             <th>Scrap</th>
           </tr>
           {currentItem.experimentation.map(elems => (
-            <tr key={elems.blueprint.id}>
+            <tr key={elems.id}>
               <td className="tableCell">
-                <Link key={elems.blueprint.id} to={elems.name}>
-                  {elems.blueprint.image !== null && (
+                <Link key={elems.item.id} to={elems.item.name}>
+                  {elems.item.image !== null && (
                     <Img
-                      key={elems.blueprint.id}
+                      key={elems.item.id}
                       className="ingredients"
-                      alt={elems.blueprint.name}
-                      src={elems.blueprint.image.publicUrl}
+                      alt={elems.item.name}
+                      src={elems.item.image.publicUrl}
                     />
                   )}
-                  {elems.blueprint.name}
+                  {elems.item.blueprint}
                 </Link>
               </td>
-              <td className="tableCell center">{elems.subCategory.name}</td>
               <td className="tableCell center">
-                <span key={elems.experiment.id}>
+                {elems.item.subCategory.name}
+              </td>
+              <td className="tableCell center">
+                <span key={elems.experimentNeeded.item.id}>
                   <Link
-                    key={elems.experiment.experimentNeeded.id}
-                    to={elems.experiment.experimentNeeded.name}
+                    key={elems.experimentNeeded.item.id}
+                    to={elems.experimentNeeded.item.name}
                   >
-                    {elems.experiment.experimentNeeded.image !== null && (
+                    {elems.experimentNeeded.item.image !== null && (
                       <Img
                         className="ingredients"
-                        alt={elems.experiment.experimentNeeded.name}
-                        src={elems.experiment.experimentNeeded.image.publicUrl}
+                        alt={elems.experimentNeeded.item.name}
+                        src={elems.experimentNeeded.item.image.publicUrl}
                       />
                     )}
                   </Link>
-                  {elems.experiment.experimentCost}
+                  {elems.experimentNeeded.count}
                 </span>
               </td>
             </tr>

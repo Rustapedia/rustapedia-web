@@ -46,6 +46,7 @@ const GET_DATA = gql`
           id
           name
           text
+          blueprint
           additionalText
           image {
             publicUrl
@@ -93,6 +94,10 @@ const GET_DATA = gql`
             container {
               id
               name
+              image {
+                id
+                publicUrl
+              }
             }
             condition
             count
@@ -103,6 +108,10 @@ const GET_DATA = gql`
             itemToLoot {
               id
               name
+              image {
+                id
+                publicUrl
+              }
               subCategory {
                 id
                 name
@@ -113,19 +122,18 @@ const GET_DATA = gql`
           }
           craftInfo {
             id
-            blueprint
             requiredItemCounts {
               id
               item {
                 id
                 name
+                blueprint
                 image {
                   id
                   publicUrl
                 }
                 craftInfo {
                   id
-                  blueprint
                   requiredItemCounts {
                     id
                     item {
@@ -181,6 +189,105 @@ const GET_DATA = gql`
                 id
                 publicUrl
               }
+            }
+          }
+          experiment {
+            id
+            workBench {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            experimentNeeded {
+              id
+              item {
+                id
+                name
+                image {
+                  publicUrl
+                }
+              }
+              count
+            }
+          }
+          experimentation {
+            id
+            item {
+              id
+              name
+              blueprint
+              subCategory {
+                id
+                name
+              }
+              image {
+                id
+                publicUrl
+              }
+            }
+            experimentNeeded {
+              id
+              item {
+                id
+                name
+                image {
+                  publicUrl
+                }
+              }
+              count
+            }
+          }
+          research {
+            id
+            researchTool {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            researchNeeded {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+          }
+          researches {
+            id
+            item {
+              id
+              name
+              subCategory {
+                id
+                name
+              }
+              image {
+                id
+                publicUrl
+              }
+            }
+            researchNeeded {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
             }
           }
         }

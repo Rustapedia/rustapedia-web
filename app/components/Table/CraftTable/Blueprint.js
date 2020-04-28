@@ -19,7 +19,7 @@ export function Blueprint({ currentItem }) {
               src={currentItem.image.publicUrl}
             />
           )}
-          {currentItem.craftInfo.blueprint}
+          {currentItem.blueprint}
         </Link>
       </td>
       <td className="tableCell center">

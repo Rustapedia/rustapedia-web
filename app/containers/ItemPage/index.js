@@ -11,6 +11,7 @@ import MainItemInfo from 'components/Table/ItemMainInfo';
 import ItemInfo from 'components/Table/InfoBox/ItemInfo';
 import FoodInfo from 'components/Table/InfoBox/FoodInfo';
 import WeaponInfo from 'components/Table/InfoBox/WeaponInfo';
+import ResearchTable from 'components/Table/ResearchTable';
 import LootTable from 'components/Table/LootTable';
 import CraftTable from 'components/Table/CraftTable';
 import { makeSelectCurrentItem } from '../App/selectors';
@@ -25,16 +26,15 @@ import {
   craftStatusChange,
   experimentStatusChange,
   researchStatusChange,
-  experimentationStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
-  makeSelectExperimentationStatus,
 } from './selectors';
 import Button from './Button';
+import { ExperimentTable } from '../../components/Table/ExperimentTable';
 
 const key = 'item';
 
@@ -44,12 +44,10 @@ export function ItemPage({
   onCurrentCraftStatusChanged,
   onCurrentExperimentStatusChanged,
   onCurrentResearchStatusChanged,
-  onCurrentExperimentationStatusChanged,
   lootStatus,
   craftStatus,
   experimentStatus,
   researchStatus,
-  experimentationStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -137,12 +135,12 @@ export function ItemPage({
             Used for craft
           </Button>
         )}
-        {currentItem.experimentation !== null && (
+        {currentItem.experimentation.length > 0 && (
           <Button
             type="button"
-            onClick={() => onCurrentExperimentationStatusChanged()}
+            onClick={() => onCurrentExperimentStatusChanged()}
             style={
-              experimentationStatus
+              experimentStatus
                 ? { background: 'rgba(0, 0, 0, 0.1)' }
                 : { background: 'rgba(0, 0, 0, 0.2)' }
             }
@@ -176,6 +174,19 @@ export function ItemPage({
             Research
           </Button>
         )}
+        {currentItem.researches.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentResearchStatusChanged()}
+            style={
+              researchStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Researches
+          </Button>
+        )}
         {currentItem.repairInfo !== null > 0 && (
           <Button type="button">Repair</Button>
         )}
@@ -193,6 +204,8 @@ export function ItemPage({
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
         {craftStatus && <CraftTable currentItem={currentItem} />}
+        {experimentStatus && <ExperimentTable currentItem={currentItem} />}
+        {researchStatus && <ResearchTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -203,12 +216,10 @@ ItemPage.propTypes = {
   onCurrentLootStatusChanged: PropTypes.func,
   onCurrentCraftStatusChanged: PropTypes.func,
   onCurrentExperimentStatusChanged: PropTypes.func,
-  onCurrentExperimentationStatusChanged: PropTypes.func,
   onCurrentResearchStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
-  experimentationStatus: PropTypes.bool,
   researchStatus: PropTypes.bool,
 };
 
@@ -217,7 +228,6 @@ const mapStateToProps = createStructuredSelector({
   craftStatus: makeSelectCraftStatus(),
   researchStatus: makeSelectResearchStatus(),
   experimentStatus: makeSelectExperimentStatus(),
-  experimentationStatus: makeSelectExperimentationStatus(),
   currentItem: makeSelectCurrentItem(),
 });
 
@@ -231,8 +241,6 @@ export function mapDispatchToProps(dispatch) {
       dispatch(experimentStatusChange(experimentStatus)),
     onCurrentResearchStatusChanged: researchStatus =>
       dispatch(researchStatusChange(researchStatus)),
-    onCurrentExperimentationStatusChanged: experimentationStatus =>
-      dispatch(experimentationStatusChange(experimentationStatus)),
   };
 }
 

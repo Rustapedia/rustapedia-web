@@ -6,7 +6,6 @@ import {
   RESEARCH_STATUS_CHANGED,
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
-  EXPERIMENTATION_STATUS_CHANGED,
 } from './constants';
 
 // The initial state of the ItemPage
@@ -27,27 +26,17 @@ const itemReducer = (state = initialState, action) =>
         draft.craftStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
-        draft.experimentationStatus = false;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
         draft.lootStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
-        draft.experimentationStatus = false;
         break;
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
         draft.lootStatus = false;
         draft.experimentStatus = true;
-        draft.researchStatus = false;
-        draft.experimentationStatus = false;
-        break;
-      case EXPERIMENTATION_STATUS_CHANGED:
-        draft.experimentationStatus = true;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
         draft.researchStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
@@ -55,14 +44,12 @@ const itemReducer = (state = initialState, action) =>
         draft.craftStatus = false;
         draft.lootStatus = false;
         draft.experimentStatus = false;
-        draft.experimentationStatus = false;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
         draft.lootStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
-        draft.experimentationStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -75,10 +62,16 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.usedForCraft.length > 0
         ) {
           draft.craftStatus = true;
-        } else if (action.currentItem.experiment !== null) {
+        } else if (
+          action.currentItem.experiment !== null ||
+          action.currentItem.experimentation.length > 0
+        ) {
           draft.experimentStatus = true;
-        } else if (action.currentItem.experimentation.length > 0) {
-          draft.experimentationStatus = true;
+        } else if (
+          action.currentItem.research !== null ||
+          action.currentItem.researches.length > 0
+        ) {
+          draft.researchStatus = true;
         }
         break;
     }

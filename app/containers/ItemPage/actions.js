@@ -5,7 +5,6 @@ import {
   RESEARCH_STATUS_CHANGED,
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
-  EXPERIMENTATION_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
@@ -25,12 +24,6 @@ export function experimentStatusChange(experimentStatus) {
   return {
     type: EXPERIMENT_STATUS_CHANGED,
     experimentStatus,
-  };
-}
-export function experimentationStatusChange(experimentationStatus) {
-  return {
-    type: EXPERIMENTATION_STATUS_CHANGED,
-    experimentationStatus,
   };
 }
 export function researchStatusChange(researchStatus) {

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
+import Img from 'components/Img';
 
 const LootTable = ({ currentItem }) => (
   <Table>
@@ -16,7 +17,16 @@ const LootTable = ({ currentItem }) => (
         {currentItem.loot.map(elems => (
           <tr key={elems.id}>
             <td className="tableCell">
-              <Link to={elems.itemToLoot.name}>{elems.itemToLoot.name}</Link>
+              <Link to={elems.itemToLoot.name}>
+                {elems.itemToLoot.image !== null && (
+                  <Img
+                    className="ingredients"
+                    alt={elems.itemToLoot.name}
+                    src={elems.itemToLoot.image.publicUrl}
+                  />
+                )}
+                {elems.itemToLoot.name}
+              </Link>
             </td>
             <td className="tableCell center">{elems.condition}</td>
             <td className="tableCell center">
@@ -38,7 +48,16 @@ const LootTable = ({ currentItem }) => (
         {currentItem.lootInfo.map(elems => (
           <tr key={elems.container.id}>
             <td className="tableCell">
-              <Link to={elems.container.name}>{elems.container.name}</Link>
+              <Link to={elems.container.name}>
+                {elems.container.image !== null && (
+                  <Img
+                    className="ingredients"
+                    alt={elems.container.name}
+                    src={elems.container.image.publicUrl}
+                  />
+                )}
+                {elems.container.name}
+              </Link>
             </td>
             <td className="tableCell center">{elems.condition}</td>
             <td className="tableCell center">{elems.count}</td>
