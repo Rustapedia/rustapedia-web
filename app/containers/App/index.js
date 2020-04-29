@@ -290,6 +290,56 @@ const GET_DATA = gql`
               count
             }
           }
+          repair {
+            id
+            tool {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            repairCoast {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            condition
+            blueprintRequired
+          }
+          repairs {
+            id
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            repairCoast {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            condition
+            blueprintRequired
+          }
         }
       }
     }

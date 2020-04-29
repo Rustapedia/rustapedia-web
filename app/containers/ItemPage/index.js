@@ -14,6 +14,8 @@ import WeaponInfo from 'components/Table/InfoBox/WeaponInfo';
 import ResearchTable from 'components/Table/ResearchTable';
 import LootTable from 'components/Table/LootTable';
 import CraftTable from 'components/Table/CraftTable';
+import RepairTable from 'components/Table/RepairTable';
+import { ExperimentTable } from 'components/Table/ExperimentTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
@@ -26,15 +28,16 @@ import {
   craftStatusChange,
   experimentStatusChange,
   researchStatusChange,
+  repairStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
+  makeSelectRepairStatus,
 } from './selectors';
 import Button from './Button';
-import { ExperimentTable } from '../../components/Table/ExperimentTable';
 
 const key = 'item';
 
@@ -44,10 +47,12 @@ export function ItemPage({
   onCurrentCraftStatusChanged,
   onCurrentExperimentStatusChanged,
   onCurrentResearchStatusChanged,
+  onCurrentRepairStatusChanged,
   lootStatus,
   craftStatus,
   experimentStatus,
   researchStatus,
+  repairStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -187,8 +192,31 @@ export function ItemPage({
             Researches
           </Button>
         )}
-        {currentItem.repairInfo !== null > 0 && (
-          <Button type="button">Repair</Button>
+        {currentItem.repair.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentRepairStatusChanged()}
+            style={
+              repairStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Repair
+          </Button>
+        )}
+        {currentItem.repairs.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentRepairStatusChanged()}
+            style={
+              repairStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Repairs
+          </Button>
         )}
         {currentItem.recycleResult !== null > 0 && (
           <Button type="button">Recycle</Button>
@@ -206,6 +234,7 @@ export function ItemPage({
         {craftStatus && <CraftTable currentItem={currentItem} />}
         {experimentStatus && <ExperimentTable currentItem={currentItem} />}
         {researchStatus && <ResearchTable currentItem={currentItem} />}
+        {repairStatus && <RepairTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -217,10 +246,12 @@ ItemPage.propTypes = {
   onCurrentCraftStatusChanged: PropTypes.func,
   onCurrentExperimentStatusChanged: PropTypes.func,
   onCurrentResearchStatusChanged: PropTypes.func,
+  onCurrentRepairStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
   researchStatus: PropTypes.bool,
+  repairStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -228,6 +259,7 @@ const mapStateToProps = createStructuredSelector({
   craftStatus: makeSelectCraftStatus(),
   researchStatus: makeSelectResearchStatus(),
   experimentStatus: makeSelectExperimentStatus(),
+  repairStatus: makeSelectRepairStatus(),
   currentItem: makeSelectCurrentItem(),
 });
 
@@ -241,6 +273,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(experimentStatusChange(experimentStatus)),
     onCurrentResearchStatusChanged: researchStatus =>
       dispatch(researchStatusChange(researchStatus)),
+    onCurrentRepairStatusChanged: repairStatus =>
+      dispatch(repairStatusChange(repairStatus)),
   };
 }
 

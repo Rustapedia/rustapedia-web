@@ -25,16 +25,16 @@ const makeSelectExperimentStatus = () =>
     itemState => itemState.experimentStatus,
   );
 
-const makeSelectExperimentationStatus = () =>
-  createSelector(
-    selectItem,
-    itemState => itemState.experimentationStatus,
-  );
-
 const makeSelectResearchStatus = () =>
   createSelector(
     selectItem,
     itemState => itemState.researchStatus,
+  );
+
+const makeSelectRepairStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.repairStatus,
   );
 
 export {
@@ -43,5 +43,5 @@ export {
   makeSelectCraftStatus,
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
-  makeSelectExperimentationStatus,
+  makeSelectRepairStatus,
 };

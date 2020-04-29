@@ -5,6 +5,7 @@ import {
   RESEARCH_STATUS_CHANGED,
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
+  REPAIR_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
@@ -30,6 +31,12 @@ export function researchStatusChange(researchStatus) {
   return {
     type: RESEARCH_STATUS_CHANGED,
     researchStatus,
+  };
+}
+export function repairStatusChange(repairStatus) {
+  return {
+    type: REPAIR_STATUS_CHANGED,
+    repairStatus,
   };
 }
 export function resetToDefault() {

@@ -4,6 +4,7 @@ import {
   CRAFT_STATUS_CHANGED,
   EXPERIMENT_STATUS_CHANGED,
   RESEARCH_STATUS_CHANGED,
+  REPAIR_STATUS_CHANGED,
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
 } from './constants';
@@ -14,7 +15,7 @@ export const initialState = {
   craftStatus: false,
   experimentStatus: false,
   researchStatus: false,
-  experimentationStatus: false,
+  repairStatus: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -26,30 +27,42 @@ const itemReducer = (state = initialState, action) =>
         draft.craftStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
+        draft.repairStatus = false;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
         draft.lootStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
+        draft.repairStatus = false;
         break;
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
         draft.lootStatus = false;
         draft.experimentStatus = true;
         draft.researchStatus = false;
+        draft.repairStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
         draft.researchStatus = true;
         draft.craftStatus = false;
         draft.lootStatus = false;
         draft.experimentStatus = false;
+        draft.repairStatus = false;
+        break;
+      case REPAIR_STATUS_CHANGED:
+        draft.repairStatus = true;
+        draft.craftStatus = false;
+        draft.lootStatus = false;
+        draft.experimentStatus = false;
+        draft.researchStatus = false;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
         draft.lootStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
+        draft.repairStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -72,6 +85,11 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.researches.length > 0
         ) {
           draft.researchStatus = true;
+        } else if (
+          action.currentItem.repair.length > 0 ||
+          action.currentItem.repairs.length > 0
+        ) {
+          draft.repairStatus = true;
         }
         break;
     }
