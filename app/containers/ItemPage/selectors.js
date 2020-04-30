@@ -37,6 +37,12 @@ const makeSelectRepairStatus = () =>
     itemState => itemState.repairStatus,
   );
 
+const makeSelectRecycleStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.recycleStatus,
+  );
+
 export {
   selectItem,
   makeSelectLootStatus,
@@ -44,4 +50,5 @@ export {
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
   makeSelectRepairStatus,
+  makeSelectRecycleStatus,
 };

@@ -6,6 +6,7 @@ import {
   RESET_TO_DEFAULT,
   SET_INITIAL_STATUS,
   REPAIR_STATUS_CHANGED,
+  RECYCLE_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
@@ -37,6 +38,12 @@ export function repairStatusChange(repairStatus) {
   return {
     type: REPAIR_STATUS_CHANGED,
     repairStatus,
+  };
+}
+export function recycleStatusChange(recycleStatus) {
+  return {
+    type: RECYCLE_STATUS_CHANGED,
+    recycleStatus,
   };
 }
 export function resetToDefault() {

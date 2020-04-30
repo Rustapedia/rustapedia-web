@@ -340,6 +340,56 @@ const GET_DATA = gql`
             condition
             blueprintRequired
           }
+          recycle {
+            id
+            yield {
+              id
+              count
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+            }
+            recycler {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
+          recycler {
+            id
+            yield {
+              id
+              count
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+            }
+            item {
+              id
+              name
+              subCategory {
+                id
+                name
+              }
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
         }
       }
     }

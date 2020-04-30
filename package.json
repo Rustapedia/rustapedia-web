@@ -64,7 +64,7 @@
     "babel-core": "7.0.0-bridge.0"
   },
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.3",
+    "@apollo/react-hooks": "^3.1.5",
     "@babel/polyfill": "7.4.3",
     "apollo-boost": "^0.4.7",
     "chalk": "^2.4.2",
@@ -85,7 +85,7 @@
     "minimist": "1.2.3",
     "prop-types": "15.7.2",
     "react": "16.8.6",
-    "react-apollo": "^3.1.3",
+    "react-apollo": "^3.1.5",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
     "react-intl": "2.8.0",
@@ -154,7 +154,7 @@
     "react-test-renderer": "16.8.6",
     "react-testing-library": "6.1.2",
     "rimraf": "2.6.3",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.4",
     "style-loader": "^0.23.1",
     "stylelint": "10.0.1",
     "stylelint-config-recommended": "2.2.0",

@@ -2,6 +2,7 @@ import produce from 'immer';
 import {
   LOOT_STATUS_CHANGED,
   CRAFT_STATUS_CHANGED,
+  RECYCLE_STATUS_CHANGED,
   EXPERIMENT_STATUS_CHANGED,
   RESEARCH_STATUS_CHANGED,
   REPAIR_STATUS_CHANGED,
@@ -16,6 +17,7 @@ export const initialState = {
   experimentStatus: false,
   researchStatus: false,
   repairStatus: false,
+  recycleStatus: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -28,6 +30,7 @@ const itemReducer = (state = initialState, action) =>
         draft.experimentStatus = false;
         draft.researchStatus = false;
         draft.repairStatus = false;
+        draft.recycleStatus = false;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
@@ -35,6 +38,7 @@ const itemReducer = (state = initialState, action) =>
         draft.experimentStatus = false;
         draft.researchStatus = false;
         draft.repairStatus = false;
+        draft.recycleStatus = false;
         break;
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
@@ -42,6 +46,7 @@ const itemReducer = (state = initialState, action) =>
         draft.experimentStatus = true;
         draft.researchStatus = false;
         draft.repairStatus = false;
+        draft.recycleStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
         draft.researchStatus = true;
@@ -49,6 +54,7 @@ const itemReducer = (state = initialState, action) =>
         draft.lootStatus = false;
         draft.experimentStatus = false;
         draft.repairStatus = false;
+        draft.recycleStatus = false;
         break;
       case REPAIR_STATUS_CHANGED:
         draft.repairStatus = true;
@@ -56,6 +62,15 @@ const itemReducer = (state = initialState, action) =>
         draft.lootStatus = false;
         draft.experimentStatus = false;
         draft.researchStatus = false;
+        draft.recycleStatus = false;
+        break;
+      case RECYCLE_STATUS_CHANGED:
+        draft.repairStatus = false;
+        draft.craftStatus = false;
+        draft.lootStatus = false;
+        draft.experimentStatus = false;
+        draft.researchStatus = false;
+        draft.recycleStatus = true;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
@@ -63,6 +78,7 @@ const itemReducer = (state = initialState, action) =>
         draft.experimentStatus = false;
         draft.researchStatus = false;
         draft.repairStatus = false;
+        draft.recycleStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -90,6 +106,11 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.repairs.length > 0
         ) {
           draft.repairStatus = true;
+        } else if (
+          action.currentItem.recycle !== null ||
+          action.currentItem.recycler.length > 0
+        ) {
+          draft.recycleStatus = true;
         }
         break;
     }

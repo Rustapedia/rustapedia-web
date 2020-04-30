@@ -15,7 +15,8 @@ import ResearchTable from 'components/Table/ResearchTable';
 import LootTable from 'components/Table/LootTable';
 import CraftTable from 'components/Table/CraftTable';
 import RepairTable from 'components/Table/RepairTable';
-import { ExperimentTable } from 'components/Table/ExperimentTable';
+import RecycleTable from 'components/Table/RecycleTable';
+import ExperimentTable from 'components/Table/ExperimentTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
@@ -28,6 +29,7 @@ import {
   craftStatusChange,
   experimentStatusChange,
   researchStatusChange,
+  recycleStatusChange,
   repairStatusChange,
 } from './actions';
 import {
@@ -36,6 +38,7 @@ import {
   makeSelectExperimentStatus,
   makeSelectResearchStatus,
   makeSelectRepairStatus,
+  makeSelectRecycleStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -48,11 +51,13 @@ export function ItemPage({
   onCurrentExperimentStatusChanged,
   onCurrentResearchStatusChanged,
   onCurrentRepairStatusChanged,
+  onCurrentRecycleStatusChanged,
   lootStatus,
   craftStatus,
   experimentStatus,
   researchStatus,
   repairStatus,
+  recycleStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -218,15 +223,31 @@ export function ItemPage({
             Repairs
           </Button>
         )}
-        {currentItem.recycleResult !== null > 0 && (
-          <Button type="button">Recycle</Button>
+        {currentItem.recycle !== null && (
+          <Button
+            type="button"
+            onClick={() => onCurrentRecycleStatusChanged()}
+            style={
+              recycleStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Recycle
+          </Button>
         )}
-        {currentItem.mods !== null && <Button type="button">Mods</Button>}
-        {currentItem.damageInfo !== null > 0 && (
-          <Button type="button">Damage</Button>
-        )}
-        {currentItem.ammoFor !== null && (
-          <Button type="button">Ammo For</Button>
+        {currentItem.recycler.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentRecycleStatusChanged()}
+            style={
+              recycleStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Recycle
+          </Button>
         )}
       </Wrapper>
       <Wrapper>
@@ -235,6 +256,7 @@ export function ItemPage({
         {experimentStatus && <ExperimentTable currentItem={currentItem} />}
         {researchStatus && <ResearchTable currentItem={currentItem} />}
         {repairStatus && <RepairTable currentItem={currentItem} />}
+        {recycleStatus && <RecycleTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -247,11 +269,13 @@ ItemPage.propTypes = {
   onCurrentExperimentStatusChanged: PropTypes.func,
   onCurrentResearchStatusChanged: PropTypes.func,
   onCurrentRepairStatusChanged: PropTypes.func,
+  onCurrentRecycleStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
   researchStatus: PropTypes.bool,
   repairStatus: PropTypes.bool,
+  recycleStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -260,6 +284,7 @@ const mapStateToProps = createStructuredSelector({
   researchStatus: makeSelectResearchStatus(),
   experimentStatus: makeSelectExperimentStatus(),
   repairStatus: makeSelectRepairStatus(),
+  recycleStatus: makeSelectRecycleStatus(),
   currentItem: makeSelectCurrentItem(),
 });
 
@@ -275,6 +300,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(researchStatusChange(researchStatus)),
     onCurrentRepairStatusChanged: repairStatus =>
       dispatch(repairStatusChange(repairStatus)),
+    onCurrentRecycleStatusChanged: recycleStatus =>
+      dispatch(recycleStatusChange(recycleStatus)),
   };
 }
 
