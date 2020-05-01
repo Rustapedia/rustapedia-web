@@ -390,6 +390,66 @@ const GET_DATA = gql`
               }
             }
           }
+          explosive: durabilityInfo(where: { type: Explosive }) {
+            id
+            time
+            sulfurNeeded
+            fuelNeeded
+            quantity
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
+          melle: durabilityInfo(where: { type: Melle }) {
+            id
+            time
+            sulfurNeeded
+            fuelNeeded
+            quantity
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
+          throwing: durabilityInfo(where: { type: Throwing }) {
+            id
+            time
+            sulfurNeeded
+            fuelNeeded
+            quantity
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
+          guns: durabilityInfo(where: { type: Guns }) {
+            id
+            time
+            sulfurNeeded
+            fuelNeeded
+            quantity
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
         }
       }
     }
