@@ -8,6 +8,7 @@ import {
   REPAIR_STATUS_CHANGED,
   RECYCLE_STATUS_CHANGED,
   DURABILITY_STATUS_CHANGED,
+  INGREDIENT_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
@@ -51,6 +52,12 @@ export function durabilityStatusChange(durabilityStatus) {
   return {
     type: DURABILITY_STATUS_CHANGED,
     durabilityStatus,
+  };
+}
+export function ingredientStatusChange(ingredientStatus) {
+  return {
+    type: INGREDIENT_STATUS_CHANGED,
+    ingredientStatus,
   };
 }
 export function resetToDefault() {

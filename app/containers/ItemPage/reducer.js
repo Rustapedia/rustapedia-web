@@ -2,6 +2,7 @@ import produce from 'immer';
 import {
   LOOT_STATUS_CHANGED,
   CRAFT_STATUS_CHANGED,
+  INGREDIENT_STATUS_CHANGED,
   RECYCLE_STATUS_CHANGED,
   EXPERIMENT_STATUS_CHANGED,
   RESEARCH_STATUS_CHANGED,
@@ -20,6 +21,7 @@ export const initialState = {
   repairStatus: false,
   recycleStatus: false,
   durabilityStatus: false,
+  ingredientStatus: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -34,6 +36,7 @@ const itemReducer = (state = initialState, action) =>
         draft.repairStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
@@ -43,6 +46,17 @@ const itemReducer = (state = initialState, action) =>
         draft.repairStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
+        break;
+      case INGREDIENT_STATUS_CHANGED:
+        draft.lootStatus = false;
+        draft.craftStatus = false;
+        draft.experimentStatus = false;
+        draft.researchStatus = false;
+        draft.repairStatus = false;
+        draft.recycleStatus = false;
+        draft.durabilityStatus = false;
+        draft.ingredientStatus = true;
         break;
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
@@ -52,6 +66,7 @@ const itemReducer = (state = initialState, action) =>
         draft.repairStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
         draft.researchStatus = true;
@@ -61,6 +76,7 @@ const itemReducer = (state = initialState, action) =>
         draft.repairStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
         break;
       case REPAIR_STATUS_CHANGED:
         draft.repairStatus = true;
@@ -70,6 +86,7 @@ const itemReducer = (state = initialState, action) =>
         draft.researchStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
         break;
       case RECYCLE_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -79,6 +96,7 @@ const itemReducer = (state = initialState, action) =>
         draft.researchStatus = false;
         draft.recycleStatus = true;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
         break;
       case DURABILITY_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -88,6 +106,7 @@ const itemReducer = (state = initialState, action) =>
         draft.researchStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = true;
+        draft.ingredientStatus = false;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
@@ -97,6 +116,7 @@ const itemReducer = (state = initialState, action) =>
         draft.repairStatus = false;
         draft.recycleStatus = false;
         draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -109,6 +129,8 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.usedForCraft.length > 0
         ) {
           draft.craftStatus = true;
+        } else if (action.currentItem.ingredientFor.length > 0) {
+          draft.ingredientStatus = true;
         } else if (
           action.currentItem.experiment !== null ||
           action.currentItem.experimentation.length > 0

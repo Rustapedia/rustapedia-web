@@ -167,6 +167,33 @@ const GET_DATA = gql`
               }
             }
           }
+          ingredientFor {
+            id
+            requiredItemCounts {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            item {
+              id
+              name
+              subCategory {
+                id
+                name
+              }
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
           usedForCraft {
             id
             time

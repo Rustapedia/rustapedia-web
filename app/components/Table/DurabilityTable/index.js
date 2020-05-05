@@ -45,18 +45,12 @@ export function DurabilityTable({
             >
               Explosive
             </button>
-          </td>
-          <td>
             <button type="button" onClick={() => onCurrentGunsStatusChanged()}>
               Guns
             </button>
-          </td>
-          <td>
             <button type="button" onClick={() => onCurrentMelleStatusChanged()}>
               Melle
             </button>
-          </td>
-          <td>
             <button
               type="button"
               onClick={() => onCurrentThrowingStatusChanged()}

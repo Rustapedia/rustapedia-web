@@ -49,6 +49,12 @@ const makeSelectRecycleStatus = () =>
     itemState => itemState.recycleStatus,
   );
 
+const makeSelectIngredientStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.ingredientStatus,
+  );
+
 export {
   selectItem,
   makeSelectLootStatus,
@@ -58,4 +64,5 @@ export {
   makeSelectRepairStatus,
   makeSelectRecycleStatus,
   makeSelectDurabilityStatus,
+  makeSelectIngredientStatus,
 };

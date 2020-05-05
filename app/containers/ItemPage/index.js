@@ -17,6 +17,7 @@ import CraftTable from 'components/Table/CraftTable';
 import RepairTable from 'components/Table/RepairTable';
 import RecycleTable from 'components/Table/RecycleTable';
 import ExperimentTable from 'components/Table/ExperimentTable';
+import IngredientTable from 'components/Table/IngredientTable';
 import DurabilityTable from 'components/Table/DurabilityTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
@@ -33,6 +34,7 @@ import {
   recycleStatusChange,
   repairStatusChange,
   durabilityStatusChange,
+  ingredientStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -42,6 +44,7 @@ import {
   makeSelectRepairStatus,
   makeSelectRecycleStatus,
   makeSelectDurabilityStatus,
+  makeSelectIngredientStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -56,10 +59,12 @@ export function ItemPage({
   onCurrentRepairStatusChanged,
   onCurrentRecycleStatusChanged,
   onCurrentDurabilityStatusChanged,
+  onCurrentIngredientStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
   experimentStatus,
+  ingredientStatus,
   researchStatus,
   repairStatus,
   recycleStatus,
@@ -135,6 +140,19 @@ export function ItemPage({
             }
           >
             Craft
+          </Button>
+        )}
+        {currentItem.ingredientFor.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentIngredientStatusChanged()}
+            style={
+              ingredientStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Ingredient for
           </Button>
         )}
         {currentItem.usedForCraft.length > 0 && (
@@ -276,6 +294,7 @@ export function ItemPage({
         {repairStatus && <RepairTable currentItem={currentItem} />}
         {recycleStatus && <RecycleTable currentItem={currentItem} />}
         {durabilityStatus && <DurabilityTable currentItem={currentItem} />}
+        {ingredientStatus && <IngredientTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -290,6 +309,7 @@ ItemPage.propTypes = {
   onCurrentRepairStatusChanged: PropTypes.func,
   onCurrentRecycleStatusChanged: PropTypes.func,
   onCurrentDurabilityStatusChanged: PropTypes.func,
+  onCurrentIngredientStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
@@ -297,10 +317,12 @@ ItemPage.propTypes = {
   repairStatus: PropTypes.bool,
   recycleStatus: PropTypes.bool,
   durabilityStatus: PropTypes.bool,
+  ingredientStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   lootStatus: makeSelectLootStatus(),
+  ingredientStatus: makeSelectIngredientStatus(),
   craftStatus: makeSelectCraftStatus(),
   researchStatus: makeSelectResearchStatus(),
   experimentStatus: makeSelectExperimentStatus(),
@@ -326,6 +348,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(recycleStatusChange(recycleStatus)),
     onCurrentDurabilityStatusChanged: durabilityStatus =>
       dispatch(durabilityStatusChange(durabilityStatus)),
+    onCurrentIngredientStatusChanged: ingredientStatus =>
+      dispatch(ingredientStatusChange(ingredientStatus)),
   };
 }
 
