@@ -16,6 +16,7 @@ import LootTable from 'components/Table/LootTable';
 import CraftTable from 'components/Table/CraftTable';
 import RepairTable from 'components/Table/RepairTable';
 import RecycleTable from 'components/Table/RecycleTable';
+import RecycledTable from 'components/Table/RecycledTable';
 import ExperimentTable from 'components/Table/ExperimentTable';
 import IngredientTable from 'components/Table/IngredientTable';
 import DurabilityTable from 'components/Table/DurabilityTable';
@@ -35,6 +36,7 @@ import {
   repairStatusChange,
   durabilityStatusChange,
   ingredientStatusChange,
+  recycledStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -45,6 +47,7 @@ import {
   makeSelectRecycleStatus,
   makeSelectDurabilityStatus,
   makeSelectIngredientStatus,
+  makeSelectRecycledStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -60,6 +63,7 @@ export function ItemPage({
   onCurrentRecycleStatusChanged,
   onCurrentDurabilityStatusChanged,
   onCurrentIngredientStatusChanged,
+  onCurrentRecycledStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
@@ -68,6 +72,7 @@ export function ItemPage({
   researchStatus,
   repairStatus,
   recycleStatus,
+  recycledStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -272,6 +277,19 @@ export function ItemPage({
             Recycle
           </Button>
         )}
+        {currentItem.recycledFrom.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentRecycledStatusChanged()}
+            style={
+              recycledStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Recycled From
+          </Button>
+        )}
         {currentItem.explosive.length > 0 && (
           <Button
             type="button"
@@ -293,6 +311,7 @@ export function ItemPage({
         {researchStatus && <ResearchTable currentItem={currentItem} />}
         {repairStatus && <RepairTable currentItem={currentItem} />}
         {recycleStatus && <RecycleTable currentItem={currentItem} />}
+        {recycledStatus && <RecycledTable currentItem={currentItem} />}
         {durabilityStatus && <DurabilityTable currentItem={currentItem} />}
         {ingredientStatus && <IngredientTable currentItem={currentItem} />}
       </Wrapper>
@@ -308,6 +327,7 @@ ItemPage.propTypes = {
   onCurrentResearchStatusChanged: PropTypes.func,
   onCurrentRepairStatusChanged: PropTypes.func,
   onCurrentRecycleStatusChanged: PropTypes.func,
+  onCurrentRecycledStatusChanged: PropTypes.func,
   onCurrentDurabilityStatusChanged: PropTypes.func,
   onCurrentIngredientStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
@@ -316,6 +336,7 @@ ItemPage.propTypes = {
   researchStatus: PropTypes.bool,
   repairStatus: PropTypes.bool,
   recycleStatus: PropTypes.bool,
+  recycledStatus: PropTypes.bool,
   durabilityStatus: PropTypes.bool,
   ingredientStatus: PropTypes.bool,
 };
@@ -328,6 +349,7 @@ const mapStateToProps = createStructuredSelector({
   experimentStatus: makeSelectExperimentStatus(),
   repairStatus: makeSelectRepairStatus(),
   recycleStatus: makeSelectRecycleStatus(),
+  recycledStatus: makeSelectRecycledStatus(),
   currentItem: makeSelectCurrentItem(),
   durabilityStatus: makeSelectDurabilityStatus(),
 });
@@ -346,6 +368,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(repairStatusChange(repairStatus)),
     onCurrentRecycleStatusChanged: recycleStatus =>
       dispatch(recycleStatusChange(recycleStatus)),
+    onCurrentRecycledStatusChanged: recycledStatus =>
+      dispatch(recycledStatusChange(recycledStatus)),
     onCurrentDurabilityStatusChanged: durabilityStatus =>
       dispatch(durabilityStatusChange(durabilityStatus)),
     onCurrentIngredientStatusChanged: ingredientStatus =>

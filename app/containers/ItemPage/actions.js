@@ -9,6 +9,7 @@ import {
   RECYCLE_STATUS_CHANGED,
   DURABILITY_STATUS_CHANGED,
   INGREDIENT_STATUS_CHANGED,
+  RECYCLED_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
@@ -46,6 +47,12 @@ export function recycleStatusChange(recycleStatus) {
   return {
     type: RECYCLE_STATUS_CHANGED,
     recycleStatus,
+  };
+}
+export function recycledStatusChange(recycledStatus) {
+  return {
+    type: RECYCLED_STATUS_CHANGED,
+    recycledStatus,
   };
 }
 export function durabilityStatusChange(durabilityStatus) {

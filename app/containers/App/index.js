@@ -192,6 +192,33 @@ const GET_DATA = gql`
                 id
                 publicUrl
               }
+              ingredientFor {
+                id
+                requiredItemCounts {
+                  id
+                  item {
+                    id
+                    name
+                    image {
+                      id
+                      publicUrl
+                    }
+                  }
+                  count
+                }
+                item {
+                  id
+                  name
+                  subCategory {
+                    id
+                    name
+                  }
+                  image {
+                    id
+                    publicUrl
+                  }
+                }
+              }
             }
           }
           usedForCraft {
@@ -372,6 +399,7 @@ const GET_DATA = gql`
             yield {
               id
               count
+              percent
               item {
                 id
                 name
@@ -390,11 +418,40 @@ const GET_DATA = gql`
               }
             }
           }
+          recycledFrom {
+            id
+            item {
+              id
+              name
+              subCategory {
+                id
+                name
+              }
+              image {
+                id
+                publicUrl
+              }
+            }
+            yield {
+              id
+              count
+              percent
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+            }
+          }
           recycler {
             id
             yield {
               id
               count
+              percent
               item {
                 id
                 name
