@@ -3,23 +3,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Search, Grid } from 'semantic-ui-react';
 import StyledLink from 'containers/Header/StyledLink';
-import data from 'containers/App/data';
 
 const initialState = { isLoading: false, results: [], value: '' };
-
-const source = _.range(0, 1).reduce(memo => {
-  Object.keys(data).map(prop =>
-    Object.keys(data[prop]).map(name => {
-      const result = memo;
-      result[name] = {
-        name,
-        results: data[prop][name],
-      };
-      return result;
-    }),
-  );
-  return memo;
-}, {});
 
 const resultRenderer = ({ name, shortName }) => (
   <StyledLink to={`/${shortName}`}>{name}</StyledLink>
@@ -41,6 +26,20 @@ export default class SearchBar extends Component {
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
       const isMatch = result => re.test(result.name);
+
+      const source = _.range(0, 1).reduce(memo => {
+        this.props.data.map(category =>
+          category.subCategory.map(subCategory => {
+            const result = memo;
+            result[subCategory.name] = {
+              name: subCategory.name,
+              results: subCategory.items,
+            };
+            return result;
+          }),
+        );
+        return memo;
+      }, {});
 
       const filteredResults = _.reduce(
         source,
@@ -79,3 +78,7 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  data: PropTypes.array,
+};

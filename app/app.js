@@ -17,11 +17,12 @@ import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 // Import root app
 import App from 'containers/App';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
-
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
 // Load the favicon and the .htaccess file
 import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
 
@@ -29,11 +30,20 @@ import configureStore from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
-import config from './config';
 
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
+
+const cache = new InMemoryCache();
+// eslint-disable-next-line no-debugger
+
+const link = new HttpLink({
+  uri: 'http://localhost:4301/admin/api',
+});
+
 const client = new ApolloClient({
-  uri: config.apiUrl,
+  link,
+  cache,
 });
 
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
