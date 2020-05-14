@@ -35,7 +35,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const cache = new InMemoryCache();
-// eslint-disable-next-line no-debugger
 
 const link = new HttpLink({
   uri: 'http://localhost:4301/admin/api',

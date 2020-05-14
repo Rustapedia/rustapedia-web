@@ -563,31 +563,29 @@ export function App({ onLoadData, categories, onCurrentItemChange }) {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />
-        <div>
-          {categories.map(category => (
-            <div key={category.id}>
-              {category.subCategory.map(subCategory => (
-                <div key={subCategory.id}>
+        {categories.map(category => (
+          <React.Fragment key={category.id}>
+            {category.subCategory.map(subCategory => (
+              <React.Fragment key={subCategory.id}>
+                <Route
+                  key={subCategory.id}
+                  path={`/${subCategory.name}`}
+                  render={() => <ItemsPage currentCategory={subCategory} />}
+                />
+                {subCategory.items.map(item => (
                   <Route
-                    key={subCategory.id}
-                    path={`/${subCategory.name}`}
-                    render={() => <ItemsPage currentCategory={subCategory} />}
+                    key={item.id}
+                    path={`/${item.name}`}
+                    render={() => {
+                      onCurrentItemChange(item);
+                      return <ItemPage />;
+                    }}
                   />
-                  {subCategory.items.map(item => (
-                    <Route
-                      key={item.id}
-                      path={`/${item.name}`}
-                      render={() => {
-                        onCurrentItemChange(item);
-                        return <ItemPage />;
-                      }}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+                ))}
+              </React.Fragment>
+            ))}
+          </React.Fragment>
+        ))}
         <Route path="" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
