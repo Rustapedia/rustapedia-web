@@ -89,37 +89,6 @@ const GET_DATA = gql`
             healthOverTime
             capacity
           }
-          lootInfo {
-            id
-            container {
-              id
-              name
-              image {
-                id
-                publicUrl
-              }
-            }
-            condition
-            count
-            chance
-          }
-          loot {
-            id
-            itemToLoot {
-              id
-              name
-              image {
-                id
-                publicUrl
-              }
-              subCategory {
-                id
-                name
-              }
-            }
-            condition
-            chance
-          }
           craftInfo {
             id
             requiredItemCounts {
@@ -563,29 +532,31 @@ export function App({ onLoadData, categories, onCurrentItemChange }) {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />
-        {categories.map(category => (
-          <React.Fragment key={category.id}>
-            {category.subCategory.map(subCategory => (
-              <React.Fragment key={subCategory.id}>
-                <Route
-                  key={subCategory.id}
-                  path={`/${subCategory.name}`}
-                  render={() => <ItemsPage currentCategory={subCategory} />}
-                />
-                {subCategory.items.map(item => (
+        <React.Fragment>
+          {categories.map(category => (
+            <React.Fragment key={category.id}>
+              {category.subCategory.map(subCategory => (
+                <React.Fragment key={subCategory.id}>
                   <Route
-                    key={item.id}
-                    path={`/${item.name}`}
-                    render={() => {
-                      onCurrentItemChange(item);
-                      return <ItemPage />;
-                    }}
+                    key={subCategory.id}
+                    path={`/${subCategory.name}`}
+                    render={() => <ItemsPage currentCategory={subCategory} />}
                   />
-                ))}
-              </React.Fragment>
-            ))}
-          </React.Fragment>
-        ))}
+                  {subCategory.items.map(item => (
+                    <Route
+                      key={item.id}
+                      path={`/${item.name}`}
+                      render={() => {
+                        onCurrentItemChange(item);
+                        return <ItemPage />;
+                      }}
+                    />
+                  ))}
+                </React.Fragment>
+              ))}
+            </React.Fragment>
+          ))}
+        </React.Fragment>
         <Route path="" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

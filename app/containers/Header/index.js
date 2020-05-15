@@ -51,9 +51,7 @@ export function Header({
               <StyledLink
                 key={subCategory.id}
                 to={`/${subCategory.name}`}
-                onClick={() =>
-                  onCurrentCategoryChanged(currentNav[subCategory])
-                }
+                onClick={() => onCurrentCategoryChanged(subCategory)}
               >
                 {subCategory.name}
               </StyledLink>

@@ -37,7 +37,7 @@ dotenv.config();
 const cache = new InMemoryCache();
 
 const link = new HttpLink({
-  uri: 'http://localhost:4301/admin/api',
+  uri: '',
 });
 
 const client = new ApolloClient({
