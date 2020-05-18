@@ -37,7 +37,7 @@ dotenv.config();
 const cache = new InMemoryCache();
 
 const link = new HttpLink({
-  uri: '',
+  uri: 'https://mysterious-beyond-50794.herokuapp.com/admin/api',
 });
 
 const client = new ApolloClient({

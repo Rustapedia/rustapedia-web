@@ -64,6 +64,38 @@ const GET_DATA = gql`
             decay
             upkeep
           }
+          lootInfo {
+            id
+            container {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            condition
+            count
+            chance
+          }
+          loot {
+            id
+            itemToLoot {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+              subCategory {
+                id
+                name
+              }
+            }
+            condition
+            chance
+            count
+          }
           weaponInfo {
             id
             damage

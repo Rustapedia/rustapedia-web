@@ -10,8 +10,9 @@ const LootTable = ({ currentItem }) => (
       <tbody>
         <tr className="center">
           <th>Items</th>
-          <th>Condition</th>
           <th>Category</th>
+          <th>Condition</th>
+          <th>Amount</th>
           <th>Chance</th>
         </tr>
         {currentItem.loot.map(elems => (
@@ -28,10 +29,11 @@ const LootTable = ({ currentItem }) => (
                 {elems.itemToLoot.name}
               </Link>
             </td>
-            <td className="tableCell center">{elems.condition}</td>
             <td className="tableCell center">
               {elems.itemToLoot.subCategory.name}
             </td>
+            <td className="tableCell center">{elems.condition}</td>
+            <td className="tableCell center">{elems.count}</td>
             <td className="tableCell center">{elems.chance}%</td>
           </tr>
         ))}
