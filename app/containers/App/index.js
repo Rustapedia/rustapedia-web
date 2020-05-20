@@ -540,6 +540,69 @@ const GET_DATA = gql`
               }
             }
           }
+          compostable {
+            id
+            tool {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            result {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            amountPerStack
+          }
+          composter {
+            id
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            result {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            amountPerStack
+          }
+          composting {
+            id
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            result {
+              id
+              count
+            }
+          }
         }
       }
     }

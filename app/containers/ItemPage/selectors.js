@@ -13,6 +13,12 @@ const makeSelectLootStatus = () =>
     itemState => itemState.lootStatus,
   );
 
+const makeSelectCompostableStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.compostableStatus,
+  );
+
 const makeSelectCraftStatus = () =>
   createSelector(
     selectItem,
@@ -79,4 +85,5 @@ export {
   makeSelectIngredientStatus,
   makeSelectRecycledStatus,
   makeSelectUsedForCraftStatus,
+  makeSelectCompostableStatus,
 };

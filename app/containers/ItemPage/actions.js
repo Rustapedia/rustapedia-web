@@ -11,12 +11,19 @@ import {
   INGREDIENT_STATUS_CHANGED,
   RECYCLED_STATUS_CHANGED,
   USEDFORCRAFT_STATUS_CHANGED,
+  COMPOSTABLE_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function compostableStatusChange(compostableStatus) {
+  return {
+    type: COMPOSTABLE_STATUS_CHANGED,
+    compostableStatus,
   };
 }
 export function craftStatusChange(craftStatus) {

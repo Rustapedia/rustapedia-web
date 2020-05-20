@@ -21,6 +21,7 @@ import ExperimentTable from 'components/Table/ExperimentTable';
 import IngredientTable from 'components/Table/IngredientTable';
 import DurabilityTable from 'components/Table/DurabilityTable';
 import UsedForCraftTable from 'components/Table/UsedForCraftTable';
+import CompostableTable from 'components/Table/CompostableTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
@@ -39,6 +40,7 @@ import {
   ingredientStatusChange,
   recycledStatusChange,
   usedForCraftStatusChange,
+  compostableStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -51,6 +53,7 @@ import {
   makeSelectIngredientStatus,
   makeSelectRecycledStatus,
   makeSelectUsedForCraftStatus,
+  makeSelectCompostableStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -68,6 +71,7 @@ export function ItemPage({
   onCurrentIngredientStatusChanged,
   onCurrentRecycledStatusChanged,
   onCurrentUsedForCraftStatusChanged,
+  onCurrentCompostableStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
@@ -78,6 +82,7 @@ export function ItemPage({
   recycleStatus,
   recycledStatus,
   usedForCraftStatus,
+  compostableStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -308,6 +313,45 @@ export function ItemPage({
             Durability
           </Button>
         )}
+        {currentItem.compostable !== null && (
+          <Button
+            type="button"
+            onClick={() => onCurrentCompostableStatusChanged()}
+            style={
+              compostableStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Compostable
+          </Button>
+        )}
+        {currentItem.composter.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentCompostableStatusChanged()}
+            style={
+              compostableStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Composter
+          </Button>
+        )}
+        {currentItem.composting.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentCompostableStatusChanged()}
+            style={
+              compostableStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Composting
+          </Button>
+        )}
       </Wrapper>
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
@@ -320,6 +364,7 @@ export function ItemPage({
         {recycledStatus && <RecycledTable currentItem={currentItem} />}
         {durabilityStatus && <DurabilityTable currentItem={currentItem} />}
         {ingredientStatus && <IngredientTable currentItem={currentItem} />}
+        {compostableStatus && <CompostableTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -337,6 +382,7 @@ ItemPage.propTypes = {
   onCurrentDurabilityStatusChanged: PropTypes.func,
   onCurrentIngredientStatusChanged: PropTypes.func,
   onCurrentUsedForCraftStatusChanged: PropTypes.func,
+  onCurrentCompostableStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
@@ -347,6 +393,7 @@ ItemPage.propTypes = {
   durabilityStatus: PropTypes.bool,
   ingredientStatus: PropTypes.bool,
   usedForCraftStatus: PropTypes.bool,
+  compostableStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -361,6 +408,7 @@ const mapStateToProps = createStructuredSelector({
   currentItem: makeSelectCurrentItem(),
   durabilityStatus: makeSelectDurabilityStatus(),
   usedForCraftStatus: makeSelectUsedForCraftStatus(),
+  compostableStatus: makeSelectCompostableStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -385,6 +433,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(ingredientStatusChange(ingredientStatus)),
     onCurrentUsedForCraftStatusChanged: usedForCraftStatus =>
       dispatch(usedForCraftStatusChange(usedForCraftStatus)),
+    onCurrentCompostableStatusChanged: compostableStatus =>
+      dispatch(compostableStatusChange(compostableStatus)),
   };
 }
 
