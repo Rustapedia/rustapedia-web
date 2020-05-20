@@ -49,6 +49,7 @@ const GET_DATA = gql`
           blueprint
           additionalText
           image {
+            id
             publicUrl
           }
           mainInfo {
@@ -152,6 +153,7 @@ const GET_DATA = gql`
                     id
                     name
                     image {
+                      id
                       publicUrl
                     }
                   }
@@ -164,6 +166,7 @@ const GET_DATA = gql`
               id
               name
               image {
+                id
                 publicUrl
               }
             }
@@ -262,6 +265,7 @@ const GET_DATA = gql`
                 id
                 name
                 image {
+                  id
                   publicUrl
                 }
               }
@@ -289,6 +293,7 @@ const GET_DATA = gql`
                 id
                 name
                 image {
+                  id
                   publicUrl
                 }
               }

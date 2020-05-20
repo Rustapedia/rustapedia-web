@@ -19,6 +19,12 @@ const makeSelectCraftStatus = () =>
     itemState => itemState.craftStatus,
   );
 
+const makeSelectUsedForCraftStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.usedForCraftStatus,
+  );
+
 const makeSelectExperimentStatus = () =>
   createSelector(
     selectItem,
@@ -72,4 +78,5 @@ export {
   makeSelectDurabilityStatus,
   makeSelectIngredientStatus,
   makeSelectRecycledStatus,
+  makeSelectUsedForCraftStatus,
 };

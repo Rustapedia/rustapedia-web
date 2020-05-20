@@ -37,20 +37,24 @@ const Blueprint = ({ currentItem }) => (
     </td>
     <td className="tableCell center">{currentItem.craftInfo.time}</td>
     <td className="tableCell center">
-      <Link
-        key={currentItem.craftInfo.workBench.id}
-        to={currentItem.craftInfo.workBench.name}
-      >
-        {currentItem.craftInfo.workBench.image !== null && (
-          <Img
-            key={currentItem.craftInfo.workBench.id}
-            className="ingredients"
-            alt={currentItem.craftInfo.workBench.name}
-            src={currentItem.craftInfo.workBench.image.publicUrl}
-          />
-        )}
-        {currentItem.craftInfo.workBench.name}
-      </Link>
+      {currentItem.craftInfo.workBench !== null ? (
+        <Link
+          key={currentItem.craftInfo.workBench.id}
+          to={currentItem.craftInfo.workBench.name}
+        >
+          {currentItem.craftInfo.workBench.image !== null && (
+            <Img
+              key={currentItem.craftInfo.workBench.id}
+              className="ingredients"
+              alt={currentItem.craftInfo.workBench.name}
+              src={currentItem.craftInfo.workBench.image.publicUrl}
+            />
+          )}
+          {currentItem.craftInfo.workBench.name}
+        </Link>
+      ) : (
+        '-'
+      )}
     </td>
   </tr>
 );

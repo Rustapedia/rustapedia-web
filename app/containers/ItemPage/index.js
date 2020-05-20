@@ -20,6 +20,7 @@ import RecycledTable from 'components/Table/RecycledTable';
 import ExperimentTable from 'components/Table/ExperimentTable';
 import IngredientTable from 'components/Table/IngredientTable';
 import DurabilityTable from 'components/Table/DurabilityTable';
+import UsedForCraftTable from 'components/Table/UsedForCraftTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
@@ -37,6 +38,7 @@ import {
   durabilityStatusChange,
   ingredientStatusChange,
   recycledStatusChange,
+  usedForCraftStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -48,6 +50,7 @@ import {
   makeSelectDurabilityStatus,
   makeSelectIngredientStatus,
   makeSelectRecycledStatus,
+  makeSelectUsedForCraftStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -64,6 +67,7 @@ export function ItemPage({
   onCurrentDurabilityStatusChanged,
   onCurrentIngredientStatusChanged,
   onCurrentRecycledStatusChanged,
+  onCurrentUsedForCraftStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
@@ -73,6 +77,7 @@ export function ItemPage({
   repairStatus,
   recycleStatus,
   recycledStatus,
+  usedForCraftStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -147,6 +152,19 @@ export function ItemPage({
             Craft
           </Button>
         )}
+        {currentItem.usedForCraft.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentUsedForCraftStatusChanged()}
+            style={
+              usedForCraftStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Used for craft
+          </Button>
+        )}
         {currentItem.ingredientFor.length > 0 && (
           <Button
             type="button"
@@ -158,19 +176,6 @@ export function ItemPage({
             }
           >
             Ingredient for
-          </Button>
-        )}
-        {currentItem.usedForCraft.length > 0 && (
-          <Button
-            type="button"
-            onClick={() => onCurrentCraftStatusChanged()}
-            style={
-              craftStatus
-                ? { background: 'rgba(0, 0, 0, 0.1)' }
-                : { background: 'rgba(0, 0, 0, 0.2)' }
-            }
-          >
-            Used for craft
           </Button>
         )}
         {currentItem.experimentation.length > 0 && (
@@ -307,6 +312,7 @@ export function ItemPage({
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
         {craftStatus && <CraftTable currentItem={currentItem} />}
+        {usedForCraftStatus && <UsedForCraftTable currentItem={currentItem} />}
         {experimentStatus && <ExperimentTable currentItem={currentItem} />}
         {researchStatus && <ResearchTable currentItem={currentItem} />}
         {repairStatus && <RepairTable currentItem={currentItem} />}
@@ -330,6 +336,7 @@ ItemPage.propTypes = {
   onCurrentRecycledStatusChanged: PropTypes.func,
   onCurrentDurabilityStatusChanged: PropTypes.func,
   onCurrentIngredientStatusChanged: PropTypes.func,
+  onCurrentUsedForCraftStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
@@ -339,6 +346,7 @@ ItemPage.propTypes = {
   recycledStatus: PropTypes.bool,
   durabilityStatus: PropTypes.bool,
   ingredientStatus: PropTypes.bool,
+  usedForCraftStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -352,6 +360,7 @@ const mapStateToProps = createStructuredSelector({
   recycledStatus: makeSelectRecycledStatus(),
   currentItem: makeSelectCurrentItem(),
   durabilityStatus: makeSelectDurabilityStatus(),
+  usedForCraftStatus: makeSelectUsedForCraftStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -374,6 +383,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(durabilityStatusChange(durabilityStatus)),
     onCurrentIngredientStatusChanged: ingredientStatus =>
       dispatch(ingredientStatusChange(ingredientStatus)),
+    onCurrentUsedForCraftStatusChanged: usedForCraftStatus =>
+      dispatch(usedForCraftStatusChange(usedForCraftStatus)),
   };
 }
 

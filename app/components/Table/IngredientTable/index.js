@@ -9,8 +9,8 @@ const IngredientTable = ({ currentItem }) => (
       <tbody>
         <tr className="center">
           <th>Item</th>
-          <th>Ingredients</th>
           <th>Category</th>
+          <th>Ingredients</th>
         </tr>
         <Item currentItem={currentItem} />
         {currentItem.ingredientFor.map(

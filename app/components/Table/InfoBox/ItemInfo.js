@@ -26,7 +26,7 @@ const ItemInfo = ({ currentItem }) => (
       {currentItem.decay !== null && (
         <tr>
           <td className="tableCell">Decay</td>
-          <td className="tableCell">{currentItem.decay}</td>
+          <td className="tableCell">{currentItem.decay} hours</td>
         </tr>
       )}
     </tbody>

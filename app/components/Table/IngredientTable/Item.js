@@ -18,6 +18,7 @@ const Item = ({ currentItem }) =>
           {items.item.name}
         </Link>
       </td>
+      <td className="tableCell center">{items.item.subCategory.name}</td>
       <td className="tableCell center">
         {items.requiredItemCounts.map(res => (
           <span key={res.id}>
@@ -35,7 +36,6 @@ const Item = ({ currentItem }) =>
           </span>
         ))}
       </td>
-      <td className="tableCell center">{items.item.subCategory.name}</td>
     </tr>
   ));
 Item.propTypes = {

@@ -10,6 +10,7 @@ import {
   DURABILITY_STATUS_CHANGED,
   INGREDIENT_STATUS_CHANGED,
   RECYCLED_STATUS_CHANGED,
+  USEDFORCRAFT_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
@@ -18,11 +19,16 @@ export function lootStatusChange(lootStatus) {
     lootStatus,
   };
 }
-
 export function craftStatusChange(craftStatus) {
   return {
     type: CRAFT_STATUS_CHANGED,
     craftStatus,
+  };
+}
+export function usedForCraftStatusChange(usedForCraftStatus) {
+  return {
+    type: USEDFORCRAFT_STATUS_CHANGED,
+    usedForCraftStatus,
   };
 }
 export function experimentStatusChange(experimentStatus) {
