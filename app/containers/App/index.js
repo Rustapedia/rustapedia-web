@@ -603,6 +603,180 @@ const GET_DATA = gql`
               count
             }
           }
+          cookingInfo {
+            id
+            furnace {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            processOne {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            processTwo {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            processThree {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            processFour {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+          }
+          cooking {
+            id
+            processOne {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            processTwo {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            processThree {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            processFour {
+              id
+              cookingItem {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              needed {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+          }
         }
       }
     }

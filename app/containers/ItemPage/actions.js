@@ -12,12 +12,19 @@ import {
   RECYCLED_STATUS_CHANGED,
   USEDFORCRAFT_STATUS_CHANGED,
   COMPOSTABLE_STATUS_CHANGED,
+  COOKING_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function cookingStatusChange(cookingStatus) {
+  return {
+    type: COOKING_STATUS_CHANGED,
+    cookingStatus,
   };
 }
 export function compostableStatusChange(compostableStatus) {
