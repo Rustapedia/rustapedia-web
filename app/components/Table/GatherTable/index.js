@@ -6,6 +6,52 @@ import PropTypes from 'prop-types';
 
 const GatherTable = ({ currentItem }) => (
   <Table>
+    {currentItem.gatheringInfo.length > 0 && (
+      <tbody>
+        <tr className="center">
+          <th>Tool</th>
+          <th>Resources</th>
+          <th>Time</th>
+          <th>Condition Loss</th>
+        </tr>
+        {currentItem.gatheringInfo.map(items => (
+          <tr key={items.id}>
+            <td className="tableCell">
+              <Link to={items.tool.name} key={items.tool.id}>
+                {items.tool.image !== null && (
+                  <Img
+                    key={items.tool.image.id}
+                    className="ingredients"
+                    alt={items.tool.name}
+                    src={items.tool.image.publicUrl}
+                  />
+                )}
+                {items.tool.name}
+              </Link>
+            </td>
+            <td className="tableCell center">
+              {items.result.map(res => (
+                <span key={res.id}>
+                  <Link to={res.item.name} key={res.item.id}>
+                    {res.item.image !== null && (
+                      <Img
+                        key={res.item.image.id}
+                        className="ingredients"
+                        alt={res.item.name}
+                        src={res.item.image.publicUrl}
+                      />
+                    )}
+                  </Link>
+                  {res.count}
+                </span>
+              ))}
+            </td>
+            <td className="tableCell center">{items.time}</td>
+            <td className="tableCell center">{items.conditionLoss}%</td>
+          </tr>
+        ))}
+      </tbody>
+    )}
     {currentItem.gather.length > 0 && (
       <tbody>
         <tr className="center">
@@ -15,7 +61,7 @@ const GatherTable = ({ currentItem }) => (
           <th>Condition Loss</th>
         </tr>
         {currentItem.gather.map(items => (
-          <tr id={items.id}>
+          <tr key={items.id}>
             <td className="tableCell">
               <Link key={items.fromItem.id} to={items.fromItem.name}>
                 {items.fromItem.image !== null && (
@@ -74,7 +120,7 @@ const GatherTable = ({ currentItem }) => (
           )}
         </tr>
         {currentItem.gatheredFrom.map(items => (
-          <tr id={items.id}>
+          <tr key={items.id}>
             <td className="tableCell">
               <Link to={items.name}>
                 {items.image !== null && (
@@ -89,9 +135,9 @@ const GatherTable = ({ currentItem }) => (
               </Link>
             </td>
             {items.gatheringInfo.map(item => (
-              <td className="tableCell center" id={item.id}>
+              <td className="tableCell center" key={item.id}>
                 {item.result.map(res => (
-                  <span id={res.id}>
+                  <span key={res.id}>
                     <Link to={res.item.name}>
                       {res.item.image !== null && (
                         <Img

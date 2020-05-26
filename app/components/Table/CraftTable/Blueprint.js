@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Blueprint = ({ currentItem }) => (
-  <tr key={currentItem.craftInfo.id}>
+  <tr>
     <td className="tableCell">
       <Link key={currentItem.id} to={currentItem.name}>
         {currentItem.image !== null && (

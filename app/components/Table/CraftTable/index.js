@@ -13,10 +13,12 @@ const CraftTable = ({ currentItem }) => (
           <th>Time</th>
           <th>Workbench Level</th>
         </tr>
-        <Blueprint currentItem={currentItem} />
+        <Blueprint currentItem={currentItem} key={currentItem.craftInfo.id} />
         {currentItem.craftInfo.requiredItemCounts.map(
           res =>
-            res.item.craftInfo != null && <Blueprint currentItem={res.item} />,
+            res.item.craftInfo != null && (
+              <Blueprint currentItem={res.item} key={res.id} />
+            ),
         )}
       </tbody>
     )}
