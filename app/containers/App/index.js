@@ -777,6 +777,95 @@ const GET_DATA = gql`
               count
             }
           }
+          gather {
+            id
+            fromItem {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            result {
+              id
+              count
+              range
+              percent
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+            }
+            time
+            conditionLoss
+          }
+          gatheringInfo {
+            id
+            tool {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+            result {
+              id
+              count
+              range
+              percent
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+            }
+            time
+            conditionLoss
+          }
+          gatheredFrom {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+            gatheringInfo {
+              id
+              tool {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              result {
+                id
+                count
+                range
+                percent
+                item {
+                  id
+                  name
+                  image {
+                    id
+                    publicUrl
+                  }
+                }
+              }
+              time
+              conditionLoss
+            }
+          }
         }
       }
     }

@@ -13,12 +13,19 @@ import {
   USEDFORCRAFT_STATUS_CHANGED,
   COMPOSTABLE_STATUS_CHANGED,
   COOKING_STATUS_CHANGED,
+  GATHER_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function gatherStatusChange(gatherStatus) {
+  return {
+    type: GATHER_STATUS_CHANGED,
+    gatherStatus,
   };
 }
 export function cookingStatusChange(cookingStatus) {

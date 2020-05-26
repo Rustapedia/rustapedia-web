@@ -23,6 +23,7 @@ import DurabilityTable from 'components/Table/DurabilityTable';
 import UsedForCraftTable from 'components/Table/UsedForCraftTable';
 import CompostableTable from 'components/Table/CompostableTable';
 import CookingTable from 'components/Table/CookingTable';
+import GatherTable from 'components/Table/GatherTable';
 import { makeSelectCurrentItem } from '../App/selectors';
 import H1 from '../../components/H1';
 import reducer from './reducer';
@@ -43,6 +44,7 @@ import {
   usedForCraftStatusChange,
   compostableStatusChange,
   cookingStatusChange,
+  gatherStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -57,6 +59,7 @@ import {
   makeSelectUsedForCraftStatus,
   makeSelectCompostableStatus,
   makeSelectCookingStatus,
+  makeSelectGatherStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -76,6 +79,7 @@ export function ItemPage({
   onCurrentUsedForCraftStatusChanged,
   onCurrentCompostableStatusChanged,
   onCurrentCookingStatusChanged,
+  onCurrentGatherStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
@@ -88,6 +92,7 @@ export function ItemPage({
   usedForCraftStatus,
   compostableStatus,
   cookingStatus,
+  gatherStatus,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
@@ -383,6 +388,45 @@ export function ItemPage({
             Cooking
           </Button>
         )}
+        {currentItem.gather.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentGatherStatusChanged()}
+            style={
+              gatherStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Gather
+          </Button>
+        )}
+        {currentItem.gatheringInfo.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentGatherStatusChanged()}
+            style={
+              gatherStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Gathering
+          </Button>
+        )}
+        {currentItem.gatheredFrom.length > 0 && (
+          <Button
+            type="button"
+            onClick={() => onCurrentGatherStatusChanged()}
+            style={
+              gatherStatus
+                ? { background: 'rgba(0, 0, 0, 0.1)' }
+                : { background: 'rgba(0, 0, 0, 0.2)' }
+            }
+          >
+            Gathered From
+          </Button>
+        )}
       </Wrapper>
       <Wrapper>
         {lootStatus && <LootTable currentItem={currentItem} />}
@@ -397,6 +441,7 @@ export function ItemPage({
         {ingredientStatus && <IngredientTable currentItem={currentItem} />}
         {compostableStatus && <CompostableTable currentItem={currentItem} />}
         {cookingStatus && <CookingTable currentItem={currentItem} />}
+        {gatherStatus && <GatherTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -416,6 +461,7 @@ ItemPage.propTypes = {
   onCurrentUsedForCraftStatusChanged: PropTypes.func,
   onCurrentCompostableStatusChanged: PropTypes.func,
   onCurrentCookingStatusChanged: PropTypes.func,
+  onCurrentGatherStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
@@ -428,6 +474,7 @@ ItemPage.propTypes = {
   usedForCraftStatus: PropTypes.bool,
   compostableStatus: PropTypes.bool,
   cookingStatus: PropTypes.bool,
+  gatherStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -444,6 +491,7 @@ const mapStateToProps = createStructuredSelector({
   usedForCraftStatus: makeSelectUsedForCraftStatus(),
   compostableStatus: makeSelectCompostableStatus(),
   cookingStatus: makeSelectCookingStatus(),
+  gatherStatus: makeSelectGatherStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -472,6 +520,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(compostableStatusChange(compostableStatus)),
     onCurrentCookingStatusChanged: cookingStatus =>
       dispatch(cookingStatusChange(cookingStatus)),
+    onCurrentGatherStatusChanged: gatherStatus =>
+      dispatch(gatherStatusChange(gatherStatus)),
   };
 }
 
