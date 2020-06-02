@@ -66,7 +66,9 @@ function GatherTable({ currentItem }) {
                 ))}
               </td>
               <td className="tableCell center">{items.time}</td>
-              <td className="tableCell center">{items.conditionLoss}%</td>
+              <td className="tableCell center">
+                {items.conditionLoss !== null ? `${items.conditionLoss}%` : '-'}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -114,7 +116,9 @@ function GatherTable({ currentItem }) {
                 ))}
               </td>
               <td className="tableCell center">{items.time}</td>
-              <td className="tableCell center">{items.conditionLoss}%</td>
+              <td className="tableCell center">
+                {items.conditionLoss !== null ? `${items.conditionLoss}%` : '-'}
+              </td>
             </tr>
           ))}
         </tbody>

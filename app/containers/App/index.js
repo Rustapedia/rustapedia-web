@@ -45,13 +45,13 @@ const GET_DATA = gql`
         items {
           id
           name
-          text
-          blueprint
-          additionalText
           image {
             id
             publicUrl
           }
+          text
+          blueprint
+          additionalText
           mainInfo {
             id
             identifier
