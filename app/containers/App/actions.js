@@ -18,12 +18,20 @@
 import {
   CURRENT_ITEM_CHANGED,
   CURRENT_CATEGORY_CHANGED,
+  CURRENT_ITEM_SET,
   LOAD_DATA,
 } from './constants';
 
 export function currentItemChange(item) {
   return {
     type: CURRENT_ITEM_CHANGED,
+    item,
+  };
+}
+
+export function currentItemSet(item) {
+  return {
+    type: CURRENT_ITEM_SET,
     item,
   };
 }

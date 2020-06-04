@@ -15,6 +15,7 @@ import {
   COMPOSTABLE_STATUS_CHANGED,
   COOKING_STATUS_CHANGED,
   GATHER_STATUS_CHANGED,
+  EQUIPMENT_STATUS_CHANGED,
 } from './constants';
 
 // The initial state of the ItemPage
@@ -32,6 +33,7 @@ export const initialState = {
   compostableStatus: false,
   cookingStatus: false,
   gatherStatus: false,
+  equipmentStatus: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -52,6 +54,23 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
+        break;
+      case EQUIPMENT_STATUS_CHANGED:
+        draft.lootStatus = false;
+        draft.craftStatus = false;
+        draft.experimentStatus = false;
+        draft.researchStatus = false;
+        draft.repairStatus = false;
+        draft.recycleStatus = false;
+        draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
+        draft.recycledStatus = false;
+        draft.usedForCraftStatus = false;
+        draft.compostableStatus = false;
+        draft.cookingStatus = false;
+        draft.gatherStatus = false;
+        draft.equipmentStatus = true;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
@@ -67,6 +86,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case USEDFORCRAFT_STATUS_CHANGED:
         draft.craftStatus = false;
@@ -82,6 +102,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case INGREDIENT_STATUS_CHANGED:
         draft.lootStatus = false;
@@ -97,6 +118,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
@@ -112,6 +134,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
         draft.researchStatus = true;
@@ -127,6 +150,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case REPAIR_STATUS_CHANGED:
         draft.repairStatus = true;
@@ -142,6 +166,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case RECYCLE_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -157,6 +182,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case RECYCLED_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -172,6 +198,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case DURABILITY_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -187,6 +214,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case COMPOSTABLE_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -202,6 +230,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = true;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case COOKING_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -217,6 +246,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = true;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case GATHER_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -232,6 +262,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = true;
+        draft.equipmentStatus = false;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
@@ -247,6 +278,7 @@ const itemReducer = (state = initialState, action) =>
         draft.compostableStatus = false;
         draft.cookingStatus = false;
         draft.gatherStatus = false;
+        draft.equipmentStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -295,6 +327,11 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.guns.length > 0
         ) {
           draft.durabilityStatus = true;
+        } else if (
+          action.currentItem.equipment.length > 0 ||
+          action.currentItem.equipmentFor !== null
+        ) {
+          draft.equipmentStatus = true;
         } else if (
           action.currentItem.cookingInfo.length > 0 ||
           action.currentItem.cooking.length > 0

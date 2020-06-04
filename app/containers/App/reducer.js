@@ -11,6 +11,7 @@ import produce from 'immer';
 import {
   CURRENT_ITEM_CHANGED,
   CURRENT_CATEGORY_CHANGED,
+  CURRENT_ITEM_SET,
   LOAD_DATA,
 } from './constants';
 
@@ -28,6 +29,10 @@ const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CURRENT_ITEM_CHANGED:
+        draft.currentItem = action.item;
+        break;
+
+      case CURRENT_ITEM_SET:
         draft.currentItem = action.item;
         break;
 

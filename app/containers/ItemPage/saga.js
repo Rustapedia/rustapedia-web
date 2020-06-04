@@ -19,7 +19,6 @@ export function* resetStatus() {
 export function* setInitStatus() {
   try {
     const currentItem = yield select(makeSelectCurrentItem());
-
     yield put(setInitialStatus(currentItem));
   } catch (err) {
     // empty

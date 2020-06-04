@@ -13,6 +13,12 @@ const makeSelectLootStatus = () =>
     itemState => itemState.lootStatus,
   );
 
+const makeSelectEquipmentStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.equipmentStatus,
+  );
+
 const makeSelectGatherStatus = () =>
   createSelector(
     selectItem,
@@ -100,4 +106,5 @@ export {
   makeSelectCompostableStatus,
   makeSelectCookingStatus,
   makeSelectGatherStatus,
+  makeSelectEquipmentStatus,
 };

@@ -1,5 +1,6 @@
 import {
   LOOT_STATUS_CHANGED,
+  EQUIPMENT_STATUS_CHANGED,
   CRAFT_STATUS_CHANGED,
   EXPERIMENT_STATUS_CHANGED,
   RESEARCH_STATUS_CHANGED,
@@ -20,6 +21,12 @@ export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function equipmentStatusChange(equipmentStatus) {
+  return {
+    type: EQUIPMENT_STATUS_CHANGED,
+    equipmentStatus,
   };
 }
 export function gatherStatusChange(gatherStatus) {

@@ -36,6 +36,12 @@ const ItemMainInfo = ({ currentItem }) => (
             <td className="tableCell">{currentItem.hp}</td>
           </tr>
         )}
+        {currentItem.stamina !== null && (
+          <tr>
+            <td className="tableCell">Stamina</td>
+            <td className="tableCell">{currentItem.stamina}</td>
+          </tr>
+        )}
       </tbody>
     </Table>
   </div>
