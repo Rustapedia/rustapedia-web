@@ -25,6 +25,7 @@ import UsedForCraftTable from 'components/Table/UsedForCraftTable';
 import CompostableTable from 'components/Table/CompostableTable';
 import CookingTable from 'components/Table/CookingTable';
 import GatherTable from 'components/Table/GatherTable';
+import EquipmentTable from 'components/Table/EquipmentTable';
 import { useQuery } from '@apollo/react-hooks';
 import { makeSelectCurrentItem } from '../App/selectors';
 import { currentItemSet } from '../App/actions';
@@ -48,6 +49,7 @@ import {
   compostableStatusChange,
   cookingStatusChange,
   gatherStatusChange,
+  equipmentStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -63,6 +65,7 @@ import {
   makeSelectCompostableStatus,
   makeSelectCookingStatus,
   makeSelectGatherStatus,
+  makeSelectEquipmentStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -92,6 +95,7 @@ const GET_ITEM = gql`
         respawnTimer
         decay
         upkeep
+        speed
       }
       lootInfo {
         id
@@ -903,6 +907,9 @@ const GET_ITEM = gql`
             id
             publicUrl
           }
+          itemInfo {
+            speed
+          }
         }
         extraSlots
         protection
@@ -984,6 +991,7 @@ export function ItemPage({
   onCurrentCompostableStatusChanged,
   onCurrentCookingStatusChanged,
   onCurrentGatherStatusChanged,
+  onCurrentEquipmentStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
@@ -997,6 +1005,7 @@ export function ItemPage({
   compostableStatus,
   cookingStatus,
   gatherStatus,
+  equipmentStatus,
 }) {
   function getItem({ id }) {
     const { loading, data, error } = useQuery(GET_ITEM, {
@@ -1311,6 +1320,19 @@ export function ItemPage({
                 Cooking
               </Button>
             )}
+            {currentItem.equipment.length > 0 && (
+              <Button
+                type="button"
+                onClick={() => onCurrentEquipmentStatusChanged()}
+                style={
+                  equipmentStatus
+                    ? { background: 'rgba(0, 0, 0, 0.1)' }
+                    : { background: 'rgba(0, 0, 0, 0.2)' }
+                }
+              >
+                Equipment
+              </Button>
+            )}
             {currentItem.gather.length > 0 && (
               <Button
                 type="button"
@@ -1367,6 +1389,7 @@ export function ItemPage({
         {compostableStatus && <CompostableTable currentItem={currentItem} />}
         {cookingStatus && <CookingTable currentItem={currentItem} />}
         {gatherStatus && <GatherTable currentItem={currentItem} />}
+        {equipmentStatus && <EquipmentTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -1389,6 +1412,7 @@ ItemPage.propTypes = {
   onCurrentCookingStatusChanged: PropTypes.func,
   onCurrentGatherStatusChanged: PropTypes.func,
   onCurrentItemChanged: PropTypes.func,
+  onCurrentEquipmentStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
@@ -1402,6 +1426,7 @@ ItemPage.propTypes = {
   compostableStatus: PropTypes.bool,
   cookingStatus: PropTypes.bool,
   gatherStatus: PropTypes.bool,
+  equipmentStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1419,12 +1444,15 @@ const mapStateToProps = createStructuredSelector({
   compostableStatus: makeSelectCompostableStatus(),
   cookingStatus: makeSelectCookingStatus(),
   gatherStatus: makeSelectGatherStatus(),
+  equipmentStatus: makeSelectEquipmentStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     onCurrentLootStatusChanged: lootStatus =>
       dispatch(lootStatusChange(lootStatus)),
+    onCurrentEquipmentStatusChanged: equipmentStatus =>
+      dispatch(equipmentStatusChange(equipmentStatus)),
     onCurrentCraftStatusChanged: craftStatus =>
       dispatch(craftStatusChange(craftStatus)),
     onCurrentExperimentStatusChanged: experimentStatus =>
