@@ -14,6 +14,7 @@ import FoodInfo from 'components/Table/InfoBox/FoodInfo';
 import WeaponInfo from 'components/Table/InfoBox/WeaponInfo';
 import ResearchTable from 'components/Table/ResearchTable';
 import LootTable from 'components/Table/LootTable';
+import BreedsTable from 'components/Table/BreedsTable';
 import CraftTable from 'components/Table/CraftTable';
 import RepairTable from 'components/Table/RepairTable';
 import RecycleTable from 'components/Table/RecycleTable';
@@ -50,6 +51,7 @@ import {
   cookingStatusChange,
   gatherStatusChange,
   equipmentStatusChange,
+  breedsStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -66,6 +68,7 @@ import {
   makeSelectCookingStatus,
   makeSelectGatherStatus,
   makeSelectEquipmentStatus,
+  makeSelectBreedsStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -992,6 +995,7 @@ export function ItemPage({
   onCurrentCookingStatusChanged,
   onCurrentGatherStatusChanged,
   onCurrentEquipmentStatusChanged,
+  onCurrentBreedsStatusChanged,
   lootStatus,
   durabilityStatus,
   craftStatus,
@@ -1006,6 +1010,7 @@ export function ItemPage({
   cookingStatus,
   gatherStatus,
   equipmentStatus,
+  breedsStatus,
 }) {
   function getItem({ id }) {
     const { loading, data, error } = useQuery(GET_ITEM, {
@@ -1333,6 +1338,19 @@ export function ItemPage({
                 Equipment
               </Button>
             )}
+            {currentItem.equipmentFor !== null && (
+              <Button
+                type="button"
+                onClick={() => onCurrentEquipmentStatusChanged()}
+                style={
+                  equipmentStatus
+                    ? { background: 'rgba(0, 0, 0, 0.1)' }
+                    : { background: 'rgba(0, 0, 0, 0.2)' }
+                }
+              >
+                Equipment For
+              </Button>
+            )}
             {currentItem.gather.length > 0 && (
               <Button
                 type="button"
@@ -1372,6 +1390,19 @@ export function ItemPage({
                 Gathered From
               </Button>
             )}
+            {currentItem.breeds.length > 0 && (
+              <Button
+                type="button"
+                onClick={() => onCurrentBreedsStatusChanged()}
+                style={
+                  breedsStatus
+                    ? { background: 'rgba(0, 0, 0, 0.1)' }
+                    : { background: 'rgba(0, 0, 0, 0.2)' }
+                }
+              >
+                Breeds
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -1390,6 +1421,7 @@ export function ItemPage({
         {cookingStatus && <CookingTable currentItem={currentItem} />}
         {gatherStatus && <GatherTable currentItem={currentItem} />}
         {equipmentStatus && <EquipmentTable currentItem={currentItem} />}
+        {breedsStatus && <BreedsTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -1409,6 +1441,7 @@ ItemPage.propTypes = {
   onCurrentIngredientStatusChanged: PropTypes.func,
   onCurrentUsedForCraftStatusChanged: PropTypes.func,
   onCurrentCompostableStatusChanged: PropTypes.func,
+  onCurrentBreedsStatusChanged: PropTypes.func,
   onCurrentCookingStatusChanged: PropTypes.func,
   onCurrentGatherStatusChanged: PropTypes.func,
   onCurrentItemChanged: PropTypes.func,
@@ -1427,6 +1460,7 @@ ItemPage.propTypes = {
   cookingStatus: PropTypes.bool,
   gatherStatus: PropTypes.bool,
   equipmentStatus: PropTypes.bool,
+  breedsStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1445,6 +1479,7 @@ const mapStateToProps = createStructuredSelector({
   cookingStatus: makeSelectCookingStatus(),
   gatherStatus: makeSelectGatherStatus(),
   equipmentStatus: makeSelectEquipmentStatus(),
+  breedsStatus: makeSelectBreedsStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -1477,6 +1512,8 @@ export function mapDispatchToProps(dispatch) {
       dispatch(cookingStatusChange(cookingStatus)),
     onCurrentGatherStatusChanged: gatherStatus =>
       dispatch(gatherStatusChange(gatherStatus)),
+    onCurrentBreedsStatusChanged: breedsStatus =>
+      dispatch(breedsStatusChange(breedsStatus)),
     onCurrentItemChanged: item => dispatch(currentItemSet(item)),
   };
 }

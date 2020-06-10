@@ -15,12 +15,19 @@ import {
   COMPOSTABLE_STATUS_CHANGED,
   COOKING_STATUS_CHANGED,
   GATHER_STATUS_CHANGED,
+  BREEDS_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function breedsStatusChange(breedsStatus) {
+  return {
+    type: BREEDS_STATUS_CHANGED,
+    breedsStatus,
   };
 }
 export function equipmentStatusChange(equipmentStatus) {

@@ -16,6 +16,7 @@ import {
   COOKING_STATUS_CHANGED,
   GATHER_STATUS_CHANGED,
   EQUIPMENT_STATUS_CHANGED,
+  BREEDS_STATUS_CHANGED,
 } from './constants';
 
 // The initial state of the ItemPage
@@ -34,6 +35,7 @@ export const initialState = {
   cookingStatus: false,
   gatherStatus: false,
   equipmentStatus: false,
+  breedsStatus: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -55,6 +57,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case EQUIPMENT_STATUS_CHANGED:
         draft.lootStatus = false;
@@ -71,6 +74,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = true;
+        draft.breedsStatus = false;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
@@ -87,6 +91,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case USEDFORCRAFT_STATUS_CHANGED:
         draft.craftStatus = false;
@@ -103,6 +108,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case INGREDIENT_STATUS_CHANGED:
         draft.lootStatus = false;
@@ -119,6 +125,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case EXPERIMENT_STATUS_CHANGED:
         draft.craftStatus = false;
@@ -135,6 +142,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
         draft.researchStatus = true;
@@ -151,6 +159,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case REPAIR_STATUS_CHANGED:
         draft.repairStatus = true;
@@ -167,6 +176,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case RECYCLE_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -183,6 +193,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case RECYCLED_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -199,6 +210,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case DURABILITY_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -215,6 +227,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case COMPOSTABLE_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -231,6 +244,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case COOKING_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -247,6 +261,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = true;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case GATHER_STATUS_CHANGED:
         draft.repairStatus = false;
@@ -263,6 +278,24 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = true;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
+        break;
+      case BREEDS_STATUS_CHANGED:
+        draft.repairStatus = false;
+        draft.craftStatus = false;
+        draft.lootStatus = false;
+        draft.experimentStatus = false;
+        draft.researchStatus = false;
+        draft.recycleStatus = false;
+        draft.durabilityStatus = false;
+        draft.ingredientStatus = false;
+        draft.recycledStatus = false;
+        draft.usedForCraftStatus = false;
+        draft.compostableStatus = false;
+        draft.cookingStatus = false;
+        draft.gatherStatus = false;
+        draft.equipmentStatus = false;
+        draft.breedsStatus = true;
         break;
       case RESET_TO_DEFAULT:
         draft.craftStatus = false;
@@ -279,6 +312,7 @@ const itemReducer = (state = initialState, action) =>
         draft.cookingStatus = false;
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
+        draft.breedsStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -343,6 +377,8 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.gatheredFrom.length > 0
         ) {
           draft.gatherStatus = true;
+        } else if (action.currentItem.breeds.length > 0) {
+          draft.breedsStatus = true;
         }
         break;
     }
