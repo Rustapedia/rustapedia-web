@@ -8,8 +8,28 @@
  * Follow this format:
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
-
+import gql from 'graphql-tag';
 export const CURRENT_ITEM_CHANGED = 'CURRENT_ITEM_CHANGED';
 export const CURRENT_ITEM_SET = 'CURRENT_ITEM_SET';
 export const CURRENT_CATEGORY_CHANGED = 'CURRENT_CATEGORY_CHANGED';
 export const LOAD_DATA = 'LOAD_DATA';
+export const GET_DATA = gql`
+  {
+    allCategories {
+      name
+      id
+      subCategory {
+        id
+        name
+        items {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+    }
+  }
+`;

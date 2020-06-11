@@ -7,7 +7,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import Img from 'components/Img';
 import P from 'components/P';
-import gql from 'graphql-tag';
 import MainItemInfo from 'components/Table/ItemMainInfo';
 import ItemInfo from 'components/Table/InfoBox/ItemInfo';
 import FoodInfo from 'components/Table/InfoBox/FoodInfo';
@@ -36,1013 +35,32 @@ import reducer from './reducer';
 import saga from './saga';
 import Wrapper from './Wrapper';
 import ItemContainer from './ItemContainer';
-
-import {
-  lootStatusChange,
-  craftStatusChange,
-  experimentStatusChange,
-  researchStatusChange,
-  recycleStatusChange,
-  repairStatusChange,
-  durabilityStatusChange,
-  ingredientStatusChange,
-  recycledStatusChange,
-  usedForCraftStatusChange,
-  compostableStatusChange,
-  cookingStatusChange,
-  gatherStatusChange,
-  equipmentStatusChange,
-  breedsStatusChange,
-  feedingStatusChange,
-} from './actions';
-import {
-  makeSelectLootStatus,
-  makeSelectCraftStatus,
-  makeSelectExperimentStatus,
-  makeSelectResearchStatus,
-  makeSelectRepairStatus,
-  makeSelectRecycleStatus,
-  makeSelectDurabilityStatus,
-  makeSelectIngredientStatus,
-  makeSelectRecycledStatus,
-  makeSelectUsedForCraftStatus,
-  makeSelectCompostableStatus,
-  makeSelectCookingStatus,
-  makeSelectGatherStatus,
-  makeSelectEquipmentStatus,
-  makeSelectBreedsStatus,
-  makeSelectFeedingStatus,
-} from './selectors';
+import { statusChange } from './actions';
+import { makeSelectStatus } from './selectors';
 import Button from './Button';
+import { GET_ITEM } from './constants';
 
 const key = 'item';
-const GET_ITEM = gql`
-  query findItem($id: ID!) {
-    Item(where: { id: $id }) {
-      id
-      name
-      image {
-        id
-        publicUrl
-      }
-      text
-      blueprint
-      additionalText
-      mainInfo {
-        id
-        identifier
-        stackSize
-        despawnTime
-        hp
-        stamina
-      }
-      itemInfo {
-        id
-        respawnTimer
-        decay
-        upkeep
-        speed
-      }
-      lootInfo {
-        id
-        container {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        condition
-        count
-        chance
-      }
-      loot {
-        id
-        itemToLoot {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-          subCategory {
-            id
-            name
-          }
-        }
-        condition
-        chance
-        count
-      }
-      weaponInfo {
-        id
-        damage
-        attackSpeed
-        range
-        rateOfFire
-        aimCone
-        capacity
-        reload
-        draw
-        throw
-        velocity
-        recoil
-        exposionRadius
-        explosionDelay
-        dugChance
-      }
-      foodInfo {
-        id
-        calories
-        hydration
-        health
-        healthOverTime
-        capacity
-      }
-      craftInfo {
-        id
-        requiredItemCounts {
-          id
-          item {
-            id
-            name
-            blueprint
-            image {
-              id
-              publicUrl
-            }
-            craftInfo {
-              id
-              requiredItemCounts {
-                id
-                item {
-                  id
-                  name
-                  image {
-                    id
-                    publicUrl
-                  }
-                }
-                count
-              }
-              time
-              workBench {
-                id
-                name
-                image {
-                  id
-                  publicUrl
-                }
-              }
-            }
-          }
-          count
-        }
-        time
-        workBench {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      ingredientFor {
-        id
-        requiredItemCounts {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        item {
-          id
-          name
-          subCategory {
-            id
-            name
-          }
-          image {
-            id
-            publicUrl
-          }
-          ingredientFor {
-            id
-            requiredItemCounts {
-              id
-              item {
-                id
-                name
-                image {
-                  id
-                  publicUrl
-                }
-              }
-              count
-            }
-            item {
-              id
-              name
-              subCategory {
-                id
-                name
-              }
-              image {
-                id
-                publicUrl
-              }
-            }
-          }
-        }
-      }
-      usedForCraft {
-        id
-        time
-        requiredItemCounts {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      experiment {
-        id
-        workBench {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        experimentNeeded {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-      }
-      experimentation {
-        id
-        item {
-          id
-          name
-          blueprint
-          subCategory {
-            id
-            name
-          }
-          image {
-            id
-            publicUrl
-          }
-        }
-        experimentNeeded {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-      }
-      research {
-        id
-        researchTool {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        researchNeeded {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-      }
-      researches {
-        id
-        item {
-          id
-          name
-          subCategory {
-            id
-            name
-          }
-          image {
-            id
-            publicUrl
-          }
-        }
-        researchNeeded {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-      }
-      repair {
-        id
-        tool {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        repairCoast {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        condition
-        blueprintRequired
-      }
-      repairs {
-        id
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        repairCoast {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        condition
-        blueprintRequired
-      }
-      recycle {
-        id
-        yield {
-          id
-          count
-          percent
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-        }
-        recycler {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      recycledFrom {
-        id
-        item {
-          id
-          name
-          subCategory {
-            id
-            name
-          }
-          image {
-            id
-            publicUrl
-          }
-        }
-        yield {
-          id
-          count
-          percent
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-        }
-      }
-      recycler {
-        id
-        yield {
-          id
-          count
-          percent
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-        }
-        item {
-          id
-          name
-          subCategory {
-            id
-            name
-          }
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      explosive: durabilityInfo(where: { type: Explosive }) {
-        id
-        time
-        sulfurNeeded
-        fuelNeeded
-        quantity
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      melle: durabilityInfo(where: { type: Melle }) {
-        id
-        time
-        sulfurNeeded
-        fuelNeeded
-        quantity
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      throwing: durabilityInfo(where: { type: Throwing }) {
-        id
-        time
-        sulfurNeeded
-        fuelNeeded
-        quantity
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      guns: durabilityInfo(where: { type: Guns }) {
-        id
-        time
-        sulfurNeeded
-        fuelNeeded
-        quantity
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-      compostable {
-        id
-        tool {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        result {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        amountPerStack
-      }
-      composter {
-        id
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        result {
-          id
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        amountPerStack
-      }
-      composting {
-        id
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        result {
-          id
-          count
-        }
-      }
-      cookingInfo {
-        id
-        furnace {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        processOne {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        processTwo {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        processThree {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        processFour {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-      }
-      cooking {
-        id
-        processOne {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        processTwo {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        processThree {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-        processFour {
-          id
-          cookingItem {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          needed {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          count
-        }
-      }
-      gather {
-        id
-        fromItem {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        result {
-          id
-          count
-          range
-          percent
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-        }
-        time
-        conditionLoss
-      }
-      gatheringInfo {
-        id
-        tool {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        result {
-          id
-          count
-          range
-          percent
-          item {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-        }
-        time
-        conditionLoss
-      }
-      gatheredFrom {
-        id
-        name
-        image {
-          id
-          publicUrl
-        }
-        gatheringInfo {
-          id
-          tool {
-            id
-            name
-            image {
-              id
-              publicUrl
-            }
-          }
-          result {
-            id
-            count
-            range
-            percent
-            item {
-              id
-              name
-              image {
-                id
-                publicUrl
-              }
-            }
-          }
-          time
-          conditionLoss
-        }
-      }
-      equipment {
-        id
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-          itemInfo {
-            speed
-          }
-        }
-        extraSlots
-        protection
-      }
-      equipmentFor {
-        id
-        animal {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        extraSlots
-        protection
-      }
-      breeds {
-        id
-        stamina
-        speed
-        hp
-        breed
-      }
-      feeding {
-        id
-        food {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        addStamina
-        healing
-      }
-      produces {
-        id
-        item {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        amount
-      }
-      productOf {
-        id
-        animal {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-        amount
-      }
-    }
-  }
-`;
 export function ItemPage({
   item,
   currentItem,
   onCurrentItemChanged,
-  onCurrentLootStatusChanged,
-  onCurrentCraftStatusChanged,
-  onCurrentExperimentStatusChanged,
-  onCurrentResearchStatusChanged,
-  onCurrentRepairStatusChanged,
-  onCurrentRecycleStatusChanged,
-  onCurrentDurabilityStatusChanged,
-  onCurrentIngredientStatusChanged,
-  onCurrentRecycledStatusChanged,
-  onCurrentUsedForCraftStatusChanged,
-  onCurrentCompostableStatusChanged,
-  onCurrentCookingStatusChanged,
-  onCurrentGatherStatusChanged,
-  onCurrentEquipmentStatusChanged,
-  onCurrentBreedsStatusChanged,
-  onCurrentFeedingStatusChanged,
-  lootStatus,
-  feedingStatus,
-  durabilityStatus,
-  craftStatus,
-  experimentStatus,
-  ingredientStatus,
-  researchStatus,
-  repairStatus,
-  recycleStatus,
-  recycledStatus,
-  usedForCraftStatus,
-  compostableStatus,
-  cookingStatus,
-  gatherStatus,
-  equipmentStatus,
-  breedsStatus,
+  onCurrentStatusChanged,
+  display,
 }) {
   const [initialized, setIinitialized] = useState(false);
-
+  const { loading, data, error } = useQuery(GET_ITEM, {
+    variables: { id: item.id },
+    initialized,
+  });
   useEffect(() => {
-    // if (!props.fetched) {
-    //   props.fetchRules();
-    // }
-
-    getItem({ id: item.id });
-    setIinitialized(true);
-  }, [initialized]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
-
-  function getItem({ id }) {
-    const { loading, data, error } = useQuery(GET_ITEM, {
-      variables: { id },
-      skip: !id,
-      pollInterval: 0,
-    });
-    if (loading && !data) {
-      return null;
+    if (!loading && !!data) {
+      setIinitialized(true);
+      const selectItem = data.Item;
+      onCurrentItemChanged(selectItem);
     }
-    if (error) return `Error! ${error}`;
-    const selectItem = data.Item;
-    onCurrentItemChanged(selectItem);
-    return null;
-  }
-
+  }, [data, loading]);
+  if (error) return `Error! ${error}`;
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -1083,28 +101,12 @@ export function ItemPage({
             </div>
           </Wrapper>
           <Wrapper>
-            {currentItem.lootInfo.length > 0 && (
+            {(currentItem.lootInfo.length > 0 ||
+              currentItem.loot.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentLootStatusChanged()}
-                style={
-                  lootStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Loot
-              </Button>
-            )}
-            {currentItem.loot.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentLootStatusChanged()}
-                style={
-                  lootStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('loot')}
+                className={display.loot ? 'active' : null}
               >
                 Loot
               </Button>
@@ -1112,12 +114,8 @@ export function ItemPage({
             {currentItem.craftInfo !== null && (
               <Button
                 type="button"
-                onClick={() => onCurrentCraftStatusChanged()}
-                style={
-                  craftStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('craft')}
+                className={display.craft ? 'active' : null}
               >
                 Craft
               </Button>
@@ -1125,12 +123,8 @@ export function ItemPage({
             {currentItem.usedForCraft.length > 0 && (
               <Button
                 type="button"
-                onClick={() => onCurrentUsedForCraftStatusChanged()}
-                style={
-                  usedForCraftStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('usedForCraft')}
+                className={display.usedForCraft ? 'active' : null}
               >
                 Used for craft
               </Button>
@@ -1138,116 +132,50 @@ export function ItemPage({
             {currentItem.ingredientFor.length > 0 && (
               <Button
                 type="button"
-                onClick={() => onCurrentIngredientStatusChanged()}
-                style={
-                  ingredientStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('ingredient')}
+                className={display.ingredient ? 'active' : null}
               >
                 Ingredient for
               </Button>
             )}
-            {currentItem.experimentation.length > 0 && (
+            {(currentItem.experimentation.length > 0 ||
+              currentItem.experiment !== null) && (
               <Button
                 type="button"
-                onClick={() => onCurrentExperimentStatusChanged()}
-                style={
-                  experimentStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('experiment')}
+                className={display.experiment ? 'active' : null}
               >
-                Experimentation
+                {currentItem.experimentation.length > 0
+                  ? 'Experimentation'
+                  : 'Experiment'}
               </Button>
             )}
-            {currentItem.experiment !== null && (
+            {(currentItem.research !== null ||
+              currentItem.researches.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentExperimentStatusChanged()}
-                style={
-                  experimentStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('research')}
+                className={display.research ? 'active' : null}
               >
-                Experiment
+                {currentItem.research !== null ? 'Research' : 'Researches'}
               </Button>
             )}
-            {currentItem.research !== null && (
+            {(currentItem.repair.length > 0 ||
+              currentItem.repairs.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentResearchStatusChanged()}
-                style={
-                  researchStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('repair')}
+                className={display.repair ? 'active' : null}
               >
-                Research
+                {currentItem.repair.length > 0 ? 'Repair' : 'Repairs'}
               </Button>
             )}
-            {currentItem.researches.length > 0 && (
+            {(currentItem.recycle !== null ||
+              currentItem.recycler.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentResearchStatusChanged()}
-                style={
-                  researchStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Researches
-              </Button>
-            )}
-            {currentItem.repair.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentRepairStatusChanged()}
-                style={
-                  repairStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Repair
-              </Button>
-            )}
-            {currentItem.repairs.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentRepairStatusChanged()}
-                style={
-                  repairStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Repairs
-              </Button>
-            )}
-            {currentItem.recycle !== null && (
-              <Button
-                type="button"
-                onClick={() => onCurrentRecycleStatusChanged()}
-                style={
-                  recycleStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Recycle
-              </Button>
-            )}
-            {currentItem.recycler.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentRecycleStatusChanged()}
-                style={
-                  recycleStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('recycle')}
+                className={display.recycle ? 'active' : null}
               >
                 Recycle
               </Button>
@@ -1255,12 +183,8 @@ export function ItemPage({
             {currentItem.recycledFrom.length > 0 && (
               <Button
                 type="button"
-                onClick={() => onCurrentRecycledStatusChanged()}
-                style={
-                  recycledStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('recycled')}
+                className={display.recycled ? 'active' : null}
               >
                 Recycled From
               </Button>
@@ -1268,155 +192,65 @@ export function ItemPage({
             {currentItem.explosive.length > 0 && (
               <Button
                 type="button"
-                onClick={() => onCurrentDurabilityStatusChanged()}
-                style={
-                  durabilityStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('durability')}
+                className={display.durability ? 'active' : null}
               >
                 Durability
               </Button>
             )}
-            {currentItem.compostable !== null && (
+            {(currentItem.compostable !== null ||
+              currentItem.composter.length > 0 ||
+              currentItem.composting.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentCompostableStatusChanged()}
-                style={
-                  compostableStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('compostable')}
+                className={display.compostable ? 'active' : null}
               >
-                Compostable
+                {currentItem.compostable !== null && 'Compostable'}
+                {currentItem.composter.length > 0 && 'Composter'}
+                {currentItem.composting.length > 0 && 'Composting'}
               </Button>
             )}
-            {currentItem.composter.length > 0 && (
+            {(currentItem.cookingInfo.length > 0 ||
+              currentItem.cooking.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentCompostableStatusChanged()}
-                style={
-                  compostableStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Composter
-              </Button>
-            )}
-            {currentItem.composting.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentCompostableStatusChanged()}
-                style={
-                  compostableStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Composting
-              </Button>
-            )}
-            {currentItem.cookingInfo.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentCookingStatusChanged()}
-                style={
-                  cookingStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('cooking')}
+                className={display.cooking ? 'active' : null}
               >
                 Cooking
               </Button>
             )}
-            {currentItem.cooking.length > 0 && (
+            {(currentItem.equipment.length > 0 ||
+              currentItem.equipmentFor !== null) && (
               <Button
                 type="button"
-                onClick={() => onCurrentCookingStatusChanged()}
-                style={
-                  cookingStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('equipment')}
+                className={display.equipment ? 'active' : null}
               >
-                Cooking
+                {currentItem.equipment.length > 0
+                  ? 'Equipment'
+                  : 'Equipment For'}
               </Button>
             )}
-            {currentItem.equipment.length > 0 && (
+            {(currentItem.gather.length > 0 ||
+              currentItem.gatheringInfo.length > 0 ||
+              currentItem.gatheredFrom.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentEquipmentStatusChanged()}
-                style={
-                  equipmentStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('gather')}
+                className={display.gather ? 'active' : null}
               >
-                Equipment
-              </Button>
-            )}
-            {currentItem.equipmentFor !== null && (
-              <Button
-                type="button"
-                onClick={() => onCurrentEquipmentStatusChanged()}
-                style={
-                  equipmentStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Equipment For
-              </Button>
-            )}
-            {currentItem.gather.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentGatherStatusChanged()}
-                style={
-                  gatherStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Gather
-              </Button>
-            )}
-            {currentItem.gatheringInfo.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentGatherStatusChanged()}
-                style={
-                  gatherStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Gathering
-              </Button>
-            )}
-            {currentItem.gatheredFrom.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentGatherStatusChanged()}
-                style={
-                  gatherStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
-              >
-                Gathered From
+                {currentItem.gather.length > 0 && 'Gather'}
+                {currentItem.gatheringInfo.length > 0 && 'Gathering'}
+                {currentItem.gatheredFrom.length > 0 && 'Gathered From'}
               </Button>
             )}
             {currentItem.breeds.length > 0 && (
               <Button
                 type="button"
-                onClick={() => onCurrentBreedsStatusChanged()}
-                style={
-                  breedsStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('breeds')}
+                className={display.breeds ? 'active' : null}
               >
                 Breeds
               </Button>
@@ -1424,12 +258,8 @@ export function ItemPage({
             {currentItem.feeding.length > 0 && (
               <Button
                 type="button"
-                onClick={() => onCurrentFeedingStatusChanged()}
-                style={
-                  breedsStatus
-                    ? { background: 'rgba(0, 0, 0, 0.1)' }
-                    : { background: 'rgba(0, 0, 0, 0.2)' }
-                }
+                onClick={() => onCurrentStatusChanged('feeding')}
+                className={display.feeding ? 'active' : null}
               >
                 Feeding
               </Button>
@@ -1438,119 +268,45 @@ export function ItemPage({
         </div>
       )}
       <Wrapper>
-        {lootStatus && <LootTable currentItem={currentItem} />}
-        {craftStatus && <CraftTable currentItem={currentItem} />}
-        {usedForCraftStatus && <UsedForCraftTable currentItem={currentItem} />}
-        {experimentStatus && <ExperimentTable currentItem={currentItem} />}
-        {researchStatus && <ResearchTable currentItem={currentItem} />}
-        {repairStatus && <RepairTable currentItem={currentItem} />}
-        {recycleStatus && <RecycleTable currentItem={currentItem} />}
-        {recycledStatus && <RecycledTable currentItem={currentItem} />}
-        {durabilityStatus && <DurabilityTable currentItem={currentItem} />}
-        {ingredientStatus && <IngredientTable currentItem={currentItem} />}
-        {compostableStatus && <CompostableTable currentItem={currentItem} />}
-        {cookingStatus && <CookingTable currentItem={currentItem} />}
-        {gatherStatus && <GatherTable currentItem={currentItem} />}
-        {equipmentStatus && <EquipmentTable currentItem={currentItem} />}
-        {breedsStatus && <BreedsTable currentItem={currentItem} />}
-        {feedingStatus && <FeedingTable currentItem={currentItem} />}
+        {display.loot && <LootTable currentItem={currentItem} />}
+        {display.craft && <CraftTable currentItem={currentItem} />}
+        {display.usedForCraft && (
+          <UsedForCraftTable currentItem={currentItem} />
+        )}
+        {display.experiment && <ExperimentTable currentItem={currentItem} />}
+        {display.research && <ResearchTable currentItem={currentItem} />}
+        {display.repair && <RepairTable currentItem={currentItem} />}
+        {display.recycle && <RecycleTable currentItem={currentItem} />}
+        {display.recycled && <RecycledTable currentItem={currentItem} />}
+        {display.ingredient && <IngredientTable currentItem={currentItem} />}
+        {display.compostable && <CompostableTable currentItem={currentItem} />}
+        {display.cooking && <CookingTable currentItem={currentItem} />}
+        {display.gather && <GatherTable currentItem={currentItem} />}
+        {display.equipment && <EquipmentTable currentItem={currentItem} />}
+        {display.breeds && <BreedsTable currentItem={currentItem} />}
+        {display.feeding && <FeedingTable currentItem={currentItem} />}
+        {display.durability && <DurabilityTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
 }
 
 ItemPage.propTypes = {
+  onCurrentItemChanged: PropTypes.func,
   item: PropTypes.object,
   currentItem: PropTypes.object,
-  onCurrentLootStatusChanged: PropTypes.func,
-  onCurrentCraftStatusChanged: PropTypes.func,
-  onCurrentExperimentStatusChanged: PropTypes.func,
-  onCurrentResearchStatusChanged: PropTypes.func,
-  onCurrentRepairStatusChanged: PropTypes.func,
-  onCurrentRecycleStatusChanged: PropTypes.func,
-  onCurrentRecycledStatusChanged: PropTypes.func,
-  onCurrentDurabilityStatusChanged: PropTypes.func,
-  onCurrentIngredientStatusChanged: PropTypes.func,
-  onCurrentUsedForCraftStatusChanged: PropTypes.func,
-  onCurrentCompostableStatusChanged: PropTypes.func,
-  onCurrentBreedsStatusChanged: PropTypes.func,
-  onCurrentCookingStatusChanged: PropTypes.func,
-  onCurrentGatherStatusChanged: PropTypes.func,
-  onCurrentItemChanged: PropTypes.func,
-  onCurrentEquipmentStatusChanged: PropTypes.func,
-  onCurrentFeedingStatusChanged: PropTypes.func,
-  lootStatus: PropTypes.bool,
-  craftStatus: PropTypes.bool,
-  experimentStatus: PropTypes.bool,
-  researchStatus: PropTypes.bool,
-  repairStatus: PropTypes.bool,
-  recycleStatus: PropTypes.bool,
-  recycledStatus: PropTypes.bool,
-  durabilityStatus: PropTypes.bool,
-  ingredientStatus: PropTypes.bool,
-  usedForCraftStatus: PropTypes.bool,
-  compostableStatus: PropTypes.bool,
-  cookingStatus: PropTypes.bool,
-  gatherStatus: PropTypes.bool,
-  equipmentStatus: PropTypes.bool,
-  breedsStatus: PropTypes.bool,
-  feedingStatus: PropTypes.bool,
+  onCurrentStatusChanged: PropTypes.func,
+  display: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  lootStatus: makeSelectLootStatus(),
-  ingredientStatus: makeSelectIngredientStatus(),
-  craftStatus: makeSelectCraftStatus(),
-  researchStatus: makeSelectResearchStatus(),
-  experimentStatus: makeSelectExperimentStatus(),
-  repairStatus: makeSelectRepairStatus(),
-  recycleStatus: makeSelectRecycleStatus(),
-  recycledStatus: makeSelectRecycledStatus(),
+  display: makeSelectStatus(),
   currentItem: makeSelectCurrentItem(),
-  durabilityStatus: makeSelectDurabilityStatus(),
-  usedForCraftStatus: makeSelectUsedForCraftStatus(),
-  compostableStatus: makeSelectCompostableStatus(),
-  cookingStatus: makeSelectCookingStatus(),
-  gatherStatus: makeSelectGatherStatus(),
-  equipmentStatus: makeSelectEquipmentStatus(),
-  breedsStatus: makeSelectBreedsStatus(),
-  feedingStatus: makeSelectFeedingStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onCurrentLootStatusChanged: lootStatus =>
-      dispatch(lootStatusChange(lootStatus)),
-    onCurrentEquipmentStatusChanged: equipmentStatus =>
-      dispatch(equipmentStatusChange(equipmentStatus)),
-    onCurrentCraftStatusChanged: craftStatus =>
-      dispatch(craftStatusChange(craftStatus)),
-    onCurrentExperimentStatusChanged: experimentStatus =>
-      dispatch(experimentStatusChange(experimentStatus)),
-    onCurrentResearchStatusChanged: researchStatus =>
-      dispatch(researchStatusChange(researchStatus)),
-    onCurrentRepairStatusChanged: repairStatus =>
-      dispatch(repairStatusChange(repairStatus)),
-    onCurrentRecycleStatusChanged: recycleStatus =>
-      dispatch(recycleStatusChange(recycleStatus)),
-    onCurrentRecycledStatusChanged: recycledStatus =>
-      dispatch(recycledStatusChange(recycledStatus)),
-    onCurrentDurabilityStatusChanged: durabilityStatus =>
-      dispatch(durabilityStatusChange(durabilityStatus)),
-    onCurrentIngredientStatusChanged: ingredientStatus =>
-      dispatch(ingredientStatusChange(ingredientStatus)),
-    onCurrentUsedForCraftStatusChanged: usedForCraftStatus =>
-      dispatch(usedForCraftStatusChange(usedForCraftStatus)),
-    onCurrentCompostableStatusChanged: compostableStatus =>
-      dispatch(compostableStatusChange(compostableStatus)),
-    onCurrentCookingStatusChanged: cookingStatus =>
-      dispatch(cookingStatusChange(cookingStatus)),
-    onCurrentGatherStatusChanged: gatherStatus =>
-      dispatch(gatherStatusChange(gatherStatus)),
-    onCurrentBreedsStatusChanged: breedsStatus =>
-      dispatch(breedsStatusChange(breedsStatus)),
-    onCurrentFeedingStatusChanged: feedingStatus =>
-      dispatch(feedingStatusChange(feedingStatus)),
+    onCurrentStatusChanged: status => dispatch(statusChange(status)),
     onCurrentItemChanged: item => dispatch(currentItemChange(item)),
   };
 }

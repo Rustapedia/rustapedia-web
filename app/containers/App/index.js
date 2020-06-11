@@ -7,7 +7,7 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
@@ -20,9 +20,9 @@ import ItemsPage from 'containers/ItemsPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import HomePage from 'containers/HomePage/Loadable';
 import Header from 'containers/Header';
-import gql from 'graphql-tag';
 import ItemPage from 'containers/ItemPage';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_DATA } from './constants';
 import { makeSelectData } from './selectors';
 import { loadData } from './actions';
 import GlobalStyle from '../../global-styles';
@@ -34,28 +34,17 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-const GET_DATA = gql`
-  {
-    allCategories {
-      name
-      id
-      subCategory {
-        id
-        name
-        items {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
-      }
-    }
-  }
-`;
-
 export function App({ onLoadData, categories }) {
+  const [initialized, setIinitialized] = useState(false);
+  const { loading, error, data } = useQuery(GET_DATA, { initialized });
+  useEffect(() => {
+    if (!loading && !!data) {
+      setIinitialized(true);
+      const allCategory = data.allCategories;
+      onLoadData(allCategory);
+    }
+  }, [data, loading]);
+  if (error) return `Error! ${error}`;
   return (
     <AppWrapper>
       <Helmet
@@ -64,17 +53,6 @@ export function App({ onLoadData, categories }) {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Query query={GET_DATA} fetchPolicy="network-only">
-        {({ data, loading, error }) => {
-          if (loading && !data) {
-            return null;
-          }
-          if (error) return `Error! ${error}`;
-          const allCategory = data.allCategories;
-          onLoadData(allCategory);
-          return null;
-        }}
-      </Query>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

@@ -8,22 +8,911 @@
  * Follow this format:
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
-
-export const LOOT_STATUS_CHANGED = 'LOOT_STATUS_CHANGED';
-export const BREEDS_STATUS_CHANGED = 'BREEDS_STATUS_CHANGED';
-export const EQUIPMENT_STATUS_CHANGED = 'EQUIPMENT_STATUS_CHANGED';
-export const RECYCLED_STATUS_CHANGED = 'RECYCLED_STATUS_CHANGED';
-export const CRAFT_STATUS_CHANGED = 'CRAFT_STATUS_CHANGED';
-export const INGREDIENT_STATUS_CHANGED = 'INGREDIENT_STATUS_CHANGED';
-export const EXPERIMENT_STATUS_CHANGED = 'EXPERIMENT_STATUS_CHANGED';
-export const RESEARCH_STATUS_CHANGED = 'RESEARCH_STATUS_CHANGED';
+import gql from 'graphql-tag';
+export const STATUS_CHANGED = 'STATUS_CHANGED';
 export const RESET_TO_DEFAULT = 'RESET_TO_DEFAULT';
 export const SET_INITIAL_STATUS = 'SET_INITIAL_STATUS';
-export const REPAIR_STATUS_CHANGED = 'REPAIR_STATUS_CHANGED';
-export const RECYCLE_STATUS_CHANGED = 'RECYCLE_STATUS_CHANGED';
-export const DURABILITY_STATUS_CHANGED = 'DURABILITY_STATUS_CHANGED';
-export const USEDFORCRAFT_STATUS_CHANGED = 'USEDFORCRAFT_STATUS_CHANGED';
-export const COMPOSTABLE_STATUS_CHANGED = 'COMPOSTABLE_STATUS_CHANGED';
-export const COOKING_STATUS_CHANGED = 'COOKING_STATUS_CHANGED';
-export const GATHER_STATUS_CHANGED = 'GATHER_STATUS_CHANGED';
-export const FEEDING_STATUS_CHANGED = 'FEEDING_STATUS_CHANGED';
+export const GET_ITEM = gql`
+  query findItem($id: ID!) {
+    Item(where: { id: $id }) {
+      id
+      name
+      image {
+        id
+        publicUrl
+      }
+      text
+      blueprint
+      additionalText
+      mainInfo {
+        id
+        identifier
+        stackSize
+        despawnTime
+        hp
+        stamina
+      }
+      itemInfo {
+        id
+        respawnTimer
+        decay
+        upkeep
+        speed
+      }
+      lootInfo {
+        id
+        container {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        condition
+        count
+        chance
+      }
+      loot {
+        id
+        itemToLoot {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+          subCategory {
+            id
+            name
+          }
+        }
+        condition
+        chance
+        count
+      }
+      weaponInfo {
+        id
+        damage
+        attackSpeed
+        range
+        rateOfFire
+        aimCone
+        capacity
+        reload
+        draw
+        throw
+        velocity
+        recoil
+        exposionRadius
+        explosionDelay
+        dugChance
+      }
+      foodInfo {
+        id
+        calories
+        hydration
+        health
+        healthOverTime
+        capacity
+      }
+      craftInfo {
+        id
+        requiredItemCounts {
+          id
+          item {
+            id
+            name
+            blueprint
+            image {
+              id
+              publicUrl
+            }
+            craftInfo {
+              id
+              requiredItemCounts {
+                id
+                item {
+                  id
+                  name
+                  image {
+                    id
+                    publicUrl
+                  }
+                }
+                count
+              }
+              time
+              workBench {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+            }
+          }
+          count
+        }
+        time
+        workBench {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      ingredientFor {
+        id
+        requiredItemCounts {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        item {
+          id
+          name
+          subCategory {
+            id
+            name
+          }
+          image {
+            id
+            publicUrl
+          }
+          ingredientFor {
+            id
+            requiredItemCounts {
+              id
+              item {
+                id
+                name
+                image {
+                  id
+                  publicUrl
+                }
+              }
+              count
+            }
+            item {
+              id
+              name
+              subCategory {
+                id
+                name
+              }
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
+        }
+      }
+      usedForCraft {
+        id
+        time
+        requiredItemCounts {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      experiment {
+        id
+        workBench {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        experimentNeeded {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      experimentation {
+        id
+        item {
+          id
+          name
+          blueprint
+          subCategory {
+            id
+            name
+          }
+          image {
+            id
+            publicUrl
+          }
+        }
+        experimentNeeded {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      research {
+        id
+        researchTool {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        researchNeeded {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      researches {
+        id
+        item {
+          id
+          name
+          subCategory {
+            id
+            name
+          }
+          image {
+            id
+            publicUrl
+          }
+        }
+        researchNeeded {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      repair {
+        id
+        tool {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        repairCoast {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        condition
+        blueprintRequired
+      }
+      repairs {
+        id
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        repairCoast {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        condition
+        blueprintRequired
+      }
+      recycle {
+        id
+        yield {
+          id
+          count
+          percent
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+        }
+        recycler {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      recycledFrom {
+        id
+        item {
+          id
+          name
+          subCategory {
+            id
+            name
+          }
+          image {
+            id
+            publicUrl
+          }
+        }
+        yield {
+          id
+          count
+          percent
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+        }
+      }
+      recycler {
+        id
+        yield {
+          id
+          count
+          percent
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+        }
+        item {
+          id
+          name
+          subCategory {
+            id
+            name
+          }
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      explosive: durabilityInfo(where: { type: Explosive }) {
+        id
+        time
+        sulfurNeeded
+        fuelNeeded
+        quantity
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      melle: durabilityInfo(where: { type: Melle }) {
+        id
+        time
+        sulfurNeeded
+        fuelNeeded
+        quantity
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      throwing: durabilityInfo(where: { type: Throwing }) {
+        id
+        time
+        sulfurNeeded
+        fuelNeeded
+        quantity
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      guns: durabilityInfo(where: { type: Guns }) {
+        id
+        time
+        sulfurNeeded
+        fuelNeeded
+        quantity
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      compostable {
+        id
+        tool {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        result {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        amountPerStack
+      }
+      composter {
+        id
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        result {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        amountPerStack
+      }
+      composting {
+        id
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        result {
+          id
+          count
+        }
+      }
+      cookingInfo {
+        id
+        furnace {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        processOne {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        processTwo {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        processThree {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        processFour {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      cooking {
+        id
+        processOne {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        processTwo {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        processThree {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        processFour {
+          id
+          cookingItem {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          needed {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      gather {
+        id
+        fromItem {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        result {
+          id
+          count
+          range
+          percent
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+        }
+        time
+        conditionLoss
+      }
+      gatheringInfo {
+        id
+        tool {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        result {
+          id
+          count
+          range
+          percent
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+        }
+        time
+        conditionLoss
+      }
+      gatheredFrom {
+        id
+        name
+        image {
+          id
+          publicUrl
+        }
+        gatheringInfo {
+          id
+          tool {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          result {
+            id
+            count
+            range
+            percent
+            item {
+              id
+              name
+              image {
+                id
+                publicUrl
+              }
+            }
+          }
+          time
+          conditionLoss
+        }
+      }
+      equipment {
+        id
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+          itemInfo {
+            speed
+          }
+        }
+        extraSlots
+        protection
+      }
+      equipmentFor {
+        id
+        animal {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        extraSlots
+        protection
+      }
+      breeds {
+        id
+        stamina
+        speed
+        hp
+        breed
+      }
+      feeding {
+        id
+        food {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        addStamina
+        healing
+      }
+      produces {
+        id
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amount
+      }
+      productOf {
+        id
+        animal {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amount
+      }
+    }
+  }
+`;
