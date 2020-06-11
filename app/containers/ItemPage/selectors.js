@@ -97,6 +97,12 @@ const makeSelectIngredientStatus = () =>
     itemState => itemState.ingredientStatus,
   );
 
+const makeSelectFeedingStatus = () =>
+  createSelector(
+    selectItem,
+    itemState => itemState.feedingStatus,
+  );
+
 export {
   selectItem,
   makeSelectLootStatus,
@@ -114,4 +120,5 @@ export {
   makeSelectGatherStatus,
   makeSelectEquipmentStatus,
   makeSelectBreedsStatus,
+  makeSelectFeedingStatus,
 };

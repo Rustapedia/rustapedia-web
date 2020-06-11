@@ -16,12 +16,19 @@ import {
   COOKING_STATUS_CHANGED,
   GATHER_STATUS_CHANGED,
   BREEDS_STATUS_CHANGED,
+  FEEDING_STATUS_CHANGED,
 } from './constants';
 
 export function lootStatusChange(lootStatus) {
   return {
     type: LOOT_STATUS_CHANGED,
     lootStatus,
+  };
+}
+export function feedingStatusChange(feedingStatus) {
+  return {
+    type: FEEDING_STATUS_CHANGED,
+    feedingStatus,
   };
 }
 export function breedsStatusChange(breedsStatus) {

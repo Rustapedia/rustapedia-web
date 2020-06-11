@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -26,10 +26,11 @@ import UsedForCraftTable from 'components/Table/UsedForCraftTable';
 import CompostableTable from 'components/Table/CompostableTable';
 import CookingTable from 'components/Table/CookingTable';
 import GatherTable from 'components/Table/GatherTable';
+import FeedingTable from 'components/Table/FeedingTable';
 import EquipmentTable from 'components/Table/EquipmentTable';
 import { useQuery } from '@apollo/react-hooks';
 import { makeSelectCurrentItem } from '../App/selectors';
-import { currentItemSet } from '../App/actions';
+import { currentItemChange } from '../App/actions';
 import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
@@ -52,6 +53,7 @@ import {
   gatherStatusChange,
   equipmentStatusChange,
   breedsStatusChange,
+  feedingStatusChange,
 } from './actions';
 import {
   makeSelectLootStatus,
@@ -69,6 +71,7 @@ import {
   makeSelectGatherStatus,
   makeSelectEquipmentStatus,
   makeSelectBreedsStatus,
+  makeSelectFeedingStatus,
 } from './selectors';
 import Button from './Button';
 
@@ -996,7 +999,9 @@ export function ItemPage({
   onCurrentGatherStatusChanged,
   onCurrentEquipmentStatusChanged,
   onCurrentBreedsStatusChanged,
+  onCurrentFeedingStatusChanged,
   lootStatus,
+  feedingStatus,
   durabilityStatus,
   craftStatus,
   experimentStatus,
@@ -1012,9 +1017,22 @@ export function ItemPage({
   equipmentStatus,
   breedsStatus,
 }) {
+  const [initialized, setIinitialized] = useState(false);
+
+  useEffect(() => {
+    // if (!props.fetched) {
+    //   props.fetchRules();
+    // }
+
+    getItem({ id: item.id });
+    setIinitialized(true);
+  }, [initialized]); // passing an empty array as second argument triggers the callback in useEffect only after the initial render thus replicating `componentDidMount` lifecycle behaviour
+
   function getItem({ id }) {
     const { loading, data, error } = useQuery(GET_ITEM, {
       variables: { id },
+      skip: !id,
+      pollInterval: 0,
     });
     if (loading && !data) {
       return null;
@@ -1024,7 +1042,7 @@ export function ItemPage({
     onCurrentItemChanged(selectItem);
     return null;
   }
-  getItem({ id: item.id });
+
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -1403,6 +1421,19 @@ export function ItemPage({
                 Breeds
               </Button>
             )}
+            {currentItem.feeding.length > 0 && (
+              <Button
+                type="button"
+                onClick={() => onCurrentFeedingStatusChanged()}
+                style={
+                  breedsStatus
+                    ? { background: 'rgba(0, 0, 0, 0.1)' }
+                    : { background: 'rgba(0, 0, 0, 0.2)' }
+                }
+              >
+                Feeding
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -1422,6 +1453,7 @@ export function ItemPage({
         {gatherStatus && <GatherTable currentItem={currentItem} />}
         {equipmentStatus && <EquipmentTable currentItem={currentItem} />}
         {breedsStatus && <BreedsTable currentItem={currentItem} />}
+        {feedingStatus && <FeedingTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );
@@ -1446,6 +1478,7 @@ ItemPage.propTypes = {
   onCurrentGatherStatusChanged: PropTypes.func,
   onCurrentItemChanged: PropTypes.func,
   onCurrentEquipmentStatusChanged: PropTypes.func,
+  onCurrentFeedingStatusChanged: PropTypes.func,
   lootStatus: PropTypes.bool,
   craftStatus: PropTypes.bool,
   experimentStatus: PropTypes.bool,
@@ -1461,6 +1494,7 @@ ItemPage.propTypes = {
   gatherStatus: PropTypes.bool,
   equipmentStatus: PropTypes.bool,
   breedsStatus: PropTypes.bool,
+  feedingStatus: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -1480,6 +1514,7 @@ const mapStateToProps = createStructuredSelector({
   gatherStatus: makeSelectGatherStatus(),
   equipmentStatus: makeSelectEquipmentStatus(),
   breedsStatus: makeSelectBreedsStatus(),
+  feedingStatus: makeSelectFeedingStatus(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -1514,7 +1549,9 @@ export function mapDispatchToProps(dispatch) {
       dispatch(gatherStatusChange(gatherStatus)),
     onCurrentBreedsStatusChanged: breedsStatus =>
       dispatch(breedsStatusChange(breedsStatus)),
-    onCurrentItemChanged: item => dispatch(currentItemSet(item)),
+    onCurrentFeedingStatusChanged: feedingStatus =>
+      dispatch(feedingStatusChange(feedingStatus)),
+    onCurrentItemChanged: item => dispatch(currentItemChange(item)),
   };
 }
 

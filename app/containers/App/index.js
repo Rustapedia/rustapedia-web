@@ -64,17 +64,18 @@ export function App({ onLoadData, categories }) {
       >
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
-      <Header />
-      <Query query={GET_DATA}>
-        {({ data, loading }) => {
+      <Query query={GET_DATA} fetchPolicy="network-only">
+        {({ data, loading, error }) => {
           if (loading && !data) {
             return null;
           }
+          if (error) return `Error! ${error}`;
           const allCategory = data.allCategories;
           onLoadData(allCategory);
           return null;
         }}
       </Query>
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/features" component={FeaturePage} />

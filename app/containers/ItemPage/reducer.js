@@ -17,6 +17,7 @@ import {
   GATHER_STATUS_CHANGED,
   EQUIPMENT_STATUS_CHANGED,
   BREEDS_STATUS_CHANGED,
+  FEEDING_STATUS_CHANGED,
 } from './constants';
 
 // The initial state of the ItemPage
@@ -36,6 +37,7 @@ export const initialState = {
   gatherStatus: false,
   equipmentStatus: false,
   breedsStatus: false,
+  feedingStatus: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -44,257 +46,50 @@ const itemReducer = (state = initialState, action) =>
     switch (action.type) {
       case LOOT_STATUS_CHANGED:
         draft.lootStatus = true;
-        draft.craftStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
+        break;
+      case FEEDING_STATUS_CHANGED:
+        draft.feedingStatus = true;
         break;
       case EQUIPMENT_STATUS_CHANGED:
-        draft.lootStatus = false;
-        draft.craftStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
         draft.equipmentStatus = true;
-        draft.breedsStatus = false;
         break;
       case CRAFT_STATUS_CHANGED:
         draft.craftStatus = true;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case USEDFORCRAFT_STATUS_CHANGED:
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
         draft.usedForCraftStatus = true;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case INGREDIENT_STATUS_CHANGED:
-        draft.lootStatus = false;
-        draft.craftStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
         draft.ingredientStatus = true;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case EXPERIMENT_STATUS_CHANGED:
-        draft.craftStatus = false;
-        draft.lootStatus = false;
         draft.experimentStatus = true;
-        draft.researchStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case RESEARCH_STATUS_CHANGED:
         draft.researchStatus = true;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.repairStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case REPAIR_STATUS_CHANGED:
         draft.repairStatus = true;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case RECYCLE_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
         draft.recycleStatus = true;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case RECYCLED_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
         draft.recycledStatus = true;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case DURABILITY_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
         draft.durabilityStatus = true;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case COMPOSTABLE_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
         draft.compostableStatus = true;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case COOKING_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
         draft.cookingStatus = true;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case GATHER_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
         draft.gatherStatus = true;
-        draft.equipmentStatus = false;
-        draft.breedsStatus = false;
         break;
       case BREEDS_STATUS_CHANGED:
-        draft.repairStatus = false;
-        draft.craftStatus = false;
-        draft.lootStatus = false;
-        draft.experimentStatus = false;
-        draft.researchStatus = false;
-        draft.recycleStatus = false;
-        draft.durabilityStatus = false;
-        draft.ingredientStatus = false;
-        draft.recycledStatus = false;
-        draft.usedForCraftStatus = false;
-        draft.compostableStatus = false;
-        draft.cookingStatus = false;
-        draft.gatherStatus = false;
-        draft.equipmentStatus = false;
         draft.breedsStatus = true;
         break;
       case RESET_TO_DEFAULT:
@@ -313,6 +108,7 @@ const itemReducer = (state = initialState, action) =>
         draft.gatherStatus = false;
         draft.equipmentStatus = false;
         draft.breedsStatus = false;
+        draft.feedingStatus = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -324,6 +120,8 @@ const itemReducer = (state = initialState, action) =>
           draft.craftStatus = true;
         } else if (action.currentItem.usedForCraft.length > 0) {
           draft.usedForCraftStatus = true;
+        } else if (action.currentItem.feeding.length > 0) {
+          draft.feedingStatus = true;
         } else if (action.currentItem.ingredientFor.length > 0) {
           draft.ingredientStatus = true;
         } else if (
