@@ -27,6 +27,7 @@ import CookingTable from 'components/Table/CookingTable';
 import GatherTable from 'components/Table/GatherTable';
 import FeedingTable from 'components/Table/FeedingTable';
 import EquipmentTable from 'components/Table/EquipmentTable';
+import ProduceTable from 'components/Table/ProduceTable';
 import { useQuery } from '@apollo/react-hooks';
 import { makeSelectCurrentItem } from '../App/selectors';
 import { currentItemChange } from '../App/actions';
@@ -264,6 +265,16 @@ export function ItemPage({
                 Feeding
               </Button>
             )}
+            {(currentItem.produces !== null ||
+              currentItem.productOf !== null) && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('produce')}
+                className={display.produce ? 'active' : null}
+              >
+                {currentItem.produces !== null ? 'Produces' : 'Product Of'}
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -286,6 +297,7 @@ export function ItemPage({
         {display.breeds && <BreedsTable currentItem={currentItem} />}
         {display.feeding && <FeedingTable currentItem={currentItem} />}
         {display.durability && <DurabilityTable currentItem={currentItem} />}
+        {display.produce && <ProduceTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );

@@ -44,6 +44,7 @@ function resetDefault(state, propName) {
   draft.equipment = false;
   draft.breeds = false;
   draft.feeding = false;
+  draft.produce = false;
   draft[propName] = true;
   return draft;
 }
@@ -72,6 +73,7 @@ const itemReducer = (state = initialState, action) =>
         draft.equipment = false;
         draft.breeds = false;
         draft.feeding = false;
+        draft.produce = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -140,6 +142,11 @@ const itemReducer = (state = initialState, action) =>
           draft.breeds = true;
         } else if (action.currentItem.feeding.length > 0) {
           draft.feeding = true;
+        } else if (
+          action.currentItem.produces !== 0 ||
+          action.currentItem.productOf !== 0
+        ) {
+          draft.produce = true;
         }
         break;
     }
