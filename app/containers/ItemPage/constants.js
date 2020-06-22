@@ -58,6 +58,7 @@ export const GET_ITEM = gql`
         itemToLoot {
           id
           name
+          blueprint
           image {
             id
             publicUrl
@@ -67,6 +68,7 @@ export const GET_ITEM = gql`
             name
           }
         }
+        isBlueprint
         condition
         chance
         count
@@ -912,6 +914,138 @@ export const GET_ITEM = gql`
           }
         }
         amount
+      }
+      drops {
+        id
+        amount
+        crate {
+          id
+          name
+        }
+      }
+      droppedBy {
+        id
+        amount
+        vehicle {
+          id
+          name
+        }
+      }
+      collectible {
+        id
+        items {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      collected {
+        id
+        collectedFrom {
+          id
+          name
+        }
+        items {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      yields {
+        id
+        resources {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amount
+        time
+        fuel {
+          id
+          item {
+            name
+            id
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        amountPerMinute
+        type
+        resourcesPerHour {
+          id
+          item {
+            id
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+      }
+      extractedBy {
+        id
+        monument {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        resourcesPerHour {
+          id
+          item {
+            id
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        fuel {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        resources {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amount
+        time
       }
     }
   }

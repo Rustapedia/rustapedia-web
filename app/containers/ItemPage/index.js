@@ -28,6 +28,9 @@ import GatherTable from 'components/Table/GatherTable';
 import FeedingTable from 'components/Table/FeedingTable';
 import EquipmentTable from 'components/Table/EquipmentTable';
 import ProduceTable from 'components/Table/ProduceTable';
+import DropTable from 'components/Table/DropTable';
+import CollectTable from 'components/Table/CollectTable';
+import YieldsTable from 'components/Table/YieldsTable';
 import { useQuery } from '@apollo/react-hooks';
 import { makeSelectCurrentItem } from '../App/selectors';
 import { currentItemChange } from '../App/actions';
@@ -275,6 +278,35 @@ export function ItemPage({
                 {currentItem.produces !== null ? 'Produces' : 'Product Of'}
               </Button>
             )}
+            {(currentItem.drops !== null || currentItem.droppedBy !== null) && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('drop')}
+                className={display.drop ? 'active' : null}
+              >
+                {currentItem.drops !== null ? 'Drops' : 'Dropped By'}
+              </Button>
+            )}
+            {(currentItem.collectible !== null ||
+              currentItem.collected !== null) && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('collect')}
+                className={display.collect ? 'active' : null}
+              >
+                {currentItem.collectible !== null ? 'Collectible' : 'Collected'}
+              </Button>
+            )}
+            {(currentItem.yields.length > 0 ||
+              currentItem.extractedBy.length > 0) && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('yield')}
+                className={display.yield ? 'active' : null}
+              >
+                {currentItem.yields.length > 0 ? 'Yields' : 'Extracted By'}
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -298,6 +330,9 @@ export function ItemPage({
         {display.feeding && <FeedingTable currentItem={currentItem} />}
         {display.durability && <DurabilityTable currentItem={currentItem} />}
         {display.produce && <ProduceTable currentItem={currentItem} />}
+        {display.drop && <DropTable currentItem={currentItem} />}
+        {display.collect && <CollectTable currentItem={currentItem} />}
+        {display.yield && <YieldsTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );

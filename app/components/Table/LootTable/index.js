@@ -26,7 +26,9 @@ const LootTable = ({ currentItem }) => (
                     src={elems.itemToLoot.image.publicUrl}
                   />
                 )}
-                {elems.itemToLoot.name}
+                {elems.isBlueprint
+                  ? elems.itemToLoot.blueprint
+                  : elems.itemToLoot.name}
               </Link>
             </td>
             <td className="tableCell center">

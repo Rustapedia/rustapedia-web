@@ -24,6 +24,9 @@ export const initialState = {
   equipment: false,
   breeds: false,
   feeding: false,
+  drop: false,
+  collect: false,
+  yield: false,
 };
 
 function resetDefault(state, propName) {
@@ -45,6 +48,9 @@ function resetDefault(state, propName) {
   draft.breeds = false;
   draft.feeding = false;
   draft.produce = false;
+  draft.drop = false;
+  draft.collect = false;
+  draft.yield = false;
   draft[propName] = true;
   return draft;
 }
@@ -74,6 +80,9 @@ const itemReducer = (state = initialState, action) =>
         draft.breeds = false;
         draft.feeding = false;
         draft.produce = false;
+        draft.drop = false;
+        draft.collect = false;
+        draft.yield = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -143,10 +152,25 @@ const itemReducer = (state = initialState, action) =>
         } else if (action.currentItem.feeding.length > 0) {
           draft.feeding = true;
         } else if (
-          action.currentItem.produces !== 0 ||
-          action.currentItem.productOf !== 0
+          action.currentItem.produces !== null ||
+          action.currentItem.productOf !== null
         ) {
           draft.produce = true;
+        } else if (
+          action.currentItem.droppedBy !== null ||
+          action.currentItem.drops !== null
+        ) {
+          draft.drop = true;
+        } else if (
+          action.currentItem.collectible !== null ||
+          action.currentItem.collected !== null
+        ) {
+          draft.collect = true;
+        } else if (
+          action.currentItem.yields.length > 0 ||
+          action.currentItem.extractedBy.length > 0
+        ) {
+          draft.yield = true;
         }
         break;
     }
