@@ -39,24 +39,38 @@ export function DurabilityTable({
       <tbody>
         <tr>
           <td>
-            <button
-              type="button"
-              onClick={() => onCurrentExplosiveStatusChanged()}
-            >
-              Explosive
-            </button>
-            <button type="button" onClick={() => onCurrentGunsStatusChanged()}>
-              Guns
-            </button>
-            <button type="button" onClick={() => onCurrentMelleStatusChanged()}>
-              Melle
-            </button>
-            <button
-              type="button"
-              onClick={() => onCurrentThrowingStatusChanged()}
-            >
-              Throwing Attacks
-            </button>
+            {currentItem.explosive.length > 0 && (
+              <button
+                type="button"
+                onClick={() => onCurrentExplosiveStatusChanged()}
+              >
+                Explosive
+              </button>
+            )}
+            {currentItem.guns.length > 0 && (
+              <button
+                type="button"
+                onClick={() => onCurrentGunsStatusChanged()}
+              >
+                Guns
+              </button>
+            )}
+            {currentItem.melle.length > 0 && (
+              <button
+                type="button"
+                onClick={() => onCurrentMelleStatusChanged()}
+              >
+                Melle
+              </button>
+            )}
+            {currentItem.throwing.length > 0 && (
+              <button
+                type="button"
+                onClick={() => onCurrentThrowingStatusChanged()}
+              >
+                Throwing Attacks
+              </button>
+            )}
           </td>
         </tr>
         <tr className="center">

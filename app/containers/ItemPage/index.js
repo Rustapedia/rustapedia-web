@@ -29,6 +29,7 @@ import FeedingTable from 'components/Table/FeedingTable';
 import EquipmentTable from 'components/Table/EquipmentTable';
 import ProduceTable from 'components/Table/ProduceTable';
 import DropTable from 'components/Table/DropTable';
+import FuelTable from 'components/Table/FuelTable';
 import CollectTable from 'components/Table/CollectTable';
 import YieldsTable from 'components/Table/YieldsTable';
 import { useQuery } from '@apollo/react-hooks';
@@ -307,6 +308,16 @@ export function ItemPage({
                 {currentItem.yields.length > 0 ? 'Yields' : 'Extracted By'}
               </Button>
             )}
+            {(currentItem.fueledBy.length > 0 ||
+              currentItem.fuelFor.length > 0) && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('fuel')}
+                className={display.fuel ? 'active' : null}
+              >
+                {currentItem.fueledBy.length > 0 ? 'Fueled By' : 'Fuel For'}
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -333,6 +344,7 @@ export function ItemPage({
         {display.drop && <DropTable currentItem={currentItem} />}
         {display.collect && <CollectTable currentItem={currentItem} />}
         {display.yield && <YieldsTable currentItem={currentItem} />}
+        {display.fuel && <FuelTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );

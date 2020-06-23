@@ -18,8 +18,23 @@ const Item = ({ currentItem }) =>
           )}
           {item.item.name}
         </Link>
+        {item.ammo !== null && <p>{item.ammo.name}</p>}
       </td>
-      <td className="tableCell center">{item.quantity}</td>
+      <td className="tableCell center">
+        {item.ammo !== null ? (
+          <Link key={item.ammo.id} to={item.ammo.name}>
+            <Img
+              key={item.ammo.image.id}
+              className="ingredients"
+              alt={item.ammo.name}
+              src={item.ammo.image.publicUrl}
+            />
+            {item.quantity}
+          </Link>
+        ) : (
+          item.quantity
+        )}
+      </td>
       <td className="tableCell center">{item.time}</td>
       <td className="tableCell center">
         {item.fuelNeeded == null ? '-' : item.fuelNeeded}

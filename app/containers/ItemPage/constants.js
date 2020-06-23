@@ -462,6 +462,14 @@ export const GET_ITEM = gql`
         sulfurNeeded
         fuelNeeded
         quantity
+        ammo {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
         item {
           id
           name
@@ -507,6 +515,14 @@ export const GET_ITEM = gql`
         sulfurNeeded
         fuelNeeded
         quantity
+        ammo {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
         item {
           id
           name
@@ -1046,6 +1062,30 @@ export const GET_ITEM = gql`
         }
         amount
         time
+      }
+      fuelFor {
+        id
+        object {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amountPerHour
+      }
+      fueledBy {
+        id
+        fuel {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amountPerHour
       }
     }
   }
