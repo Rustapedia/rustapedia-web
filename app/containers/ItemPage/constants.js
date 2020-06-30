@@ -36,6 +36,8 @@ export const GET_ITEM = gql`
         id
         respawnTimer
         decay
+        decayTimeOutside
+        decayTimeInside
         upkeep
         speed
       }
@@ -462,6 +464,14 @@ export const GET_ITEM = gql`
         sulfurNeeded
         fuelNeeded
         quantity
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
         ammo {
           id
           name
@@ -470,6 +480,39 @@ export const GET_ITEM = gql`
             publicUrl
           }
         }
+        text
+        item {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      sam: durabilityInfo(where: { type: SAM }) {
+        id
+        time
+        sulfurNeeded
+        fuelNeeded
+        quantity
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        ammo {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        text
         item {
           id
           name
@@ -485,6 +528,23 @@ export const GET_ITEM = gql`
         sulfurNeeded
         fuelNeeded
         quantity
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        ammo {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        text
         item {
           id
           name
@@ -500,6 +560,23 @@ export const GET_ITEM = gql`
         sulfurNeeded
         fuelNeeded
         quantity
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        ammo {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        text
         item {
           id
           name
@@ -515,6 +592,14 @@ export const GET_ITEM = gql`
         sulfurNeeded
         fuelNeeded
         quantity
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
         ammo {
           id
           name
@@ -523,6 +608,7 @@ export const GET_ITEM = gql`
             publicUrl
           }
         }
+        text
         item {
           id
           name

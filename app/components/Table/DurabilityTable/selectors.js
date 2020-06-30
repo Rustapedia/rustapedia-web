@@ -13,6 +13,12 @@ const makeSelectExplosiveStatus = () =>
     durabilityState => durabilityState.explosiveStatus,
   );
 
+const makeSelectSamStatus = () =>
+  createSelector(
+    selectDurability,
+    durabilityState => durabilityState.samStatus,
+  );
+
 const makeSelectMelleStatus = () =>
   createSelector(
     selectDurability,
@@ -37,4 +43,5 @@ export {
   makeSelectMelleStatus,
   makeSelectThrowingStatus,
   makeSelectGunsStatus,
+  makeSelectSamStatus,
 };

@@ -19,6 +19,8 @@ const Item = ({ currentItem }) =>
           {item.item.name}
         </Link>
         {item.ammo !== null && <p>{item.ammo.name}</p>}
+        {item.weapon !== null && <p>{item.weapon.name}</p>}
+        {item.text !== null && <p>{item.text}</p>}
       </td>
       <td className="tableCell center">
         {item.ammo !== null ? (

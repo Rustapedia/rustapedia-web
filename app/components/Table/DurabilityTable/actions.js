@@ -3,6 +3,7 @@ import {
   MELEE_STATUS_CHANGED,
   GUNS_STATUS_CHANGED,
   THROWING_STATUS_CHANGED,
+  SAM_STATUS_CHANGED,
 } from './constants';
 
 export function explosiveStatusChange(explosiveStatus) {
@@ -11,7 +12,12 @@ export function explosiveStatusChange(explosiveStatus) {
     explosiveStatus,
   };
 }
-
+export function samStatusChange(samStatus) {
+  return {
+    type: SAM_STATUS_CHANGED,
+    samStatus,
+  };
+}
 export function melleStatusChange(melleStatus) {
   return {
     type: MELEE_STATUS_CHANGED,
