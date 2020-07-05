@@ -28,6 +28,7 @@ export const initialState = {
   collect: false,
   yield: false,
   fuel: false,
+  shopping: false,
 };
 
 function resetDefault(state, propName) {
@@ -53,6 +54,7 @@ function resetDefault(state, propName) {
   draft.collect = false;
   draft.yield = false;
   draft.fuel = false;
+  draft.shopping = false;
   draft[propName] = true;
   return draft;
 }
@@ -86,6 +88,7 @@ const itemReducer = (state = initialState, action) =>
         draft.collect = false;
         draft.yield = false;
         draft.fuel = false;
+        draft.shopping = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -179,6 +182,8 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.fuelFor.length > 0
         ) {
           draft.fuel = true;
+        } else if (action.currentItem.shopping.length > 0) {
+          draft.shopping = true;
         }
         break;
     }

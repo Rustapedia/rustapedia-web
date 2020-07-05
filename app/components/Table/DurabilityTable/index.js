@@ -75,7 +75,7 @@ export function DurabilityTable({
                 Throwing Attacks
               </button>
             )}
-            {currentItem.throwing.length > 0 && (
+            {currentItem.sam.length > 0 && (
               <button type="button" onClick={() => onCurrentSamStatusChanged()}>
                 SAM Site
               </button>

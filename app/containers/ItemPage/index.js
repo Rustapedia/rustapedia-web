@@ -29,6 +29,7 @@ import FeedingTable from 'components/Table/FeedingTable';
 import EquipmentTable from 'components/Table/EquipmentTable';
 import ProduceTable from 'components/Table/ProduceTable';
 import DropTable from 'components/Table/DropTable';
+import ShoppingTable from 'components/Table/ShoppingTable';
 import FuelTable from 'components/Table/FuelTable';
 import CollectTable from 'components/Table/CollectTable';
 import YieldsTable from 'components/Table/YieldsTable';
@@ -318,6 +319,15 @@ export function ItemPage({
                 {currentItem.fueledBy.length > 0 ? 'Fueled By' : 'Fuel For'}
               </Button>
             )}
+            {currentItem.shopping.length > 0 && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('shopping')}
+                className={display.shopping ? 'active' : null}
+              >
+                {'Shopping'}
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -345,6 +355,7 @@ export function ItemPage({
         {display.collect && <CollectTable currentItem={currentItem} />}
         {display.yield && <YieldsTable currentItem={currentItem} />}
         {display.fuel && <FuelTable currentItem={currentItem} />}
+        {display.shopping && <ShoppingTable currentItem={currentItem} />}
       </Wrapper>
     </ItemContainer>
   );

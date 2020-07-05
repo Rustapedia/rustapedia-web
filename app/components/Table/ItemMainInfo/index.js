@@ -42,6 +42,18 @@ const ItemMainInfo = ({ currentItem }) => (
             <td className="tableCell">{currentItem.stamina}</td>
           </tr>
         )}
+        {currentItem.mainRotorHP !== null && (
+          <tr>
+            <td className="tableCell">Main Rotor HP</td>
+            <td className="tableCell">{currentItem.mainRotorHP}</td>
+          </tr>
+        )}
+        {currentItem.tailRotorHP !== null && (
+          <tr>
+            <td className="tableCell">Tail Rotor HP</td>
+            <td className="tableCell">{currentItem.tailRotorHP}</td>
+          </tr>
+        )}
       </tbody>
     </Table>
   </div>

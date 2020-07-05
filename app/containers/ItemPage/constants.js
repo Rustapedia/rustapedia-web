@@ -31,6 +31,8 @@ export const GET_ITEM = gql`
         despawnTime
         hp
         stamina
+        mainRotorHP
+        tailRotorHP
       }
       itemInfo {
         id
@@ -1172,6 +1174,34 @@ export const GET_ITEM = gql`
           }
         }
         amountPerHour
+      }
+      shopping {
+        id
+        location
+        pay {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
+        receive {
+          id
+          item {
+            id
+            name
+            image {
+              id
+              publicUrl
+            }
+          }
+          count
+        }
       }
     }
   }
