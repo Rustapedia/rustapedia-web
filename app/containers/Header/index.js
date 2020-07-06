@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
-import LocaleToggle from 'containers/LocaleToggle';
 import ChapterNav from './ChapterNav';
 import GlobalNav from './GlobalNav';
 import Wrapper from './Wrapper';
@@ -38,9 +37,6 @@ export function Header({
               {category.name}
             </StyledLink>
           ))}
-          <section>
-            <LocaleToggle />
-          </section>
         </Wrapper>
       </GlobalNav>
       <ChapterNav>

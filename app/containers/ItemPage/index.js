@@ -34,6 +34,7 @@ import FuelTable from 'components/Table/FuelTable';
 import CollectTable from 'components/Table/CollectTable';
 import YieldsTable from 'components/Table/YieldsTable';
 import { useQuery } from '@apollo/react-hooks';
+import LoadingIndicator from 'components/LoadingIndicator';
 import { makeSelectCurrentItem } from '../App/selectors';
 import { currentItemChange } from '../App/actions';
 import H1 from '../../components/H1';
@@ -47,7 +48,7 @@ import Button from './Button';
 import { GET_ITEM } from './constants';
 
 const key = 'item';
-export function ItemPage({
+function ItemPage({
   item,
   currentItem,
   onCurrentItemChanged,
@@ -70,6 +71,9 @@ export function ItemPage({
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
+  if (loading) {
+    return <LoadingIndicator />;
+  }
   return (
     <ItemContainer>
       {currentItem.lootInfo !== undefined && (

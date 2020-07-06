@@ -15,13 +15,14 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import FeaturePage from 'containers/FeaturePage/Loadable';
-import ItemsPage from 'containers/ItemsPage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import HomePage from 'containers/HomePage/Loadable';
+import FeaturePage from 'containers/FeaturePage';
+import ItemsPage from 'containers/ItemsPage';
+import NotFoundPage from 'containers/NotFoundPage';
+import HomePage from 'containers/HomePage';
 import Header from 'containers/Header';
 import ItemPage from 'containers/ItemPage';
 import { useQuery } from '@apollo/react-hooks';
+import LoadingIndicator from 'components/LoadingIndicator';
 import { GET_DATA } from './constants';
 import { makeSelectData } from './selectors';
 import { loadData } from './actions';
@@ -34,7 +35,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-export function App({ onLoadData, categories }) {
+function App({ onLoadData, categories }) {
   const [initialized, setIinitialized] = useState(false);
   const { loading, error, data } = useQuery(GET_DATA, { initialized });
   useEffect(() => {
@@ -45,6 +46,9 @@ export function App({ onLoadData, categories }) {
     }
   }, [data, loading]);
   if (error) return `Error! ${error}`;
+  if (loading) {
+    return <LoadingIndicator />;
+  }
   return (
     <AppWrapper>
       <Helmet
