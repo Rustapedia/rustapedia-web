@@ -5,12 +5,18 @@ const Wrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 
-  .gray-bg {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-
   .center {
     text-align: center;
+  }
+
+  div .size250 {
+    width: 250px;
+  }
+  .padding {
+    padding: 20px 60px;
+  }
+  .padding-bottom {
+    padding-bottom: 30px;
   }
 `;
 

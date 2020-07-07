@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Img from 'components/Img';
 import { Search, Grid } from 'semantic-ui-react';
-import StyledLink from 'containers/Header/StyledLink';
+import StyledLink from 'components/StyledLink';
 
 const initialState = { isLoading: false, results: [], value: '' };
 
 const resultRenderer = ({ title, image }) => (
-  <StyledLink to={`/${title}`}>
+  <StyledLink className="block" to={`/${title}`}>
     {image !== null && <Img className="ingredients" alt={title} src={image} />}
-    {title}
+    <span>{title}</span>
   </StyledLink>
 );
-
 resultRenderer.propTypes = {
   title: PropTypes.string,
   image: PropTypes.object,

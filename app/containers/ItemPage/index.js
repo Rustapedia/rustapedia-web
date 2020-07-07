@@ -35,16 +35,15 @@ import CollectTable from 'components/Table/CollectTable';
 import YieldsTable from 'components/Table/YieldsTable';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from 'components/LoadingIndicator';
+import Button from 'components/Button';
 import { makeSelectCurrentItem } from '../App/selectors';
 import { currentItemChange } from '../App/actions';
 import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
 import Wrapper from './Wrapper';
-import ItemContainer from './ItemContainer';
 import { statusChange } from './actions';
 import { makeSelectStatus } from './selectors';
-import Button from './Button';
 import { GET_ITEM } from './constants';
 
 const key = 'item';
@@ -75,14 +74,15 @@ function ItemPage({
     return <LoadingIndicator />;
   }
   return (
-    <ItemContainer>
+    <div>
       {currentItem.lootInfo !== undefined && (
         <div>
           <Wrapper>
-            <div>
+            <div className="size250">
               {currentItem.image !== null && (
                 <div className="center">
                   <Img
+                    className="big"
                     alt={currentItem.name}
                     src={currentItem.image.publicUrl}
                   />
@@ -91,6 +91,14 @@ function ItemPage({
               {currentItem.mainInfo !== null && (
                 <MainItemInfo currentItem={currentItem.mainInfo} />
               )}
+            </div>
+            <div className="padding">
+              <H1>{currentItem.name}</H1>
+              <P>{currentItem.text}</P>
+              <P>
+                {currentItem.additionalText !== null &&
+                  currentItem.additionalText}
+              </P>
               {currentItem.itemInfo !== null && (
                 <ItemInfo currentItem={currentItem.itemInfo} />
               )}
@@ -100,14 +108,6 @@ function ItemPage({
               {currentItem.weaponInfo !== null && (
                 <WeaponInfo currentItem={currentItem.weaponInfo} />
               )}
-            </div>
-            <div>
-              <H1>{currentItem.name}</H1>
-              <P>{currentItem.text}</P>
-              <P>
-                {currentItem.additionalText !== null &&
-                  currentItem.additionalText}
-              </P>
             </div>
           </Wrapper>
           <Wrapper>
@@ -361,7 +361,7 @@ function ItemPage({
         {display.fuel && <FuelTable currentItem={currentItem} />}
         {display.shopping && <ShoppingTable currentItem={currentItem} />}
       </Wrapper>
-    </ItemContainer>
+    </div>
   );
 }
 

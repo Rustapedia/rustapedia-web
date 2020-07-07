@@ -6,13 +6,15 @@ const ChapterNavFrames = keyframes`
 }
 100% {
     opacity: 1;
+    
 }
 `;
 
 const ChapterNav = styled.div`
-  background: #fafafa;
+  background: rgba(245, 245, 247, 0.9);
   position: absolute;
   width: 100%;
+  padding: 20px;
   animation-name: ${ChapterNavFrames};
   animation-duration: 1s;
   animation-timing-function: ease-out;
@@ -21,8 +23,9 @@ const ChapterNav = styled.div`
 
   a {
     color: black;
-    padding: 20px;
     margin: 0 auto;
+    width: 14%;
+    text-align: center;
   }
 `;
 

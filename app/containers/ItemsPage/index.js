@@ -27,7 +27,9 @@ function ItemsPage({ currentCategory }) {
                 src={items.image.publicUrl}
               />
             )}
-            <div key={items.name}>{items.name}</div>
+            <span className="padding-left" key={items.name}>
+              {items.name}
+            </span>
           </ListItem>
         </Wrapper>
       ))}

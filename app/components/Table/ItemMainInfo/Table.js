@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 
 const Table = styled.table`
-  width: 250px;
   color: #1d1d1f;
-  border-collapse: separate;
-  border-spacing: 2px;
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 40px;
 
   .tableCell {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(191, 191, 191, 0.8);
     padding: 2px 10px;
+    border-top: 2px solid white;
+  }
+
+  td:first-child {
+    border-right: 2px solid white;
   }
 `;
 

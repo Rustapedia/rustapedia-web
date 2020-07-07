@@ -4,10 +4,10 @@ import { compose } from 'redux';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import StyledLink from 'components/StyledLink';
 import ChapterNav from './ChapterNav';
 import GlobalNav from './GlobalNav';
 import Wrapper from './Wrapper';
-import StyledLink from './StyledLink';
 import reducer from './reducer';
 import { currentNavChange } from './actions';
 import { makeSelectData } from '../App/selectors';
@@ -24,12 +24,15 @@ export function Header({
 }) {
   useInjectReducer({ key, reducer });
   return (
-    <div style={{ zIndex: '2' }}>
+    <div style={{ zIndex: '2', marginBottom: '100px' }}>
       <GlobalNav>
         <Wrapper>
-          <StyledLink to="/">Home</StyledLink>
+          <StyledLink className="block" to="/">
+            Home
+          </StyledLink>
           {categories.map(category => (
             <StyledLink
+              className="block"
               to="#"
               key={category.id}
               onClick={() => onCurrentNavChanged(category)}
@@ -45,6 +48,7 @@ export function Header({
             currentNav.subCategory !== undefined &&
             currentNav.subCategory.map(subCategory => (
               <StyledLink
+                className="block"
                 key={subCategory.id}
                 to={`/${subCategory.name}`}
                 onClick={() => onCurrentCategoryChanged(subCategory)}

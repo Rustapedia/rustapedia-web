@@ -2,21 +2,27 @@ import React from 'react';
 import Img from 'components/Img';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import StyledLink from 'components/StyledLink';
+import blueprint from 'images/blueprint.png';
 
 const Blueprint = ({ currentItem }) => (
   <tr>
     <td className="tableCell">
-      <Link key={currentItem.id} to={currentItem.name}>
+      <StyledLink key={currentItem.id} to={currentItem.name}>
         {currentItem.image !== null && (
           <Img
+            style={{
+              background: `url(${blueprint})`,
+              backgroundSize: 'cover',
+            }}
             key={currentItem.image.id}
             className="ingredients"
             alt={currentItem.craftInfo.blueprint}
             src={currentItem.image.publicUrl}
           />
         )}
-        {currentItem.blueprint}
-      </Link>
+        <span>{currentItem.blueprint}</span>
+      </StyledLink>
     </td>
     <td className="tableCell center">
       {currentItem.craftInfo.requiredItemCounts.map(res => (
@@ -31,14 +37,14 @@ const Blueprint = ({ currentItem }) => (
               />
             )}
           </Link>
-          {res.count}
+          <span>x{res.count}</span>
         </span>
       ))}
     </td>
     <td className="tableCell center">{currentItem.craftInfo.time}</td>
     <td className="tableCell center">
       {currentItem.craftInfo.workBench !== null ? (
-        <Link
+        <StyledLink
           key={currentItem.craftInfo.workBench.id}
           to={currentItem.craftInfo.workBench.name}
         >
@@ -50,8 +56,8 @@ const Blueprint = ({ currentItem }) => (
               src={currentItem.craftInfo.workBench.image.publicUrl}
             />
           )}
-          {currentItem.craftInfo.workBench.name}
-        </Link>
+          <span>{currentItem.craftInfo.workBench.name}</span>
+        </StyledLink>
       ) : (
         '-'
       )}

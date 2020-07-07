@@ -33,6 +33,13 @@ const AppWrapper = styled.div`
   display: flex;
   min-height: 100%;
   flex-direction: column;
+  .ui.search > .results {
+    overflow-y: auto;
+    max-height: 350px;
+  }
+  .padding-left {
+    padding-left: 10px;
+  }
 `;
 
 function App({ onLoadData, categories }) {
@@ -69,7 +76,12 @@ function App({ onLoadData, categories }) {
                   <Route
                     key={subCategory.id}
                     path={`/${subCategory.name}`}
-                    render={() => <ItemsPage currentCategory={subCategory} />}
+                    render={() => (
+                      <ItemsPage
+                        currentCategory={subCategory}
+                        currentNav={category}
+                      />
+                    )}
                   />
                   {subCategory.items.map(item => (
                     <Route

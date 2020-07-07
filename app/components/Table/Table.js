@@ -5,11 +5,10 @@ const Table = styled.table`
   border-collapse: separate;
   border-spacing: 10px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(191, 191, 191, 0.4);
 
   .tableCell {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 5px;
+    background: rgba(191, 191, 191, 0.8);
   }
 
   .center {
