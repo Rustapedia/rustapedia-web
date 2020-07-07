@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'components/Table/Table';
 import PropTypes from 'prop-types';
 import Img from 'components/Img';
-import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 import Process from './Process';
 
 const CookingTable = ({ currentItem }) => (
@@ -17,7 +17,7 @@ const CookingTable = ({ currentItem }) => (
           items.furnace.map(item => (
             <tr key={item.id}>
               <td key={item.id} className="tableCell">
-                <Link to={item.name}>
+                <StyledLink to={item.name}>
                   {item.image !== null && (
                     <Img
                       key={item.image.id}
@@ -26,8 +26,8 @@ const CookingTable = ({ currentItem }) => (
                       src={item.image.publicUrl}
                     />
                   )}
-                  {item.name}
-                </Link>
+                  <span>{item.name}</span>
+                </StyledLink>
               </td>
               <td className="tableCell center" key={items.id}>
                 <Process currentItem={items} />

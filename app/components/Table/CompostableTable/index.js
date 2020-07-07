@@ -3,6 +3,7 @@ import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import StyledLink from 'components/StyledLink';
 
 const CompostableTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +16,7 @@ const CompostableTable = ({ currentItem }) => (
         </tr>
         <tr key={currentItem.compostable.id}>
           <td className="tableCell">
-            <Link
+            <StyledLink
               key={currentItem.compostable.tool.id}
               to={currentItem.compostable.tool.name}
             >
@@ -27,8 +28,8 @@ const CompostableTable = ({ currentItem }) => (
                   src={currentItem.compostable.tool.image.publicUrl}
                 />
               )}
-              {currentItem.compostable.tool.name}
-            </Link>
+              <span>{currentItem.compostable.tool.name}</span>
+            </StyledLink>
           </td>
           <td className="tableCell center">
             <Link
@@ -44,7 +45,7 @@ const CompostableTable = ({ currentItem }) => (
                 />
               )}
             </Link>
-            {currentItem.compostable.result.count}
+            <span>x{currentItem.compostable.result.count}</span>
           </td>
           <td className="tableCell center">
             {currentItem.compostable.amountPerStack}
@@ -62,7 +63,7 @@ const CompostableTable = ({ currentItem }) => (
         {currentItem.composter.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link key={items.item.id} to={items.item.name}>
+              <StyledLink key={items.item.id} to={items.item.name}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.id}
@@ -71,8 +72,8 @@ const CompostableTable = ({ currentItem }) => (
                     src={items.item.image.publicUrl}
                   />
                 )}
-                {items.item.name}
-              </Link>
+                <span>{items.item.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">
               <Link key={items.result.item.id} to={items.result.item.name}>
@@ -85,7 +86,7 @@ const CompostableTable = ({ currentItem }) => (
                   />
                 )}
               </Link>
-              {items.result.count}
+              <span>x{items.result.count}</span>
             </td>
             <td className="tableCell center">{items.amountPerStack}</td>
           </tr>

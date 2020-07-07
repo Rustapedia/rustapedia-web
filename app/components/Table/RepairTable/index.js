@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 
 const RepairTable = ({ currentItem }) => (
   <Table>
@@ -18,7 +19,7 @@ const RepairTable = ({ currentItem }) => (
           <tr key={item.id}>
             <td className="tableCell">
               <span key={item.tool.id}>
-                <Link key={item.tool.id} to={item.tool.name}>
+                <StyledLink key={item.tool.id} to={item.tool.name}>
                   {item.tool.image !== null && (
                     <Img
                       key={item.tool.image.id}
@@ -27,8 +28,8 @@ const RepairTable = ({ currentItem }) => (
                       src={item.tool.image.publicUrl}
                     />
                   )}
-                  {item.tool.name}
-                </Link>
+                  <span>{item.tool.name}</span>
+                </StyledLink>
               </span>
             </td>
             <td className="tableCell center">
@@ -44,7 +45,7 @@ const RepairTable = ({ currentItem }) => (
                       />
                     )}
                   </Link>
-                  {res.count}
+                  <span>x{res.count}</span>
                 </span>
               ))}
             </td>
@@ -66,7 +67,7 @@ const RepairTable = ({ currentItem }) => (
           <tr key={tool.id}>
             <td className="tableCell">
               <span key={tool.item.id}>
-                <Link key={tool.item.id} to={tool.item.name}>
+                <StyledLink key={tool.item.id} to={tool.item.name}>
                   {tool.item.image !== null && (
                     <Img
                       key={tool.item.image.id}
@@ -75,8 +76,8 @@ const RepairTable = ({ currentItem }) => (
                       src={tool.item.image.publicUrl}
                     />
                   )}
-                  {tool.item.name}
-                </Link>
+                  <span>{tool.item.name}</span>
+                </StyledLink>
               </span>
             </td>
             <td className="tableCell center">
@@ -92,7 +93,7 @@ const RepairTable = ({ currentItem }) => (
                       />
                     )}
                   </Link>
-                  {res.count}
+                  <span>x{res.count}</span>
                 </span>
               ))}
             </td>

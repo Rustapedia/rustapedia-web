@@ -1,8 +1,10 @@
 import React from 'react';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import blueprint from 'images/blueprint.png';
 
 const ExperimentTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +17,7 @@ const ExperimentTable = ({ currentItem }) => (
         <tr>
           <td className="tableCell">
             <span key={currentItem.experiment.id}>
-              <Link
+              <StyledLink
                 key={currentItem.experiment.workBench.id}
                 to={currentItem.experiment.workBench.name}
               >
@@ -27,8 +29,8 @@ const ExperimentTable = ({ currentItem }) => (
                     src={currentItem.experiment.workBench.image.publicUrl}
                   />
                 )}
-                {currentItem.experiment.workBench.name}
-              </Link>
+                <span>{currentItem.experiment.workBench.name}</span>
+              </StyledLink>
             </span>
           </td>
           <td className="tableCell center">
@@ -46,7 +48,7 @@ const ExperimentTable = ({ currentItem }) => (
                 />
               )}
             </Link>
-            {currentItem.experiment.experimentNeeded.count}
+            <span>x{currentItem.experiment.experimentNeeded.count}</span>
           </td>
         </tr>
       </tbody>
@@ -61,17 +63,21 @@ const ExperimentTable = ({ currentItem }) => (
         {currentItem.experimentation.map(elems => (
           <tr key={elems.id}>
             <td className="tableCell">
-              <Link key={elems.item.id} to={elems.item.name}>
+              <StyledLink key={elems.item.id} to={elems.item.name}>
                 {elems.item.image !== null && (
                   <Img
+                    style={{
+                      background: `url(${blueprint})`,
+                      backgroundSize: 'cover',
+                    }}
                     key={elems.item.id}
                     className="ingredients"
                     alt={elems.item.name}
                     src={elems.item.image.publicUrl}
                   />
                 )}
-                {elems.item.blueprint}
-              </Link>
+                <span>{elems.item.blueprint}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{elems.item.subCategory.name}</td>
             <td className="tableCell center">
@@ -88,7 +94,7 @@ const ExperimentTable = ({ currentItem }) => (
                     />
                   )}
                 </Link>
-                {elems.experimentNeeded.count}
+                <span>x{elems.experimentNeeded.count}</span>
               </span>
             </td>
           </tr>

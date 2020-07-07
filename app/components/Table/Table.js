@@ -10,7 +10,17 @@ const Table = styled.table`
   .tableCell {
     background: rgba(191, 191, 191, 0.8);
   }
-
+  .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: no-wrap;
+  }
+  .small-font {
+    font-size: 0.8rem;
+  }
+  .marginLeft {
+    margin-left: 10px;
+  }
   .center {
     text-align: center;
   }

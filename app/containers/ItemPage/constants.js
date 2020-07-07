@@ -469,10 +469,6 @@ export const GET_ITEM = gql`
         weapon {
           id
           name
-          image {
-            id
-            publicUrl
-          }
         }
         ammo {
           id
@@ -501,10 +497,6 @@ export const GET_ITEM = gql`
         weapon {
           id
           name
-          image {
-            id
-            publicUrl
-          }
         }
         ammo {
           id
@@ -533,10 +525,6 @@ export const GET_ITEM = gql`
         weapon {
           id
           name
-          image {
-            id
-            publicUrl
-          }
         }
         ammo {
           id
@@ -565,10 +553,6 @@ export const GET_ITEM = gql`
         weapon {
           id
           name
-          image {
-            id
-            publicUrl
-          }
         }
         ammo {
           id
@@ -597,10 +581,6 @@ export const GET_ITEM = gql`
         weapon {
           id
           name
-          image {
-            id
-            publicUrl
-          }
         }
         ammo {
           id
@@ -1025,6 +1005,10 @@ export const GET_ITEM = gql`
         crate {
           id
           name
+          image {
+            id
+            publicUrl
+          }
         }
       }
       droppedBy {
@@ -1033,6 +1017,10 @@ export const GET_ITEM = gql`
         vehicle {
           id
           name
+          image {
+            id
+            publicUrl
+          }
         }
       }
       collectible {
@@ -1055,6 +1043,10 @@ export const GET_ITEM = gql`
         collectedFrom {
           id
           name
+          image {
+            id
+            publicUrl
+          }
         }
         items {
           id

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 
 const ResearchTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +16,7 @@ const ResearchTable = ({ currentItem }) => (
         <tr>
           <td className="tableCell">
             <span key={currentItem.research.id}>
-              <Link
+              <StyledLink
                 key={currentItem.research.researchTool.id}
                 to={currentItem.research.researchTool.name}
               >
@@ -27,8 +28,8 @@ const ResearchTable = ({ currentItem }) => (
                     src={currentItem.research.researchTool.image.publicUrl}
                   />
                 )}
-                {currentItem.research.researchTool.name}
-              </Link>
+                <span>{currentItem.research.researchTool.name}</span>
+              </StyledLink>
             </span>
           </td>
           <td className="tableCell center">
@@ -44,7 +45,7 @@ const ResearchTable = ({ currentItem }) => (
                 />
               )}
             </Link>
-            {currentItem.research.researchNeeded.count}
+            <span>x{currentItem.research.researchNeeded.count}</span>
           </td>
         </tr>
       </tbody>
@@ -59,7 +60,7 @@ const ResearchTable = ({ currentItem }) => (
         {currentItem.researches.map(elems => (
           <tr key={elems.id}>
             <td className="tableCell">
-              <Link key={elems.item.id} to={elems.item.name}>
+              <StyledLink key={elems.item.id} to={elems.item.name}>
                 {elems.item.image !== null && (
                   <Img
                     key={elems.item.id}
@@ -68,8 +69,8 @@ const ResearchTable = ({ currentItem }) => (
                     src={elems.item.image.publicUrl}
                   />
                 )}
-                {elems.item.name}
-              </Link>
+                <span>{elems.item.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{elems.item.subCategory.name}</td>
             <td className="tableCell center">
@@ -86,7 +87,7 @@ const ResearchTable = ({ currentItem }) => (
                     />
                   )}
                 </Link>
-                {elems.researchNeeded.count}
+                <span>x{elems.researchNeeded.count}</span>
               </span>
             </td>
           </tr>

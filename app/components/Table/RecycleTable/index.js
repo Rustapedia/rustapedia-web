@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 
 const RecycleTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +16,7 @@ const RecycleTable = ({ currentItem }) => (
         <tr>
           <td className="tableCell">
             <span>
-              <Link
+              <StyledLink
                 key={currentItem.recycle.recycler.id}
                 to={currentItem.recycle.recycler.name}
               >
@@ -27,8 +28,8 @@ const RecycleTable = ({ currentItem }) => (
                     src={currentItem.recycle.recycler.image.publicUrl}
                   />
                 )}
-                {currentItem.recycle.recycler.name}
-              </Link>
+                <span>{currentItem.recycle.recycler.name}</span>
+              </StyledLink>
             </span>
           </td>
           <td className="tableCell center">
@@ -44,7 +45,9 @@ const RecycleTable = ({ currentItem }) => (
                     />
                   )}
                 </Link>
-                {res.count == null ? `${res.percent}%` : res.count}
+                <span>
+                  x {res.count == null ? `${res.percent}%` : res.count}
+                </span>
               </span>
             ))}
           </td>
@@ -62,7 +65,7 @@ const RecycleTable = ({ currentItem }) => (
           <tr key={items.id}>
             <td className="tableCell">
               <span key={items.item.id}>
-                <Link key={items.item.id} to={items.item.name}>
+                <StyledLink key={items.item.id} to={items.item.name}>
                   {items.item.image !== null && (
                     <Img
                       key={items.item.image.id}
@@ -71,8 +74,8 @@ const RecycleTable = ({ currentItem }) => (
                       src={items.item.image.publicUrl}
                     />
                   )}
-                  {items.item.name}
-                </Link>
+                  <span>{items.item.name}</span>
+                </StyledLink>
               </span>
             </td>
             <td className="tableCell center">{items.item.subCategory.name}</td>
@@ -89,7 +92,9 @@ const RecycleTable = ({ currentItem }) => (
                       />
                     )}
                   </Link>
-                  {res.count == null ? `${res.percent}%` : res.count}
+                  <span>
+                    x{res.count == null ? `${res.percent}%` : res.count}
+                  </span>
                 </span>
               ))}
             </td>

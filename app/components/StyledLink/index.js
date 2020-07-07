@@ -17,8 +17,7 @@ const StyledLink = styled(Link)`
       text-decoration: none;
     }
   }
-
-  span:last-child {
+  span {
     padding-left: 10px;
   }
 `;

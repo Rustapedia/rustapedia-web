@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 
 const RecycledFromTable = ({ currentItem }) => (
   <Table>
@@ -17,7 +18,7 @@ const RecycledFromTable = ({ currentItem }) => (
           <tr key={items.id}>
             <td className="tableCell">
               <span key={items.item.id}>
-                <Link key={items.item.id} to={items.item.name}>
+                <StyledLink key={items.item.id} to={items.item.name}>
                   {items.item.image !== null && (
                     <Img
                       key={items.item.image.id}
@@ -26,8 +27,8 @@ const RecycledFromTable = ({ currentItem }) => (
                       src={items.item.image.publicUrl}
                     />
                   )}
-                  {items.item.name}
-                </Link>
+                  <span>{items.item.name}</span>
+                </StyledLink>
               </span>
             </td>
             <td className="tableCell center">{items.item.subCategory.name}</td>
@@ -44,7 +45,9 @@ const RecycledFromTable = ({ currentItem }) => (
                       />
                     )}
                   </Link>
-                  {res.count == null ? `${res.percent}%` : res.count}
+                  <span>
+                    x {res.count == null ? `${res.percent}%` : res.count}
+                  </span>
                 </span>
               ))}
             </td>

@@ -3,6 +3,7 @@ import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import StyledLink from 'components/StyledLink';
 
 const IngredientTable = ({ currentItem }) => (
   <Table>
@@ -16,7 +17,7 @@ const IngredientTable = ({ currentItem }) => (
         {currentItem.ingredientFor.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link key={items.item.id} to={items.item.name}>
+              <StyledLink key={items.item.id} to={items.item.name}>
                 {items.item.image !== null && (
                   <Img
                     className="ingredients"
@@ -24,8 +25,8 @@ const IngredientTable = ({ currentItem }) => (
                     src={items.item.image.publicUrl}
                   />
                 )}
-                {items.item.name}
-              </Link>
+                <span>{items.item.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{items.item.subCategory.name}</td>
             <td className="tableCell center">
@@ -41,7 +42,7 @@ const IngredientTable = ({ currentItem }) => (
                       />
                     )}
                   </Link>
-                  {res.count}
+                  <span>x {res.count}</span>
                 </span>
               ))}
             </td>

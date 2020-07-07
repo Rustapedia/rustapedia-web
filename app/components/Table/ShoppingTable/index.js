@@ -15,29 +15,35 @@ const ShoppingTable = ({ currentItem }) => (
         </tr>
         {currentItem.shopping.map(elems => (
           <tr key={elems.id}>
-            <td className="tableCell">{elems.location}</td>
-            <td className="tableCell">
-              <Link to={elems.pay.item.name}>
-                {elems.pay.item.image !== null && (
-                  <Img
-                    className="ingredients"
-                    alt={elems.pay.item.name}
-                    src={elems.pay.item.image.publicUrl}
-                  />
-                )}
-                {elems.pay.count}
-              </Link>
-              <Img alt="arrow" src={arrow} className="icon" />
-              <Link to={elems.receive.item.name}>
-                {elems.receive.item.image !== null && (
-                  <Img
-                    className="ingredients"
-                    alt={elems.receive.item.name}
-                    src={elems.receive.item.image.publicUrl}
-                  />
-                )}
-                {elems.receive.count}
-              </Link>
+            <td className="tableCell" style={{ padding: '0 10px' }}>
+              {elems.location}
+            </td>
+            <td className="tableCell center">
+              <span>
+                <Link to={elems.pay.item.name}>
+                  {elems.pay.item.image !== null && (
+                    <Img
+                      className="ingredients"
+                      alt={elems.pay.item.name}
+                      src={elems.pay.item.image.publicUrl}
+                    />
+                  )}
+                </Link>
+                <span>x{elems.pay.count}</span>
+              </span>
+              <Img alt="arrow" src={arrow} className="icon arrow" />
+              <span>
+                <Link to={elems.receive.item.name}>
+                  {elems.receive.item.image !== null && (
+                    <Img
+                      className="ingredients"
+                      alt={elems.receive.item.name}
+                      src={elems.receive.item.image.publicUrl}
+                    />
+                  )}
+                </Link>
+                <span>x{elems.receive.count}</span>
+              </span>
             </td>
           </tr>
         ))}

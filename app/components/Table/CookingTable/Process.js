@@ -38,12 +38,14 @@ const Process = ({ currentItem }) => (
             )}
           </Link>
         )}
-        {currentItem.processOne.count !== null && currentItem.processOne.count}
+        {currentItem.processOne.count !== null && (
+          <span>x{currentItem.processOne.count}</span>
+        )}
       </span>
     )}
     {currentItem.processTwo != null && (
       <span key={currentItem.processTwo.id}>
-        <Img alt="arrow" src={arrow} className="icon" />
+        <Img alt="arrow" src={arrow} className="icon arrow" />
         {currentItem.processTwo.cookingItem !== null && (
           <Link
             to={currentItem.processTwo.cookingItem.name}
@@ -74,12 +76,14 @@ const Process = ({ currentItem }) => (
             )}
           </Link>
         )}
-        {currentItem.processTwo.count !== null && currentItem.processTwo.count}
+        {currentItem.processTwo.count !== null && (
+          <span>x{currentItem.processTwo.count}</span>
+        )}
       </span>
     )}
     {currentItem.processThree != null && (
       <span key={currentItem.processThree.id}>
-        <Img alt="arrow" src={arrow} className="icon" />
+        <Img alt="arrow" src={arrow} className="icon arrow" />
         {currentItem.processThree.cookingItem !== null && (
           <Link
             to={currentItem.processThree.cookingItem.name}
@@ -110,13 +114,14 @@ const Process = ({ currentItem }) => (
             )}
           </Link>
         )}
-        {currentItem.processThree.count !== null &&
-          currentItem.processThree.count}
+        {currentItem.processThree.count !== null && (
+          <span>x{currentItem.processThree.count}</span>
+        )}
       </span>
     )}
     {currentItem.processFour != null && (
       <span key={currentItem.processFour.id}>
-        <Img alt="arrow" src={arrow} className="icon" />
+        <Img alt="arrow" src={arrow} className="icon arrow" />
         {currentItem.processFour.cookingItem !== null && (
           <Link
             to={currentItem.processFour.cookingItem.name}
@@ -147,8 +152,9 @@ const Process = ({ currentItem }) => (
             )}
           </Link>
         )}
-        {currentItem.processFour.count !== null &&
-          currentItem.processFour.count}
+        {currentItem.processFour.count !== null && (
+          <span>x{currentItem.processFour.count}</span>
+        )}
       </span>
     )}
   </span>

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
 import Img from 'components/Img';
+import StyledLink from 'components/StyledLink';
 
 const EquipmentTable = ({ currentItem }) => (
   <Table>
@@ -17,7 +17,7 @@ const EquipmentTable = ({ currentItem }) => (
         {currentItem.equipment.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link key={items.item.id} to={items.item.name}>
+              <StyledLink key={items.item.id} to={items.item.name}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.id}
@@ -26,8 +26,8 @@ const EquipmentTable = ({ currentItem }) => (
                     src={items.item.image.publicUrl}
                   />
                 )}
-                {items.item.name}
-              </Link>
+                <span>{items.item.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{items.item.itemInfo.speed}</td>
             <td className="tableCell center">
@@ -47,7 +47,7 @@ const EquipmentTable = ({ currentItem }) => (
         </tr>
         <tr>
           <td className="tableCell">
-            <Link
+            <StyledLink
               key={currentItem.equipmentFor.animal.id}
               to={currentItem.equipmentFor.animal.name}
             >
@@ -59,8 +59,8 @@ const EquipmentTable = ({ currentItem }) => (
                   src={currentItem.equipmentFor.animal.image.publicUrl}
                 />
               )}
-              {currentItem.equipmentFor.animal.name}
-            </Link>
+              <span>{currentItem.equipmentFor.animal.name}</span>
+            </StyledLink>
           </td>
           <td className="tableCell center">
             {currentItem.equipmentFor.extraSlots == null

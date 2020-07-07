@@ -14,7 +14,9 @@ const BreedsTable = ({ currentItem }) => (
         </tr>
         {currentItem.breeds.map(items => (
           <tr key={items.id}>
-            <td className="tableCell">{items.breed}</td>
+            <td className="tableCell" style={{ padding: '5px 10px' }}>
+              {items.breed}
+            </td>
             <td className="tableCell center">{items.speed}</td>
             <td className="tableCell center">{items.stamina}</td>
             <td className="tableCell center">{items.hp}</td>

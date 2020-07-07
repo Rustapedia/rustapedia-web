@@ -20,6 +20,10 @@ const Img = styled.img`
     margin-right: 7px;
     margin-bottom: 5px;
   }
+
+  &.arrow {
+    margin: 0 10px;
+  }
 `;
 
 export default Img;

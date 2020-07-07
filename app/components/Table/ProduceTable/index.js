@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
+import StyledLink from 'components/StyledLink';
 
 const ProduceTable = ({ currentItem }) => (
   <Table>
@@ -14,7 +14,7 @@ const ProduceTable = ({ currentItem }) => (
         </tr>
         <tr>
           <td className="tableCell">
-            <Link
+            <StyledLink
               to={currentItem.produces.item.name}
               key={currentItem.produces.item.id}
             >
@@ -26,8 +26,8 @@ const ProduceTable = ({ currentItem }) => (
                   src={currentItem.produces.item.image.publicUrl}
                 />
               )}
-              {currentItem.produces.item.name}
-            </Link>
+              <span>{currentItem.produces.item.name}</span>
+            </StyledLink>
           </td>
           <td className="tableCell center">{currentItem.produces.amount}</td>
         </tr>
@@ -41,7 +41,7 @@ const ProduceTable = ({ currentItem }) => (
         </tr>
         <tr>
           <td className="tableCell">
-            <Link
+            <StyledLink
               to={currentItem.productOf.animal.name}
               key={currentItem.productOf.animal.id}
             >
@@ -53,8 +53,8 @@ const ProduceTable = ({ currentItem }) => (
                   src={currentItem.productOf.animal.image.publicUrl}
                 />
               )}
-              {currentItem.productOf.animal.name}
-            </Link>
+              <span>{currentItem.productOf.animal.name}</span>
+            </StyledLink>
           </td>
           <td className="tableCell center">{currentItem.productOf.amount}</td>
         </tr>

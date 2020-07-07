@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
 import Img from 'components/Img';
+import StyledLink from 'components/StyledLink';
 
 const FuelTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +15,7 @@ const FuelTable = ({ currentItem }) => (
         {currentItem.fueledBy.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link to={items.fuel.name}>
+              <StyledLink to={items.fuel.name}>
                 {items.fuel.image !== null && (
                   <Img
                     className="ingredients"
@@ -23,8 +23,8 @@ const FuelTable = ({ currentItem }) => (
                     src={items.fuel.image.publicUrl}
                   />
                 )}
-                {items.fuel.name}
-              </Link>
+                <span>{items.fuel.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{items.amountPerHour}</td>
           </tr>
@@ -40,7 +40,7 @@ const FuelTable = ({ currentItem }) => (
         {currentItem.fuelFor.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link to={items.object.name}>
+              <StyledLink to={items.object.name}>
                 {items.object.image !== null && (
                   <Img
                     className="ingredients"
@@ -48,8 +48,8 @@ const FuelTable = ({ currentItem }) => (
                     src={items.object.image.publicUrl}
                   />
                 )}
-                {items.object.name}
-              </Link>
+                <span>{items.object.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{items.amountPerHour}</td>
           </tr>

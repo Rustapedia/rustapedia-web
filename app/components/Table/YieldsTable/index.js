@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import Img from 'components/Img';
+import StyledLink from 'components/StyledLink';
 
 const YieldsTable = ({ currentItem }) => (
   <Table>
@@ -19,7 +20,7 @@ const YieldsTable = ({ currentItem }) => (
           <tr key={items.id}>
             {items.resources.map(res => (
               <td className="tableCell" key={res.id}>
-                <Link to={res.name}>
+                <StyledLink to={res.name}>
                   {res.image !== null && (
                     <Img
                       className="ingredients"
@@ -27,8 +28,8 @@ const YieldsTable = ({ currentItem }) => (
                       src={res.image.publicUrl}
                     />
                   )}
-                  {res.name}
-                </Link>
+                  <span>{res.name}</span>
+                </StyledLink>
               </td>
             ))}
             <td className="tableCell center">{items.amount}</td>
@@ -42,8 +43,8 @@ const YieldsTable = ({ currentItem }) => (
                     src={items.fuel.item.image.publicUrl}
                   />
                 )}
-                {items.fuel.count}
               </Link>
+              <span>x{items.fuel.count}</span>
             </td>
             <td className="tableCell center">{items.amountPerMinute}</td>
           </tr>

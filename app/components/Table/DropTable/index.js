@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
+import Img from 'components/Img';
+import StyledLink from 'components/StyledLink';
 
 const DropTable = ({ currentItem }) => (
   <Table>
@@ -12,17 +13,35 @@ const DropTable = ({ currentItem }) => (
       </tr>
       <tr>
         <td className="tableCell">
-          <Link
+          <StyledLink
             to={
               currentItem.droppedBy !== null
                 ? currentItem.droppedBy.vehicle.name
                 : currentItem.drops.crate.name
             }
           >
-            {currentItem.droppedBy !== null
-              ? currentItem.droppedBy.vehicle.name
-              : currentItem.drops.crate.name}
-          </Link>
+            {currentItem.droppedBy !== null && (
+              <Img
+                key={currentItem.droppedBy.vehicle.image.id}
+                className="ingredients"
+                alt={currentItem.droppedBy.vehicle.name}
+                src={currentItem.droppedBy.vehicle.image.publicUrl}
+              />
+            )}
+            {currentItem.drops !== null && (
+              <Img
+                key={currentItem.drops.crate.image.id}
+                className="ingredients"
+                alt={currentItem.drops.crate.name}
+                src={currentItem.drops.crate.image.publicUrl}
+              />
+            )}
+            <span>
+              {currentItem.droppedBy !== null
+                ? currentItem.droppedBy.vehicle.name
+                : currentItem.drops.crate.name}
+            </span>
+          </StyledLink>
         </td>
         <td className="tableCell center">
           {currentItem.droppedBy !== null

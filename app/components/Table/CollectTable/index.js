@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import Img from 'components/Img';
+import StyledLink from 'components/StyledLink';
 
 const CollectTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +16,7 @@ const CollectTable = ({ currentItem }) => (
         {currentItem.collectible.items.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link to={items.item.name}>
+              <StyledLink to={items.item.name}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.image.id}
@@ -24,8 +25,8 @@ const CollectTable = ({ currentItem }) => (
                     src={items.item.image.publicUrl}
                   />
                 )}
-                {items.item.name}
-              </Link>
+                <span>{items.item.name}</span>
+              </StyledLink>
             </td>
             <td className="tableCell center">{items.count}</td>
           </tr>
@@ -40,23 +41,33 @@ const CollectTable = ({ currentItem }) => (
         </tr>
         <tr key={currentItem.collected.id}>
           <td className="tableCell">
-            <Link to={currentItem.collected.collectedFrom.name}>
-              {currentItem.collected.collectedFrom.name}
-            </Link>
+            <StyledLink to={currentItem.collected.collectedFrom.name}>
+              {currentItem.collected.collectedFrom.image !== null && (
+                <Img
+                  key={currentItem.collected.collectedFrom.image.id}
+                  className="ingredients"
+                  alt={currentItem.collected.collectedFrom.name}
+                  src={currentItem.collected.collectedFrom.image.publicUrl}
+                />
+              )}
+              <span>{currentItem.collected.collectedFrom.name}</span>
+            </StyledLink>
           </td>
           <td className="tableCell center">
             {currentItem.collected.items.map(items => (
-              <Link to={items.item.name} key={items.id}>
-                {items.item.image !== null && (
-                  <Img
-                    key={items.item.image.id}
-                    className="ingredients"
-                    alt={items.item.name}
-                    src={items.item.image.publicUrl}
-                  />
-                )}
-                {items.count}
-              </Link>
+              <span key={items.id}>
+                <Link to={items.item.name}>
+                  {items.item.image !== null && (
+                    <Img
+                      key={items.item.image.id}
+                      className="ingredients"
+                      alt={items.item.name}
+                      src={items.item.image.publicUrl}
+                    />
+                  )}
+                </Link>
+                <span>x{items.count}</span>
+              </span>
             ))}
           </td>
         </tr>
