@@ -4,6 +4,7 @@ import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import StyledLink from 'components/StyledLink';
+import arrow from 'images/arrow.png';
 
 const RecycleTable = ({ currentItem }) => (
   <Table>
@@ -33,6 +34,13 @@ const RecycleTable = ({ currentItem }) => (
             </span>
           </td>
           <td className="tableCell center">
+            <Img
+              key={currentItem.id}
+              className="ingredients"
+              alt={currentItem.name}
+              src={currentItem.image.publicUrl}
+            />
+            <Img alt="arrow" src={arrow} className="icon arrow" />
             {currentItem.recycle.yield.map(res => (
               <span key={res.id}>
                 <Link key={res.item.id} to={res.item.name}>

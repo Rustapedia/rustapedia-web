@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import StyledLink from 'components/StyledLink';
 import Img from 'components/Img';
+import blueprint from 'images/blueprint.png';
 
 const LootTable = ({ currentItem }) => (
   <Table>
@@ -21,6 +22,12 @@ const LootTable = ({ currentItem }) => (
               <StyledLink to={elems.itemToLoot.name}>
                 {elems.itemToLoot.image !== null && (
                   <Img
+                    style={
+                      elems.isBlueprint && {
+                        background: `url(${blueprint})`,
+                        backgroundSize: 'cover',
+                      }
+                    }
                     className="ingredients"
                     alt={elems.itemToLoot.name}
                     src={elems.itemToLoot.image.publicUrl}
