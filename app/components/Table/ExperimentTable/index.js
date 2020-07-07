@@ -5,6 +5,7 @@ import StyledLink from 'components/StyledLink';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import blueprint from 'images/blueprint.png';
+import arrow from 'images/arrow.png';
 
 const ExperimentTable = ({ currentItem }) => (
   <Table>
@@ -49,6 +50,17 @@ const ExperimentTable = ({ currentItem }) => (
               )}
             </Link>
             <span>x{currentItem.experiment.experimentNeeded.count}</span>
+            <Img alt="arrow" src={arrow} className="icon arrow" />
+            <Img
+              style={{
+                background: `url(${blueprint})`,
+                backgroundSize: 'cover',
+              }}
+              key={currentItem.id}
+              className="ingredients"
+              alt={currentItem.name}
+              src={currentItem.image.publicUrl}
+            />
           </td>
         </tr>
       </tbody>

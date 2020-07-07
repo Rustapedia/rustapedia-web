@@ -4,6 +4,8 @@ import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import StyledLink from 'components/StyledLink';
+import arrow from 'images/arrow.png';
+import blueprint from 'images/blueprint.png';
 
 const ResearchTable = ({ currentItem }) => (
   <Table>
@@ -33,6 +35,12 @@ const ResearchTable = ({ currentItem }) => (
             </span>
           </td>
           <td className="tableCell center">
+            <Img
+              key={currentItem.id}
+              className="ingredients"
+              alt={currentItem.name}
+              src={currentItem.image.publicUrl}
+            />
             <Link
               key={currentItem.research.researchNeeded.id}
               to={currentItem.research.researchNeeded.item.name}
@@ -46,6 +54,17 @@ const ResearchTable = ({ currentItem }) => (
               )}
             </Link>
             <span>x{currentItem.research.researchNeeded.count}</span>
+            <Img alt="arrow" src={arrow} className="icon arrow" />
+            <Img
+              style={{
+                background: `url(${blueprint})`,
+                backgroundSize: 'cover',
+              }}
+              key={currentItem.id}
+              className="ingredients"
+              alt={currentItem.name}
+              src={currentItem.image.publicUrl}
+            />
           </td>
         </tr>
       </tbody>
