@@ -5,7 +5,6 @@ const GlobalNav = styled.div`
 
   a {
     color: #fff;
-    padding: 10px;
     margin: 0 auto;
   }
 `;

@@ -8,7 +8,6 @@ const StyledLink = styled(Link)`
   &.block {
     text-decoration: none;
     display: block;
-    border-bottom: 10px solid transparent;
     &:focus,
     &:hover,
     &:visited,

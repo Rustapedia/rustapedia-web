@@ -25,6 +25,17 @@ const Button = styled.button`
   &.active {
     background: rgba(191, 191, 191, 0.4);
   }
+
+  &.durability {
+    font-size: 0.9rem;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: 1px solid rgba(191, 191, 191, 1);
+  }
+  &.white {
+    background: rgba(255, 255, 255, 0.3);
+  }
 `;
 
 export default Button;

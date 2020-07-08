@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import Table from 'components/Table/Table';
+import Button from 'components/Button';
 import reducer from './reducer';
 import Item from './Item';
 import {
@@ -42,43 +43,51 @@ export function DurabilityTable({
     <Table>
       <tbody>
         <tr>
-          <td>
+          <td className="durability">
             {currentItem.explosive.length > 0 && (
-              <button
+              <Button
                 type="button"
+                className={explosiveStatus ? 'durability white' : 'durability'}
                 onClick={() => onCurrentExplosiveStatusChanged()}
               >
                 Explosive
-              </button>
+              </Button>
             )}
             {currentItem.guns.length > 0 && (
-              <button
+              <Button
                 type="button"
+                className={gunsStatus ? 'durability white' : 'durability'}
                 onClick={() => onCurrentGunsStatusChanged()}
               >
                 Guns
-              </button>
+              </Button>
             )}
             {currentItem.melle.length > 0 && (
-              <button
+              <Button
                 type="button"
+                className={melleStatus ? 'durability white' : 'durability'}
                 onClick={() => onCurrentMelleStatusChanged()}
               >
                 Melle
-              </button>
+              </Button>
             )}
             {currentItem.throwing.length > 0 && (
-              <button
+              <Button
                 type="button"
+                className={throwingStatus ? 'durability white' : 'durability'}
                 onClick={() => onCurrentThrowingStatusChanged()}
               >
                 Throwing Attacks
-              </button>
+              </Button>
             )}
             {currentItem.sam.length > 0 && (
-              <button type="button" onClick={() => onCurrentSamStatusChanged()}>
+              <Button
+                type="button"
+                className={samStatus ? 'durability white' : 'durability'}
+                onClick={() => onCurrentSamStatusChanged()}
+              >
                 SAM Site
-              </button>
+              </Button>
             )}
           </td>
         </tr>

@@ -37,8 +37,8 @@ const AppWrapper = styled.div`
     overflow-y: auto;
     max-height: 350px;
   }
-  .padding-left {
-    padding-left: 10px;
+  .ui.category.search > .results .category .result {
+    padding: 0;
   }
 `;
 

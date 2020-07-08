@@ -21,6 +21,9 @@ const Table = styled.table`
   .marginLeft {
     margin-left: 10px;
   }
+  .durability button:nth-child(n + 2) {
+    margin-left: 20px;
+  }
   .center {
     text-align: center;
   }
