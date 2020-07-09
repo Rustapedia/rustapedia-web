@@ -21,6 +21,9 @@ resultRenderer.propTypes = {
 export default class SearchBar extends Component {
   state = initialState;
 
+  handleResultSelect = (e, { result }) =>
+    this.setState({ value: result.title });
+
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
     const source = _.range(0, 1).reduce(memo => {
@@ -73,6 +76,7 @@ export default class SearchBar extends Component {
           onSearchChange={_.debounce(this.handleSearchChange, 500, {
             leading: true,
           })}
+          onResultSelect={this.handleResultSelect}
           results={results}
           resultRenderer={resultRenderer}
           value={value}

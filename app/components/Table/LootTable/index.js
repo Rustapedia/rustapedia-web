@@ -4,7 +4,10 @@ import Table from 'components/Table/Table';
 import StyledLink from 'components/StyledLink';
 import Img from 'components/Img';
 import blueprint from 'images/blueprint.png';
-
+const blueprintStyle = {
+  background: `url(${blueprint})`,
+  backgroundSize: 'cover',
+};
 const LootTable = ({ currentItem }) => (
   <Table>
     {currentItem.loot.length > 0 && (
@@ -22,13 +25,8 @@ const LootTable = ({ currentItem }) => (
               <StyledLink to={elems.itemToLoot.name}>
                 {elems.itemToLoot.image !== null && (
                   <Img
-                    style={
-                      elems.isBlueprint && {
-                        background: `url(${blueprint})`,
-                        backgroundSize: 'cover',
-                      }
-                    }
-                    className="ingredients"
+                    style={elems.isBlueprint ? blueprintStyle : null}
+                    className="ingredients blueprintStyle"
                     alt={elems.itemToLoot.name}
                     src={elems.itemToLoot.image.publicUrl}
                   />

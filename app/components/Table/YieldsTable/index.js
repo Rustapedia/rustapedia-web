@@ -61,7 +61,7 @@ const YieldsTable = ({ currentItem }) => (
         {currentItem.extractedBy.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link to={items.monument.name}>
+              <StyledLink to={items.monument.name}>
                 {items.monument.image !== null && (
                   <Img
                     className="ingredients"
@@ -69,8 +69,8 @@ const YieldsTable = ({ currentItem }) => (
                     src={items.monument.image.publicUrl}
                   />
                 )}
-                {items.monument.name}
-              </Link>
+                <span>{items.monument.name}</span>
+              </StyledLink>
             </td>
             {items.resources.map(res => (
               <td className="tableCell center" key={res.id}>
@@ -83,7 +83,9 @@ const YieldsTable = ({ currentItem }) => (
                     />
                   )}
                 </Link>
-                {items.amount}/per{items.time}
+                <span>
+                  x{items.amount}/per{items.time}
+                </span>
               </td>
             ))}
             <td className="tableCell center">
@@ -95,8 +97,8 @@ const YieldsTable = ({ currentItem }) => (
                     src={items.fuel.item.image.publicUrl}
                   />
                 )}
-                {items.fuel.count}
               </Link>
+              <span>x{items.fuel.count}</span>
             </td>
           </tr>
         ))}

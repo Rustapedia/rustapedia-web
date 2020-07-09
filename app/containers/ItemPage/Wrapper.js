@@ -12,11 +12,12 @@ const Wrapper = styled.div`
   div .size250 {
     width: 250px;
   }
-  .padding {
-    padding: 20px 60px;
+  &.itemInfo {
+    margin: 30px auto;
+    margin-top: 0;
   }
-  .padding-bottom {
-    padding-bottom: 30px;
+  .padding {
+    padding: 0 5%;
   }
 `;
 

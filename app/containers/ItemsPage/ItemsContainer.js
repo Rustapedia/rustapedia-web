@@ -6,6 +6,8 @@ const ItemsContainer = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: stretch;
+  align-content: stretch;
 `;
 
 export default ItemsContainer;

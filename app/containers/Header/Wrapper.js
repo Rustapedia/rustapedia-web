@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   align-content: space-around;
   align-items: center;
-  padding: 10px 0;
+  height: 100%;
 
   a {
     padding: 5px 0;

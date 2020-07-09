@@ -5,6 +5,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
+import SearchBar from 'containers/SearchBar';
 import ChapterNav from './ChapterNav';
 import GlobalNav from './GlobalNav';
 import Wrapper from './Wrapper';
@@ -24,7 +25,7 @@ export function Header({
 }) {
   useInjectReducer({ key, reducer });
   return (
-    <div style={{ zIndex: '2', marginBottom: '100px' }}>
+    <div style={{ zIndex: '2', marginBottom: '30px' }}>
       <GlobalNav>
         <Wrapper>
           <StyledLink className="block" to="/">
@@ -40,9 +41,18 @@ export function Header({
               {category.name}
             </StyledLink>
           ))}
+          <span>
+            <SearchBar className="header-search" data={categories} />
+          </span>
         </Wrapper>
       </GlobalNav>
-      <ChapterNav>
+      <ChapterNav
+        className={
+          currentNav !== undefined &&
+          currentNav.subCategory !== undefined &&
+          'visible'
+        }
+      >
         <Wrapper>
           {currentNav !== undefined &&
             currentNav.subCategory !== undefined &&
