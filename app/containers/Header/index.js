@@ -6,14 +6,13 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
 import SearchBar from 'containers/SearchBar';
-import ChapterNav from './ChapterNav';
-import GlobalNav from './GlobalNav';
-import Wrapper from './Wrapper';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import reducer from './reducer';
 import { currentNavChange } from './actions';
 import { makeSelectData } from '../App/selectors';
 import { currentCategoryChange } from '../App/actions';
 import { makeSelectCurrentNav } from './selectors';
+import Wrapper from './Wrapper';
 
 const key = 'header';
 
@@ -25,50 +24,43 @@ export function Header({
 }) {
   useInjectReducer({ key, reducer });
   return (
-    <div style={{ zIndex: '2', marginBottom: '30px' }}>
-      <GlobalNav>
-        <Wrapper>
-          <StyledLink className="block" to="/">
+    <Wrapper className="header">
+      <Menu>
+        <Menu.Item>
+          <StyledLink className="block white" to="/">
             Home
           </StyledLink>
-          {categories.map(category => (
-            <StyledLink
-              className="block"
-              to="#"
-              key={category.id}
-              onClick={() => onCurrentNavChanged(category)}
-            >
-              {category.name}
-            </StyledLink>
-          ))}
-          <span>
-            <SearchBar className="header-search" data={categories} />
-          </span>
-        </Wrapper>
-      </GlobalNav>
-      <ChapterNav
-        className={
-          currentNav !== undefined &&
-          currentNav.subCategory !== undefined &&
-          'visible'
-        }
-      >
-        <Wrapper>
-          {currentNav !== undefined &&
-            currentNav.subCategory !== undefined &&
-            currentNav.subCategory.map(subCategory => (
-              <StyledLink
-                className="block"
-                key={subCategory.id}
-                to={`/${subCategory.name}`}
-                onClick={() => onCurrentCategoryChanged(subCategory)}
-              >
-                {subCategory.name}
-              </StyledLink>
-            ))}
-        </Wrapper>
-      </ChapterNav>
-    </div>
+        </Menu.Item>
+        {categories.map(category => (
+          <Dropdown
+            text={category.name}
+            key={category.id}
+            className="link item"
+            onClick={() => onCurrentNavChanged(category)}
+          >
+            <Dropdown.Menu>
+              {currentNav !== undefined &&
+                currentNav.subCategory !== undefined &&
+                currentNav.subCategory.map(subCategory => (
+                  <Dropdown.Item>
+                    <StyledLink
+                      className="block"
+                      key={subCategory.id}
+                      to={`/${subCategory.name}`}
+                      onClick={() => onCurrentCategoryChanged(subCategory)}
+                    >
+                      {subCategory.name}
+                    </StyledLink>
+                  </Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        ))}
+        <Menu.Item>
+          <SearchBar className="header-search" data={categories} />
+        </Menu.Item>
+      </Menu>
+    </Wrapper>
   );
 }
 

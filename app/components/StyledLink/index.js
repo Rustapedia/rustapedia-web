@@ -6,18 +6,16 @@ const StyledLink = styled(Link)`
   color: black;
 
   &.block {
-    text-decoration: none;
     display: block;
-    &:focus,
-    &:hover,
-    &:visited,
-    &:link,
-    &:active {
-      text-decoration: none;
-    }
+  }
+  &.white {
+    color: #fff;
   }
   span {
     padding-left: 10px;
+  }
+  &:hover {
+    color: #4183c4;
   }
 `;
 

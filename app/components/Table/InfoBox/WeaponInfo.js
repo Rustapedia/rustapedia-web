@@ -20,13 +20,13 @@ const WeaponInfo = ({ currentItem }) => (
       {currentItem.rateOfFire !== null && (
         <tr>
           <td className="tableCell">Rate of Fire</td>
-          <td className="tableCell">{currentItem.rateOfFire}</td>
+          <td className="tableCell">{currentItem.rateOfFire} RPM</td>
         </tr>
       )}
       {currentItem.aimCone !== null && (
         <tr>
           <td className="tableCell">Aim Cone</td>
-          <td className="tableCell">{currentItem.aimCone}</td>
+          <td className="tableCell">{currentItem.aimCone}°</td>
         </tr>
       )}
       {currentItem.capacity !== null && (
@@ -38,7 +38,7 @@ const WeaponInfo = ({ currentItem }) => (
       {currentItem.reload !== null && (
         <tr>
           <td className="tableCell">Reload</td>
-          <td className="tableCell">{currentItem.reload}</td>
+          <td className="tableCell">{currentItem.reload} sec</td>
         </tr>
       )}
       {currentItem.draw !== null && (
