@@ -30,6 +30,7 @@ export const initialState = {
   fuel: false,
   shopping: false,
   damage: false,
+  mods: false,
 };
 
 function resetDefault(state, propName) {
@@ -57,6 +58,7 @@ function resetDefault(state, propName) {
   draft.fuel = false;
   draft.shopping = false;
   draft.damage = false;
+  draft.mods = false;
   draft[propName] = true;
   return draft;
 }
@@ -92,6 +94,7 @@ const itemReducer = (state = initialState, action) =>
         draft.fuel = false;
         draft.shopping = false;
         draft.damage = false;
+        draft.mods = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -192,6 +195,11 @@ const itemReducer = (state = initialState, action) =>
           action.currentItem.ammoFor.length > 0
         ) {
           draft.damage = true;
+        } else if (
+          action.currentItem.modsInfo.length > 0 ||
+          action.currentItem.modsFor.length > 0
+        ) {
+          draft.mods = true;
         }
         break;
     }

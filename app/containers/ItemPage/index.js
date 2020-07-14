@@ -34,6 +34,7 @@ import FuelTable from 'components/Table/FuelTable';
 import CollectTable from 'components/Table/CollectTable';
 import YieldsTable from 'components/Table/YieldsTable';
 import DamageTable from 'components/Table/DamageTable';
+import ModsTable from 'components/Table/ModsTable';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
@@ -351,6 +352,24 @@ function ItemPage({
                 {'Ammo For'}
               </Button>
             )}
+            {currentItem.modsInfo.length > 0 && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('mods')}
+                className={display.mods ? 'active' : null}
+              >
+                {'Mods'}
+              </Button>
+            )}
+            {currentItem.modsFor.length > 0 && (
+              <Button
+                type="button"
+                onClick={() => onCurrentStatusChanged('mods')}
+                className={display.mods ? 'active' : null}
+              >
+                {'Mods For'}
+              </Button>
+            )}
           </Wrapper>
         </div>
       )}
@@ -380,6 +399,7 @@ function ItemPage({
         {display.fuel && <FuelTable currentItem={currentItem} />}
         {display.shopping && <ShoppingTable currentItem={currentItem} />}
         {display.damage && <DamageTable currentItem={currentItem} />}
+        {display.mods && <ModsTable currentItem={currentItem} />}
       </Wrapper>
     </div>
   );

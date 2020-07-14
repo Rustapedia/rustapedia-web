@@ -1224,6 +1224,35 @@ export const GET_ITEM = gql`
           }
         }
       }
+      modsFor {
+        id
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      modsInfo {
+        id
+        modification {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        damage
+        rateOfFire
+        aimCone
+        hipAimCone
+        velocity
+        recoil
+        aimSway
+      }
     }
   }
 `;
