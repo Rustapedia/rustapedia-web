@@ -35,21 +35,8 @@ const AppWrapper = styled.div`
   flex-direction: column;
   .ui.search > .results {
     overflow-y: auto;
+    overflow-x: auto;
     max-height: 350px;
-  }
-  .ui.category.search > .results .category .result {
-    padding: 0;
-  }
-  .header-search .ui.input > input {
-    width: 20px;
-    height: 30px;
-  }
-  .header-search .ui a {
-    color: rgba(0, 0, 0, 0.87);
-  }
-  .header-search .ui.input > input:focus {
-    width: 180px;
-    transition: width 0.5s linear;
   }
 `;
 

@@ -1195,6 +1195,35 @@ export const GET_ITEM = gql`
           count
         }
       }
+      damageInfo {
+        id
+        attack
+        ammunition {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        damage
+        dps
+        headShot
+        aimCone
+        velocity
+        spread
+      }
+      ammoFor {
+        id
+        weapon {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
     }
   }
 `;

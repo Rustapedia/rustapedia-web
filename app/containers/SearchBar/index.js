@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Img from 'components/Img';
 import { Search, Grid } from 'semantic-ui-react';
 import StyledLink from 'components/StyledLink';
+import Wrapper from './Wrapper';
 
 const initialState = { isLoading: false, results: [], value: '' };
 
@@ -21,8 +22,7 @@ resultRenderer.propTypes = {
 export default class SearchBar extends Component {
   state = initialState;
 
-  handleResultSelect = (e, { result }) =>
-    this.setState({ value: result.title });
+  handleResultSelect = () => this.setState({ value: '' });
 
   handleSearchChange = (e, { value }) => {
     this.setState({ isLoading: true, value });
@@ -68,21 +68,23 @@ export default class SearchBar extends Component {
     const { isLoading, results, value } = this.state;
 
     return (
-      <Grid textAlign="center">
-        <Search
-          category
-          aligned="left"
-          loading={isLoading}
-          onSearchChange={_.debounce(this.handleSearchChange, 500, {
-            leading: true,
-          })}
-          onResultSelect={this.handleResultSelect}
-          results={results}
-          resultRenderer={resultRenderer}
-          value={value}
-          {...this.props}
-        />
-      </Grid>
+      <Wrapper>
+        <Grid textAlign="center">
+          <Search
+            category
+            aligned="left"
+            loading={isLoading}
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+              leading: true,
+            })}
+            onResultSelect={this.handleResultSelect}
+            results={results}
+            resultRenderer={resultRenderer}
+            value={value}
+            {...this.props}
+          />
+        </Grid>
+      </Wrapper>
     );
   }
 }
