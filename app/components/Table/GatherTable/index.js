@@ -2,9 +2,9 @@
 import React from 'react';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
+import { Link } from 'react-router-dom';
 
 function GatherTable({ currentItem }) {
   const toolArray = [];
@@ -150,7 +150,7 @@ function GatherTable({ currentItem }) {
           {currentItem.gatheredFrom.map(items => (
             <tr key={items.id}>
               <td className="tableCell">
-                <Link to={items.name}>
+                <StyledLink to={items.name}>
                   {items.image !== null && (
                     <Img
                       key={items.image.id}
@@ -159,8 +159,8 @@ function GatherTable({ currentItem }) {
                       src={items.image.publicUrl}
                     />
                   )}
-                  {items.name}
-                </Link>
+                  <span>{items.name}</span>
+                </StyledLink>
               </td>
               {toolArray.map(tool => {
                 const itemFound = items.gatheringInfo.find(
@@ -180,7 +180,7 @@ function GatherTable({ currentItem }) {
                             />
                           )}
                         </Link>
-                        {res.count !== null && res.count}
+                        x{res.count !== null && res.count}
                         {res.range !== null && res.range}
                         {res.percent !== null && `${res.percent}%`}
                       </span>
