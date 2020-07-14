@@ -20,7 +20,7 @@ const ItemMainInfo = ({ currentItem }) => (
       {currentItem.stackSize !== null && (
         <tr>
           <td className="tableCell">Stack Size</td>
-          <td className="tableCell">{currentItem.stackSize}</td>
+          <td className="tableCell">x{currentItem.stackSize}</td>
         </tr>
       )}
       {currentItem.despawnTime !== null && (

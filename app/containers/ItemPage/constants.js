@@ -102,6 +102,16 @@ export const GET_ITEM = gql`
         healthOverTime
         capacity
       }
+      attireInfo {
+        id
+        projectile
+        melee
+        bite
+        radiation
+        cold
+        explosion
+        waterproof
+      }
       craftInfo {
         id
         requiredItemCounts {

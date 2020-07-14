@@ -38,6 +38,7 @@ import ModsTable from 'components/Table/ModsTable';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
+import AttireInfo from 'components/Table/InfoBox/AttireInfo';
 import { makeSelectCurrentItem } from '../App/selectors';
 import { currentItemChange } from '../App/actions';
 import H1 from '../../components/H1';
@@ -109,6 +110,9 @@ function ItemPage({
               )}
               {currentItem.weaponInfo !== null && (
                 <WeaponInfo currentItem={currentItem.weaponInfo} />
+              )}
+              {currentItem.attireInfo !== null && (
+                <AttireInfo currentItem={currentItem.attireInfo} />
               )}
             </div>
           </Wrapper>

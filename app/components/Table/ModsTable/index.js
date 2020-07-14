@@ -85,7 +85,7 @@ const ModsTable = ({ currentItem }) => (
             )}
             {items.aimSway !== null ? (
               <td className="tableCell center">
-                {items.aimSway > 0 ? `+${items.aimSway}` : `${items.vaimSway}%`}
+                {items.aimSway > 0 ? `+${items.aimSway}` : `${items.aimSway}%`}
               </td>
             ) : (
               <td className="tableCell center">-</td>

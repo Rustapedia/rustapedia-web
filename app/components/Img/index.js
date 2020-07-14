@@ -14,6 +14,15 @@ const Img = styled.img`
     height: 40px;
   }
 
+  &.infoIcon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+  }
+  &.water {
+    width: 22px;
+    height: 22px;
+  }
   &.icon {
     width: 22px;
     height: 22px;
