@@ -22,7 +22,11 @@ const FoodInfo = ({ currentItem }) => (
             <Img className="infoIcon" alt="calories" src={calories} />
             Calories
           </td>
-          <td className="tableCell">{currentItem.calories}</td>
+          <td className="tableCell">
+            {currentItem.calories > 0
+              ? `+${currentItem.calories}`
+              : currentItem.calories}
+          </td>
         </tr>
       )}
       {currentItem.hydration !== null && (
@@ -31,7 +35,11 @@ const FoodInfo = ({ currentItem }) => (
             <Img className="infoIcon" alt="hydration" src={hydration} />
             Hydration
           </td>
-          <td className="tableCell">{currentItem.hydration}</td>
+          <td className="tableCell">
+            {currentItem.hydration > 0
+              ? `+${currentItem.hydration}`
+              : currentItem.hydration}
+          </td>
         </tr>
       )}
       {currentItem.health !== null && (
@@ -40,7 +48,11 @@ const FoodInfo = ({ currentItem }) => (
             <Img className="infoIcon" alt="health" src={health} />
             Health
           </td>
-          <td className="tableCell">{currentItem.health}</td>
+          <td className="tableCell">
+            {currentItem.health > 0
+              ? `+${currentItem.health}`
+              : currentItem.health}
+          </td>
         </tr>
       )}
       {currentItem.healthOverTime !== null && (
@@ -53,7 +65,11 @@ const FoodInfo = ({ currentItem }) => (
             />
             Health Over Time
           </td>
-          <td className="tableCell">{currentItem.healthOverTime}</td>
+          <td className="tableCell">
+            {currentItem.healthOverTime > 0
+              ? `+${currentItem.healthOverTime}`
+              : currentItem.healthOverTime}
+          </td>
         </tr>
       )}
     </tbody>

@@ -31,6 +31,7 @@ export const initialState = {
   shopping: false,
   damage: false,
   mods: false,
+  fishing: false,
 };
 
 function resetDefault(state, propName) {
@@ -59,6 +60,7 @@ function resetDefault(state, propName) {
   draft.shopping = false;
   draft.damage = false;
   draft.mods = false;
+  draft.fishing = false;
   draft[propName] = true;
   return draft;
 }
@@ -95,6 +97,7 @@ const itemReducer = (state = initialState, action) =>
         draft.shopping = false;
         draft.damage = false;
         draft.mods = false;
+        draft.fishing = false;
         break;
       case SET_INITIAL_STATUS:
         if (
@@ -164,8 +167,8 @@ const itemReducer = (state = initialState, action) =>
         } else if (action.currentItem.feeding.length > 0) {
           draft.feeding = true;
         } else if (
-          action.currentItem.produces !== null ||
-          action.currentItem.productOf !== null
+          action.currentItem.produces.length > 0 ||
+          action.currentItem.productOf.length > 0
         ) {
           draft.produce = true;
         } else if (
@@ -190,6 +193,11 @@ const itemReducer = (state = initialState, action) =>
           draft.fuel = true;
         } else if (action.currentItem.shopping.length > 0) {
           draft.shopping = true;
+        } else if (
+          action.currentItem.fishing.length > 0 ||
+          action.currentItem.caughtBy.length > 0
+        ) {
+          draft.fishing = true;
         } else if (
           action.currentItem.damage.length > 0 ||
           action.currentItem.ammoFor.length > 0

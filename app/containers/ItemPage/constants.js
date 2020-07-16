@@ -42,6 +42,7 @@ export const GET_ITEM = gql`
         decayTimeInside
         upkeep
         speed
+        capacity
       }
       lootInfo {
         id
@@ -1262,6 +1263,48 @@ export const GET_ITEM = gql`
         velocity
         recoil
         aimSway
+      }
+      caughtBy {
+        id
+        trap {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amount
+        baitCalories
+        bait {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+      }
+      fishing {
+        id
+        catch {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
+        amount
+        baitCalories
+        bait {
+          id
+          name
+          image {
+            id
+            publicUrl
+          }
+        }
       }
     }
   }

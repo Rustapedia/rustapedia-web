@@ -4,6 +4,7 @@ import Img from 'components/Img';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
+import arrow from 'images/arrow.png';
 
 const CompostableTable = ({ currentItem }) => (
   <Table>
@@ -32,6 +33,13 @@ const CompostableTable = ({ currentItem }) => (
             </StyledLink>
           </td>
           <td className="tableCell center">
+            <Img
+              key={currentItem.image.id}
+              className="ingredients"
+              alt={currentItem.name}
+              src={currentItem.image.publicUrl}
+            />
+            <Img alt="arrow" src={arrow} className="icon arrow" />
             <Link
               key={currentItem.compostable.result.item.id}
               to={currentItem.compostable.result.item.name}

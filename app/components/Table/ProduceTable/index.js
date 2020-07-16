@@ -6,58 +6,70 @@ import StyledLink from 'components/StyledLink';
 
 const ProduceTable = ({ currentItem }) => (
   <Table>
-    {currentItem.produces !== null && (
+    {currentItem.produces.length > 0 && (
       <tbody>
-        <tr className="center">
-          <th>Item</th>
-          <th>Amount per Hour</th>
-        </tr>
-        <tr>
-          <td className="tableCell">
-            <StyledLink
-              to={currentItem.produces.item.name}
-              key={currentItem.produces.item.id}
-            >
-              {currentItem.produces.item.image !== null && (
-                <Img
-                  key={currentItem.produces.item.image.id}
-                  className="ingredients"
-                  alt={currentItem.produces.item.name}
-                  src={currentItem.produces.item.image.publicUrl}
-                />
-              )}
-              <span>{currentItem.produces.item.name}</span>
-            </StyledLink>
-          </td>
-          <td className="tableCell center">{currentItem.produces.amount}</td>
-        </tr>
+        {currentItem.name === 'Horse' ? (
+          <tr className="center">
+            <th>Item</th>
+            <th>Amount per Hour</th>
+          </tr>
+        ) : (
+          <tr className="center">
+            <th>Item</th>
+            <th>Amount</th>
+          </tr>
+        )}
+        {currentItem.produces.map(items => (
+          <tr key={items.item.id}>
+            <td className="tableCell">
+              <StyledLink to={items.item.name}>
+                {items.item.image !== null && (
+                  <Img
+                    key={items.item.image.id}
+                    className="ingredients"
+                    alt={items.item.name}
+                    src={items.item.image.publicUrl}
+                  />
+                )}
+                <span>{items.item.name}</span>
+              </StyledLink>
+            </td>
+            <td className="tableCell center">{items.amount}</td>
+          </tr>
+        ))}
       </tbody>
     )}
-    {currentItem.productOf !== null && (
+    {currentItem.productOf.length > 0 && (
       <tbody>
-        <tr className="center">
-          <th>Animal</th>
-          <th>Amount per Hour</th>
-        </tr>
-        <tr>
-          <td className="tableCell">
-            <StyledLink
-              to={currentItem.productOf.animal.name}
-              key={currentItem.productOf.animal.id}
-            >
-              {currentItem.productOf.animal.image !== null && (
-                <Img
-                  key={currentItem.productOf.animal.image.id}
-                  className="ingredients"
-                  alt={currentItem.productOf.animal.name}
-                  src={currentItem.productOf.animal.image.publicUrl}
-                />
-              )}
-              <span>{currentItem.productOf.animal.name}</span>
-            </StyledLink>
-          </td>
-          <td className="tableCell center">{currentItem.productOf.amount}</td>
-        </tr>
+        {currentItem.name === 'Horse Dung' ? (
+          <tr className="center">
+            <th>Animal</th>
+            <th>Amount per Hour</th>
+          </tr>
+        ) : (
+          <tr className="center">
+            <th>Item</th>
+            <th>Amount</th>
+          </tr>
+        )}
+        {currentItem.productOf.map(items => (
+          <tr key={items.animal.id}>
+            <td className="tableCell">
+              <StyledLink to={items.animal.name}>
+                {items.animal.image !== null && (
+                  <Img
+                    key={items.animal.image.id}
+                    className="ingredients"
+                    alt={items.animal.name}
+                    src={items.animal.image.publicUrl}
+                  />
+                )}
+                <span>{items.animal.name}</span>
+              </StyledLink>
+            </td>
+            <td className="tableCell center">{items.amount}</td>
+          </tr>
+        ))}
       </tbody>
     )}
   </Table>

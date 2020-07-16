@@ -35,6 +35,7 @@ import CollectTable from 'components/Table/CollectTable';
 import YieldsTable from 'components/Table/YieldsTable';
 import DamageTable from 'components/Table/DamageTable';
 import ModsTable from 'components/Table/ModsTable';
+import FishingTable from 'components/Table/FishingTable';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Button from 'components/Button';
@@ -280,14 +281,14 @@ function ItemPage({
                 Feeding
               </Button>
             )}
-            {(currentItem.produces !== null ||
-              currentItem.productOf !== null) && (
+            {(currentItem.produces.length > 0 ||
+              currentItem.productOf.length > 0) && (
               <Button
                 type="button"
                 onClick={() => onCurrentStatusChanged('produce')}
                 className={display.produce ? 'active' : null}
               >
-                {currentItem.produces !== null ? 'Produces' : 'Product Of'}
+                {currentItem.produces.length > 0 ? 'Produces' : 'Product Of'}
               </Button>
             )}
             {(currentItem.drops !== null || currentItem.droppedBy !== null) && (
@@ -338,40 +339,34 @@ function ItemPage({
                 {'Shopping'}
               </Button>
             )}
-            {currentItem.damageInfo.length > 0 && (
+            {(currentItem.damageInfo.length > 0 ||
+              currentItem.ammoFor.length > 0) && (
               <Button
                 type="button"
                 onClick={() => onCurrentStatusChanged('damage')}
                 className={display.damage ? 'active' : null}
               >
-                {'Damage'}
+                {currentItem.damageInfo.length > 0 ? 'Damage' : 'Ammo For'}
               </Button>
             )}
-            {currentItem.ammoFor.length > 0 && (
-              <Button
-                type="button"
-                onClick={() => onCurrentStatusChanged('damage')}
-                className={display.damage ? 'active' : null}
-              >
-                {'Ammo For'}
-              </Button>
-            )}
-            {currentItem.modsInfo.length > 0 && (
+            {(currentItem.modsInfo.length > 0 ||
+              currentItem.modsFor.length > 0) && (
               <Button
                 type="button"
                 onClick={() => onCurrentStatusChanged('mods')}
                 className={display.mods ? 'active' : null}
               >
-                {'Mods'}
+                {currentItem.modsInfo.length > 0 ? 'Mods' : 'Mods For'}
               </Button>
             )}
-            {currentItem.modsFor.length > 0 && (
+            {(currentItem.fishing.length > 0 ||
+              currentItem.caughtBy.length > 0) && (
               <Button
                 type="button"
-                onClick={() => onCurrentStatusChanged('mods')}
-                className={display.mods ? 'active' : null}
+                onClick={() => onCurrentStatusChanged('fishing')}
+                className={display.fishing ? 'active' : null}
               >
-                {'Mods For'}
+                {currentItem.fishing.length > 0 ? 'Fishing' : 'Caught By'}
               </Button>
             )}
           </Wrapper>
@@ -404,6 +399,7 @@ function ItemPage({
         {display.shopping && <ShoppingTable currentItem={currentItem} />}
         {display.damage && <DamageTable currentItem={currentItem} />}
         {display.mods && <ModsTable currentItem={currentItem} />}
+        {display.fishing && <FishingTable currentItem={currentItem} />}
       </Wrapper>
     </div>
   );

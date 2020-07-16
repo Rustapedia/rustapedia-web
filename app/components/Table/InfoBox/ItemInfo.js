@@ -47,6 +47,12 @@ const ItemInfo = ({ currentItem }) => (
           <td className="tableCell">{currentItem.speed} hours</td>
         </tr>
       )}
+      {currentItem.capacity !== null && (
+        <tr>
+          <td className="tableCell">Capacity</td>
+          <td className="tableCell">{currentItem.capacity} ml</td>
+        </tr>
+      )}
     </tbody>
   </Table>
 );

@@ -49,7 +49,11 @@ const RepairTable = ({ currentItem }) => (
                 </span>
               ))}
             </td>
-            <td className="tableCell center">{item.condition}</td>
+            {item.condition !== null ? (
+              <td className="tableCell center">{item.condition}</td>
+            ) : (
+              <td className="tableCell center">-</td>
+            )}
             <td className="tableCell center">{item.blueprintRequired}</td>
           </tr>
         ))}
