@@ -85,12 +85,14 @@ export const GET_ITEM = gql`
         range
         rateOfFire
         aimCone
+        aimConePercent
         capacity
         reload
         draw
         throw
         velocity
         recoil
+        recoilPercent
         exposionRadius
         explosionDelay
         dugChance
@@ -102,6 +104,8 @@ export const GET_ITEM = gql`
         health
         healthOverTime
         capacity
+        radiation
+        bleeding
       }
       attireInfo {
         id
@@ -139,6 +143,7 @@ export const GET_ITEM = gql`
                 }
                 count
               }
+              amount
               time
               workBench {
                 id
@@ -152,6 +157,7 @@ export const GET_ITEM = gql`
           }
           count
         }
+        amount
         time
         workBench {
           id

@@ -10,6 +10,8 @@ import Img from 'components/Img';
 import calories from 'images/calories.png';
 import hydration from 'images/hydration.png';
 import health from 'images/health.png';
+import radiation from 'images/radiation.png';
+import bleeding from 'images/bleeding.png';
 import healthOverTime from 'images/healthOverTime.png';
 import Table from './Table';
 
@@ -69,6 +71,32 @@ const FoodInfo = ({ currentItem }) => (
             {currentItem.healthOverTime > 0
               ? `+${currentItem.healthOverTime}`
               : currentItem.healthOverTime}
+          </td>
+        </tr>
+      )}
+      {currentItem.bleeding !== null && (
+        <tr>
+          <td className="tableCell">
+            <Img className="infoIcon" alt="bleeding" src={bleeding} />
+            Bleading
+          </td>
+          <td className="tableCell">
+            {currentItem.bleeding > 0
+              ? `+${currentItem.bleeding}`
+              : currentItem.bleeding}
+          </td>
+        </tr>
+      )}
+      {currentItem.radiation !== null && (
+        <tr>
+          <td className="tableCell">
+            <Img className="infoIcon" alt="radiation" src={radiation} />
+            Radiation
+          </td>
+          <td className="tableCell">
+            {currentItem.radiation > 0
+              ? `+${currentItem.radiation}`
+              : currentItem.radiation}
           </td>
         </tr>
       )}

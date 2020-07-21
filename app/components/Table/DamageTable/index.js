@@ -49,7 +49,7 @@ const DamageTable = ({ currentItem }) => (
               <td className="tableCell center">-</td>
             )}
             {items.headShot !== null ? (
-              <td className="tableCell center">{items.headShot}</td>
+              <td className="tableCell center">x{items.headShot}</td>
             ) : (
               <td className="tableCell center">-</td>
             )}

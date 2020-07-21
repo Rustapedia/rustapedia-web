@@ -72,45 +72,47 @@ const ExperimentTable = ({ currentItem }) => (
           <th>Category</th>
           <th>Scrap</th>
         </tr>
-        {currentItem.experimentation.map(elems => (
-          <tr key={elems.id}>
-            <td className="tableCell">
-              <StyledLink key={elems.item.id} to={elems.item.name}>
-                {elems.item.image !== null && (
-                  <Img
-                    style={{
-                      background: `url(${blueprint})`,
-                      backgroundSize: 'cover',
-                    }}
-                    key={elems.item.id}
-                    className="ingredients"
-                    alt={elems.item.name}
-                    src={elems.item.image.publicUrl}
-                  />
-                )}
-                <span>{elems.item.blueprint}</span>
-              </StyledLink>
-            </td>
-            <td className="tableCell center">{elems.item.subCategory.name}</td>
-            <td className="tableCell center">
-              <span key={elems.experimentNeeded.item.id}>
-                <Link
-                  key={elems.experimentNeeded.item.id}
-                  to={elems.experimentNeeded.item.name}
-                >
-                  {elems.experimentNeeded.item.image !== null && (
+        {currentItem.experimentation.map(elems =>
+          elems.item.map(item => (
+            <tr key={item.id}>
+              <td className="tableCell">
+                <StyledLink key={item.id} to={item.name}>
+                  {item.image !== null && (
                     <Img
+                      style={{
+                        background: `url(${blueprint})`,
+                        backgroundSize: 'cover',
+                      }}
+                      key={item.id}
                       className="ingredients"
-                      alt={elems.experimentNeeded.item.name}
-                      src={elems.experimentNeeded.item.image.publicUrl}
+                      alt={item.name}
+                      src={item.image.publicUrl}
                     />
                   )}
-                </Link>
-                <span>x{elems.experimentNeeded.count}</span>
-              </span>
-            </td>
-          </tr>
-        ))}
+                  <span>{item.blueprint}</span>
+                </StyledLink>
+              </td>
+              <td className="tableCell center">{item.subCategory.name}</td>
+              <td className="tableCell center">
+                <span key={elems.experimentNeeded.item.id}>
+                  <Link
+                    key={elems.experimentNeeded.item.id}
+                    to={elems.experimentNeeded.item.name}
+                  >
+                    {elems.experimentNeeded.item.image !== null && (
+                      <Img
+                        className="ingredients"
+                        alt={elems.experimentNeeded.item.name}
+                        src={elems.experimentNeeded.item.image.publicUrl}
+                      />
+                    )}
+                  </Link>
+                  <span>x{elems.experimentNeeded.count}</span>
+                </span>
+              </td>
+            </tr>
+          )),
+        )}
       </tbody>
     )}
   </Table>

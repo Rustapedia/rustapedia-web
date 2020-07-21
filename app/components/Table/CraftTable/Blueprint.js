@@ -21,6 +21,8 @@ const Blueprint = ({ currentItem }) => (
             src={currentItem.image.publicUrl}
           />
         )}
+        {currentItem.craftInfo.amount !== null &&
+          `x${currentItem.craftInfo.amount}`}
         <span>{currentItem.blueprint}</span>
       </StyledLink>
     </td>

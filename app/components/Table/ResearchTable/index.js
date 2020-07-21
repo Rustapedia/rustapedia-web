@@ -76,41 +76,43 @@ const ResearchTable = ({ currentItem }) => (
           <th>Category</th>
           <th>Scrap</th>
         </tr>
-        {currentItem.researches.map(elems => (
-          <tr key={elems.id}>
-            <td className="tableCell">
-              <StyledLink key={elems.item.id} to={elems.item.name}>
-                {elems.item.image !== null && (
-                  <Img
-                    key={elems.item.id}
-                    className="ingredients"
-                    alt={elems.item.name}
-                    src={elems.item.image.publicUrl}
-                  />
-                )}
-                <span>{elems.item.name}</span>
-              </StyledLink>
-            </td>
-            <td className="tableCell center">{elems.item.subCategory.name}</td>
-            <td className="tableCell center">
-              <span key={elems.researchNeeded.item.id}>
-                <Link
-                  key={elems.researchNeeded.item.id}
-                  to={elems.researchNeeded.item.name}
-                >
-                  {elems.researchNeeded.item.image !== null && (
+        {currentItem.researches.map(elems =>
+          elems.item.map(item => (
+            <tr key={item.id}>
+              <td className="tableCell">
+                <StyledLink key={item.id} to={item.name}>
+                  {item.image !== null && (
                     <Img
+                      key={item.id}
                       className="ingredients"
-                      alt={elems.researchNeeded.item.name}
-                      src={elems.researchNeeded.item.image.publicUrl}
+                      alt={item.name}
+                      src={item.image.publicUrl}
                     />
                   )}
-                </Link>
-                <span>x{elems.researchNeeded.count}</span>
-              </span>
-            </td>
-          </tr>
-        ))}
+                  <span>{item.name}</span>
+                </StyledLink>
+              </td>
+              <td className="tableCell center">{item.subCategory.name}</td>
+              <td className="tableCell center">
+                <span key={elems.researchNeeded.item.id}>
+                  <Link
+                    key={elems.researchNeeded.item.id}
+                    to={elems.researchNeeded.item.name}
+                  >
+                    {elems.researchNeeded.item.image !== null && (
+                      <Img
+                        className="ingredients"
+                        alt={elems.researchNeeded.item.name}
+                        src={elems.researchNeeded.item.image.publicUrl}
+                      />
+                    )}
+                  </Link>
+                  <span>x{elems.researchNeeded.count}</span>
+                </span>
+              </td>
+            </tr>
+          )),
+        )}
       </tbody>
     )}
   </Table>

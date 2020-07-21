@@ -10,7 +10,7 @@ const ListItem = styled(Link)`
   color: black;
 
   span {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 `;
 

@@ -12,7 +12,7 @@ const StyledLink = styled(Link)`
     color: #fff;
   }
   span {
-    padding-left: 10px;
+    padding-left: 5px;
   }
   &:hover {
     color: #4183c4;

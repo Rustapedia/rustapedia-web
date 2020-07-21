@@ -29,6 +29,12 @@ const WeaponInfo = ({ currentItem }) => (
           <td className="tableCell">{currentItem.aimCone}°</td>
         </tr>
       )}
+      {currentItem.aimConePercent !== null && (
+        <tr>
+          <td className="tableCell">Aim Cone</td>
+          <td className="tableCell">{currentItem.aimConePercent}%</td>
+        </tr>
+      )}
       {currentItem.capacity !== null && (
         <tr>
           <td className="tableCell">Capacity</td>
@@ -59,10 +65,40 @@ const WeaponInfo = ({ currentItem }) => (
           <td className="tableCell">{currentItem.range} m</td>
         </tr>
       )}
+      {currentItem.recoil !== null && (
+        <tr>
+          <td className="tableCell">Recoil</td>
+          <td className="tableCell">{currentItem.recoil}</td>
+        </tr>
+      )}
+      {currentItem.recoilPercent !== null && (
+        <tr>
+          <td className="tableCell">Recoil</td>
+          <td className="tableCell">{currentItem.recoilPercent}%</td>
+        </tr>
+      )}
       {currentItem.attackSpeed !== null && (
         <tr>
           <td className="tableCell">Attack Speed</td>
           <td className="tableCell">{currentItem.attackSpeed} HPM</td>
+        </tr>
+      )}
+      {currentItem.exposionRadius !== null && (
+        <tr>
+          <td className="tableCell">Exposion Radius</td>
+          <td className="tableCell">{currentItem.exposionRadius} m</td>
+        </tr>
+      )}
+      {currentItem.explosionDelay !== null && (
+        <tr>
+          <td className="tableCell">Explosion Delay</td>
+          <td className="tableCell">{currentItem.explosionDelay}</td>
+        </tr>
+      )}
+      {currentItem.dugChance !== null && (
+        <tr>
+          <td className="tableCell">Dug Chance</td>
+          <td className="tableCell">{currentItem.dugChance} %</td>
         </tr>
       )}
     </tbody>

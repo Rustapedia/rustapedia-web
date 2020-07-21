@@ -50,7 +50,7 @@ const RepairTable = ({ currentItem }) => (
               ))}
             </td>
             {item.condition !== null ? (
-              <td className="tableCell center">{item.condition}</td>
+              <td className="tableCell center">{item.condition}%</td>
             ) : (
               <td className="tableCell center">-</td>
             )}

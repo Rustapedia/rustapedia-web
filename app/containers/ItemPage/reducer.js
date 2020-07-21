@@ -199,7 +199,7 @@ const itemReducer = (state = initialState, action) =>
         ) {
           draft.fishing = true;
         } else if (
-          action.currentItem.damage.length > 0 ||
+          action.currentItem.damageInfo.length > 0 ||
           action.currentItem.ammoFor.length > 0
         ) {
           draft.damage = true;

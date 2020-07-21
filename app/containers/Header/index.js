@@ -42,7 +42,7 @@ export function Header({
               {currentNav !== undefined &&
                 currentNav.subCategory !== undefined &&
                 currentNav.subCategory.map(subCategory => (
-                  <Dropdown.Item>
+                  <Dropdown.Item key={subCategory.id}>
                     <StyledLink
                       className="block"
                       key={subCategory.id}
