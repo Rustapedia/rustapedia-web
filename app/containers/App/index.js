@@ -15,7 +15,6 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import FeaturePage from 'containers/FeaturePage';
 import ItemsPage from 'containers/ItemsPage';
 import NotFoundPage from 'containers/NotFoundPage';
 import HomePage from 'containers/HomePage';
@@ -32,10 +31,11 @@ const AppWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   min-height: 100%;
+  min-width: 100%;
   flex-direction: column;
   .ui.search > .results {
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: scroll;
     max-height: 350px;
   }
 `;
@@ -65,7 +65,6 @@ function App({ onLoadData, categories }) {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
         <React.Fragment>
           {categories.map(category => (
             <React.Fragment key={category.id}>

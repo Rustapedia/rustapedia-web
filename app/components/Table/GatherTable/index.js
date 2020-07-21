@@ -169,7 +169,7 @@ function GatherTable({ currentItem }) {
                 return itemFound !== undefined ? (
                   <td className="tableCell center" key={itemFound.tool.id}>
                     {itemFound.result.map(res => (
-                      <span key={res.id}>
+                      <tr key={res.id}>
                         <Link to={res.item.name}>
                           {res.item.image !== null && (
                             <Img
@@ -183,7 +183,7 @@ function GatherTable({ currentItem }) {
                         x{res.count !== null && res.count}
                         {res.range !== null && res.range}
                         {res.percent !== null && `${res.percent}%`}
-                      </span>
+                      </tr>
                     ))}
                   </td>
                 ) : (
