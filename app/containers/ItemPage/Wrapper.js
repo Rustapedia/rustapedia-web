@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   .center {
     text-align: center;
   }
-
   div .size250 {
     width: 250px;
   }
@@ -18,6 +17,17 @@ const Wrapper = styled.div`
   }
   .padding {
     padding: 0 5%;
+  }
+  @media (max-width: 768px) {
+    .padding {
+      padding: 0 1% 0 3%;
+    }
+  }
+  @media (max-width: 480px) {
+    &.itemInfo {
+      margin: 20px auto;
+      margin-top: 0;
+    }
   }
 `;
 

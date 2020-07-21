@@ -27,6 +27,9 @@ export function Header({
     <Wrapper className="header">
       <Menu>
         <Menu.Item>
+          <SearchBar className="header-search" data={categories} />
+        </Menu.Item>
+        <Menu.Item>
           <StyledLink className="block white" to="/">
             Home
           </StyledLink>
@@ -56,9 +59,6 @@ export function Header({
             </Dropdown.Menu>
           </Dropdown>
         ))}
-        <Menu.Item>
-          <SearchBar className="header-search" data={categories} />
-        </Menu.Item>
       </Menu>
     </Wrapper>
   );

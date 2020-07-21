@@ -13,6 +13,18 @@ const H1 = styled.h1`
     line-height: 1em;
     color: white;
   }
+  @media (min-width: 481px) and (max-width: 768px) {
+    font-size: 2rem;
+    &.headline {
+      font-size: 3.3rem;
+    }
+  }
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    &.headline {
+      font-size: 3rem;
+    }
+  }
 `;
 
 export default H1;

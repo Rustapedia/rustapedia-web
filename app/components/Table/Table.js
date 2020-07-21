@@ -27,6 +27,14 @@ const Table = styled.table`
   .center {
     text-align: center;
   }
+  @media (min-width: 481px) and (max-width: 768px) {
+    border-spacing: 6px;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    border-spacing: 4px;
+  }
 `;
 
 export default Table;

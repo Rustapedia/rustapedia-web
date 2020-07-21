@@ -31,12 +31,11 @@ const AppWrapper = styled.div`
   margin: 0 auto;
   display: flex;
   min-height: 100%;
-  min-width: 100%;
+  width: 100%;
   flex-direction: column;
   .ui.search > .results {
+    max-height: 35vh;
     overflow-y: auto;
-    overflow-x: scroll;
-    max-height: 350px;
   }
 `;
 

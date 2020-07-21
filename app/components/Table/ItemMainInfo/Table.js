@@ -14,6 +14,18 @@ const Table = styled.table`
   td:first-child {
     border-right: 2px solid white;
   }
+  @media (min-width: 481px) and (max-width: 768px) {
+    .tableCell {
+      padding: 2px 5px;
+    }
+    font-size: 0.9rem;
+  }
+  @media (max-width: 480px) {
+    .tableCell {
+      padding: 2px 3px;
+    }
+    font-size: 0.8rem;
+  }
 `;
 
 export default Table;

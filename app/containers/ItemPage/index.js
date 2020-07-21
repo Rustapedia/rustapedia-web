@@ -117,7 +117,7 @@ function ItemPage({
               )}
             </div>
           </Wrapper>
-          <Wrapper>
+          <Wrapper className="flex-wrap">
             {(currentItem.lootInfo.length > 0 ||
               currentItem.loot.length > 0) && (
               <Button

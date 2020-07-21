@@ -36,6 +36,14 @@ const Button = styled.button`
   &.white {
     background: rgba(255, 255, 255, 0.3);
   }
+  @media (min-width: 481px) and (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 5px 15px;
+  }
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 5px 7px;
+  }
 `;
 
 export default Button;
