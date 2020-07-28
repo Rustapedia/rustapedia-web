@@ -46,6 +46,7 @@ import H1 from '../../components/H1';
 import reducer from './reducer';
 import saga from './saga';
 import Wrapper from './Wrapper';
+import TableWrapper from './TableWrapper';
 import { statusChange } from './actions';
 import { makeSelectStatus } from './selectors';
 import { GET_ITEM } from './constants';
@@ -117,7 +118,7 @@ function ItemPage({
               )}
             </div>
           </Wrapper>
-          <Wrapper className="flex-wrap">
+          <Wrapper className="white-space-nowrap flex-wrap">
             {(currentItem.lootInfo.length > 0 ||
               currentItem.loot.length > 0) && (
               <Button
@@ -372,7 +373,7 @@ function ItemPage({
           </Wrapper>
         </div>
       )}
-      <Wrapper>
+      <TableWrapper className="white-space-nowrap">
         {display.loot && <LootTable currentItem={currentItem} />}
         {display.craft && <CraftTable currentItem={currentItem} />}
         {display.usedForCraft && (
@@ -400,7 +401,7 @@ function ItemPage({
         {display.damage && <DamageTable currentItem={currentItem} />}
         {display.mods && <ModsTable currentItem={currentItem} />}
         {display.fishing && <FishingTable currentItem={currentItem} />}
-      </Wrapper>
+      </TableWrapper>
     </div>
   );
 }

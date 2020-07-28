@@ -5,6 +5,8 @@ import {
   GUNS_STATUS_CHANGED,
   THROWING_STATUS_CHANGED,
   SAM_STATUS_CHANGED,
+  RESET_TO_DEFAULT,
+  SET_INITIAL_STATUS,
 } from './constants';
 
 // The initial state of the ItemPage
@@ -20,6 +22,13 @@ export const initialState = {
 const durabilityReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case RESET_TO_DEFAULT:
+        draft.explosiveStatus = false;
+        draft.melleStatus = false;
+        draft.gunsStatus = false;
+        draft.samStatus = false;
+        draft.throwingStatus = false;
+        break;
       case EXPLOSIVE_STATUS_CHANGED:
         draft.explosiveStatus = true;
         draft.melleStatus = false;
@@ -54,6 +63,19 @@ const durabilityReducer = (state = initialState, action) =>
         draft.gunsStatus = false;
         draft.throwingStatus = false;
         draft.samStatus = true;
+        break;
+      case SET_INITIAL_STATUS:
+        if (action.currentItem.explosive.length > 0) {
+          draft.explosiveStatus = true;
+        } else if (action.currentItem.guns.length > 0) {
+          draft.gunsStatus = true;
+        } else if (action.currentItem.melle.length > 0) {
+          draft.melleStatus = true;
+        } else if (action.currentItem.throwing.length > 0) {
+          draft.throwingStatus = true;
+        } else if (action.currentItem.sam.length > 0) {
+          draft.samStatus = true;
+        }
         break;
     }
   });

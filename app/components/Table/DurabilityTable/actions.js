@@ -4,6 +4,8 @@ import {
   GUNS_STATUS_CHANGED,
   THROWING_STATUS_CHANGED,
   SAM_STATUS_CHANGED,
+  RESET_TO_DEFAULT,
+  SET_INITIAL_STATUS,
 } from './constants';
 
 export function explosiveStatusChange(explosiveStatus) {
@@ -34,5 +36,17 @@ export function throwingStatusChange(throwingStatus) {
   return {
     type: THROWING_STATUS_CHANGED,
     throwingStatus,
+  };
+}
+export function resetToDefault() {
+  return {
+    type: RESET_TO_DEFAULT,
+  };
+}
+
+export function setInitialStatus(currentItem) {
+  return {
+    type: SET_INITIAL_STATUS,
+    currentItem,
   };
 }

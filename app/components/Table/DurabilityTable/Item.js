@@ -20,7 +20,7 @@ const Item = ({ currentItem }) =>
             />
           )}
         </StyledLink>
-        <div className="marginLeft">
+        <div>
           <StyledLink key={item.item.id} to={item.item.name}>
             <div>{item.item.name}</div>
           </StyledLink>

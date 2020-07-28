@@ -39,7 +39,11 @@ export function Header({
           <span className={showMenu ? 'rotate-secondLine' : 'secondLine '} />
           <span className={showMenu ? 'rotate-thirdLine' : 'thirdLine'} />
         </button>
-        <Menu className={showMenu ? 'show hidden-menu' : 'hidden-menu flex-2'}>
+        <Menu
+          className={
+            showMenu ? 'show hidden-menu flex-2' : 'hidden-menu flex-2'
+          }
+        >
           <Menu.Item>
             <StyledLink
               className="block white"

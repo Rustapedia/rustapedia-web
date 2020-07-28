@@ -39,10 +39,18 @@ const Button = styled.button`
   @media (min-width: 481px) and (max-width: 768px) {
     font-size: 0.9rem;
     padding: 5px 15px;
+    &.durability {
+      font-size: 0.8rem;
+      padding: 3px 8px;
+    }
   }
   @media (max-width: 480px) {
     font-size: 0.8rem;
     padding: 5px 7px;
+    &.durability {
+      font-size: 0.7rem;
+      padding: 3px 6px;
+    }
   }
 `;
 

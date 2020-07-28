@@ -40,6 +40,9 @@ const AppWrapper = styled.div`
   button {
     outline: none;
   }
+  .white-space-nowrap {
+    white-space: nowrap;
+  }
 `;
 
 function App({ onLoadData, categories }) {
