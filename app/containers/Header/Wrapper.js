@@ -5,7 +5,8 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 30px;
   background: rgb(45, 45, 45);
-  .hidden-menu-ticker {
+  .hidden-menu-ticker,
+  .btn-menu {
     display: none;
   }
   .flex-1 {
@@ -123,6 +124,7 @@ const Wrapper = styled.div`
       border-radius: 0 0.28571429rem 0.28571429rem 0.28571429rem;
     }
     .btn-menu {
+      display: block;
       border: 2px solid rgba(255, 255, 255, 0.9);
       background-color: transparent;
       padding: 5px;
