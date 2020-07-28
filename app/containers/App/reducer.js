@@ -13,6 +13,7 @@ import {
   CURRENT_CATEGORY_CHANGED,
   CURRENT_ITEM_SET,
   LOAD_DATA,
+  SHOW_MENU_CHANGED,
 } from './constants';
 
 // The initial state of the App
@@ -22,6 +23,7 @@ export const initialState = {
   data: [],
   currentItem: {},
   currentCategory: {},
+  showMenu: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -31,13 +33,16 @@ const appReducer = (state = initialState, action) =>
       case CURRENT_ITEM_CHANGED:
         draft.currentItem = action.item;
         break;
-
+      case SHOW_MENU_CHANGED:
+        draft.showMenu = !state.showMenu;
+        break;
       case CURRENT_ITEM_SET:
         draft.currentItem = action.item;
         break;
 
       case CURRENT_CATEGORY_CHANGED:
         draft.currentCategory = action.category;
+        draft.showMenu = false;
         break;
 
       case LOAD_DATA:

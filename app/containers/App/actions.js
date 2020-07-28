@@ -20,12 +20,19 @@ import {
   CURRENT_CATEGORY_CHANGED,
   CURRENT_ITEM_SET,
   LOAD_DATA,
+  SHOW_MENU_CHANGED,
 } from './constants';
 
 export function currentItemChange(item) {
   return {
     type: CURRENT_ITEM_CHANGED,
     item,
+  };
+}
+
+export function showMenuChange() {
+  return {
+    type: SHOW_MENU_CHANGED,
   };
 }
 

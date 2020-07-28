@@ -13,6 +13,7 @@ export const CURRENT_ITEM_CHANGED = 'CURRENT_ITEM_CHANGED';
 export const CURRENT_ITEM_SET = 'CURRENT_ITEM_SET';
 export const CURRENT_CATEGORY_CHANGED = 'CURRENT_CATEGORY_CHANGED';
 export const LOAD_DATA = 'LOAD_DATA';
+export const SHOW_MENU_CHANGED = 'SHOW_MENU';
 export const GET_DATA = gql`
   {
     allCategories {

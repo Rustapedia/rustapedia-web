@@ -20,7 +20,11 @@ const makeSelectLocation = () =>
     selectRouter,
     routerState => routerState.location,
   );
-
+const makeSelectShowMenu = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.showMenu,
+  );
 const makeSelectCurrentItem = () =>
   createSelector(
     selectGlobal,
@@ -39,4 +43,5 @@ export {
   makeSelectData,
   makeSelectCurrentItem,
   makeSelectCurrentCategory,
+  makeSelectShowMenu,
 };

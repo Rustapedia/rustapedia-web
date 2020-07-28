@@ -37,6 +37,9 @@ const AppWrapper = styled.div`
     max-height: 35vh;
     overflow-y: auto;
   }
+  button {
+    outline: none;
+  }
 `;
 
 function App({ onLoadData, categories }) {

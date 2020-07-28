@@ -31,14 +31,22 @@ const Wrapper = styled.div`
       padding: 0.3em 0.5em;
       width: 60px;
     }
+    .header-search .ui.input > input:focus {
+      width: 140px;
+    }
   }
   @media (max-width: 480px) {
     .ui.category.search .results {
-      width: 20em;
+      width: 180%;
     }
     .ui.category.search > .results .category > .name {
       padding: 0.2em 0.3em;
       width: 30px;
+    }
+    .header-search .ui.input > input:focus,
+    .header-search .ui.input {
+      width: 140px;
+      height: 30px;
     }
   }
 `;
