@@ -19,7 +19,7 @@ const Table = styled.table`
     font-size: 0.8rem;
   }
   .marginLeft {
-    margin-left: 10px;
+    margin-left: 5px;
   }
   .durability button:nth-child(n + 2) {
     margin-left: 20px;
@@ -34,6 +34,9 @@ const Table = styled.table`
   @media (max-width: 480px) {
     font-size: 0.8rem;
     border-spacing: 4px;
+    .marginLeft {
+      margin-left: 2px;
+    }
   }
 `;
 

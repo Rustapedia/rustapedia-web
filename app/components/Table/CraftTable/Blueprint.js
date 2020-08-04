@@ -7,7 +7,7 @@ import blueprint from 'images/blueprint.png';
 
 const Blueprint = ({ currentItem }) => (
   <tr>
-    <td className="tableCell">
+    <td className="tableCell container">
       <StyledLink key={currentItem.id} to={currentItem.name}>
         {currentItem.image !== null && (
           <Img
@@ -23,8 +23,16 @@ const Blueprint = ({ currentItem }) => (
         )}
         {currentItem.craftInfo.amount !== null &&
           `x${currentItem.craftInfo.amount}`}
-        <span>{currentItem.blueprint}</span>
       </StyledLink>
+      <div className="marginLeft">
+        <div>{currentItem.blueprint}</div>
+        {currentItem.defaultKnow ? (
+          <div className="small-font">(Know By Default)</div>
+        ) : null}
+      </div>
+    </td>
+    <td className="tableCell center">
+      {currentItem.craftInfo.workBenchNeeded}
     </td>
     <td className="tableCell center">
       {currentItem.craftInfo.requiredItemCounts.map(res => (
@@ -43,26 +51,14 @@ const Blueprint = ({ currentItem }) => (
         </span>
       ))}
     </td>
-    <td className="tableCell center">{currentItem.craftInfo.time}</td>
     <td className="tableCell center">
-      {currentItem.craftInfo.workBench !== null ? (
-        <StyledLink
-          key={currentItem.craftInfo.workBench.id}
-          to={currentItem.craftInfo.workBench.name}
-        >
-          {currentItem.craftInfo.workBench.image !== null && (
-            <Img
-              key={currentItem.craftInfo.workBench.id}
-              className="ingredients"
-              alt={currentItem.craftInfo.workBench.name}
-              src={currentItem.craftInfo.workBench.image.publicUrl}
-            />
-          )}
-          <span>{currentItem.craftInfo.workBench.name}</span>
-        </StyledLink>
-      ) : (
-        '-'
-      )}
+      {currentItem.craftInfo.time1 !== null ? currentItem.craftInfo.time1 : '-'}
+    </td>
+    <td className="tableCell center">
+      {currentItem.craftInfo.time2 !== null ? currentItem.craftInfo.time2 : '-'}
+    </td>
+    <td className="tableCell center">
+      {currentItem.craftInfo.time3 !== null ? currentItem.craftInfo.time3 : '-'}
     </td>
   </tr>
 );

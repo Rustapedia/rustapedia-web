@@ -17,14 +17,10 @@ const ResearchTable = ({ currentItem }) => (
         </tr>
         <tr>
           <td className="tableCell">
-            <span key={currentItem.research.id}>
-              <StyledLink
-                key={currentItem.research.researchTool.id}
-                to={currentItem.research.researchTool.name}
-              >
+            <span>
+              <StyledLink to={currentItem.research.researchTool.name}>
                 {currentItem.research.researchTool.image !== null && (
                   <Img
-                    key={currentItem.research.researchTool.id}
                     className="ingredients"
                     alt={currentItem.research.researchTool.name}
                     src={currentItem.research.researchTool.image.publicUrl}
@@ -36,15 +32,11 @@ const ResearchTable = ({ currentItem }) => (
           </td>
           <td className="tableCell center">
             <Img
-              key={currentItem.id}
               className="ingredients"
               alt={currentItem.name}
               src={currentItem.image.publicUrl}
             />
-            <Link
-              key={currentItem.research.researchNeeded.id}
-              to={currentItem.research.researchNeeded.item.name}
-            >
+            <Link to={currentItem.research.researchNeeded.item.name}>
               {currentItem.research.researchNeeded.item.image !== null && (
                 <Img
                   className="ingredients"
@@ -60,7 +52,6 @@ const ResearchTable = ({ currentItem }) => (
                 background: `url(${blueprint})`,
                 backgroundSize: 'cover',
               }}
-              key={currentItem.id}
               className="ingredients"
               alt={currentItem.name}
               src={currentItem.image.publicUrl}
@@ -80,10 +71,9 @@ const ResearchTable = ({ currentItem }) => (
           elems.item.map(item => (
             <tr key={item.id}>
               <td className="tableCell">
-                <StyledLink key={item.id} to={item.name}>
+                <StyledLink to={item.name}>
                   {item.image !== null && (
                     <Img
-                      key={item.id}
                       className="ingredients"
                       alt={item.name}
                       src={item.image.publicUrl}
@@ -94,11 +84,8 @@ const ResearchTable = ({ currentItem }) => (
               </td>
               <td className="tableCell center">{item.subCategory.name}</td>
               <td className="tableCell center">
-                <span key={elems.researchNeeded.item.id}>
-                  <Link
-                    key={elems.researchNeeded.item.id}
-                    to={elems.researchNeeded.item.name}
-                  >
+                <span>
+                  <Link to={elems.researchNeeded.item.name}>
                     {elems.researchNeeded.item.image !== null && (
                       <Img
                         className="ingredients"

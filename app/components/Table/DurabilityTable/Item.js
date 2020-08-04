@@ -20,7 +20,7 @@ const Item = ({ currentItem }) =>
             />
           )}
         </StyledLink>
-        <div>
+        <div className="marginLeft">
           <StyledLink key={item.item.id} to={item.item.name}>
             <div>{item.item.name}</div>
           </StyledLink>
@@ -73,7 +73,7 @@ const Item = ({ currentItem }) =>
           '-'
         ) : (
           <div>
-            <Link to={sulfur}>
+            <Link to="/Sulfur">
               <Img className="ingredients" src={sulfur} />
             </Link>
             <span>x{item.sulfurNeeded}</span>

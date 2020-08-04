@@ -23,6 +23,7 @@ export const GET_ITEM = gql`
       }
       text
       blueprint
+      defaultKnow
       additionalText
       mainInfo {
         id
@@ -119,6 +120,7 @@ export const GET_ITEM = gql`
       }
       craftInfo {
         id
+        workBenchNeeded
         requiredItemCounts {
           id
           item {
@@ -131,6 +133,7 @@ export const GET_ITEM = gql`
             }
             craftInfo {
               id
+              workBenchNeeded
               requiredItemCounts {
                 id
                 item {
@@ -144,29 +147,17 @@ export const GET_ITEM = gql`
                 count
               }
               amount
-              time
-              workBench {
-                id
-                name
-                image {
-                  id
-                  publicUrl
-                }
-              }
+              time1
+              time2
+              time3
             }
           }
           count
         }
         amount
-        time
-        workBench {
-          id
-          name
-          image {
-            id
-            publicUrl
-          }
-        }
+        time1
+        time2
+        time3
       }
       ingredientFor {
         id
@@ -224,7 +215,10 @@ export const GET_ITEM = gql`
       }
       usedForCraft {
         id
-        time
+        workBenchNeeded
+        time1
+        time2
+        time3
         requiredItemCounts {
           id
           item {
