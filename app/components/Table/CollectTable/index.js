@@ -4,6 +4,7 @@ import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const CollectTable = ({ currentItem }) => (
   <Table>
@@ -16,7 +17,7 @@ const CollectTable = ({ currentItem }) => (
         {currentItem.collectible.items.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.item.name}>
+              <StyledLink to={removeSpace(items.item.name)}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.image.id}
@@ -41,7 +42,9 @@ const CollectTable = ({ currentItem }) => (
         </tr>
         <tr key={currentItem.collected.id}>
           <td className="tableCell">
-            <StyledLink to={currentItem.collected.collectedFrom.name}>
+            <StyledLink
+              to={removeSpace(currentItem.collected.collectedFrom.name)}
+            >
               {currentItem.collected.collectedFrom.image !== null && (
                 <Img
                   key={currentItem.collected.collectedFrom.image.id}
@@ -56,7 +59,7 @@ const CollectTable = ({ currentItem }) => (
           <td className="tableCell center">
             {currentItem.collected.items.map(items => (
               <span key={items.id}>
-                <Link to={items.item.name}>
+                <Link to={removeSpace(items.item.name)}>
                   {items.item.image !== null && (
                     <Img
                       key={items.item.image.id}

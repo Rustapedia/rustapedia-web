@@ -3,6 +3,7 @@ import Img from 'components/Img';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import arrow from 'images/arrow.png';
+import removeSpace from 'utils/removeSpace';
 
 const Process = ({ currentItem }) => (
   <span key={currentItem.id}>
@@ -10,7 +11,7 @@ const Process = ({ currentItem }) => (
       <span key={currentItem.processOne.id}>
         {currentItem.processOne.cookingItem !== null && (
           <Link
-            to={currentItem.processOne.cookingItem.name}
+            to={removeSpace(currentItem.processOne.cookingItem.name)}
             key={currentItem.processOne.cookingItem.id}
           >
             {currentItem.processOne.cookingItem.image !== null && (
@@ -25,7 +26,7 @@ const Process = ({ currentItem }) => (
         )}
         {currentItem.processOne.needed !== null && (
           <Link
-            to={currentItem.processOne.needed.name}
+            to={removeSpace(currentItem.processOne.needed.name)}
             key={currentItem.processOne.needed.id}
           >
             {currentItem.processOne.needed.image !== null && (
@@ -48,7 +49,7 @@ const Process = ({ currentItem }) => (
         <Img alt="arrow" src={arrow} className="icon arrow" />
         {currentItem.processTwo.cookingItem !== null && (
           <Link
-            to={currentItem.processTwo.cookingItem.name}
+            to={removeSpace(currentItem.processTwo.cookingItem.name)}
             key={currentItem.processTwo.cookingItem.id}
           >
             {currentItem.processTwo.cookingItem.image !== null && (
@@ -63,7 +64,7 @@ const Process = ({ currentItem }) => (
         )}
         {currentItem.processTwo.needed !== null && (
           <Link
-            to={currentItem.processTwo.needed.name}
+            to={removeSpace(currentItem.processTwo.needed.name)}
             key={currentItem.processTwo.needed.id}
           >
             {currentItem.processTwo.needed.image !== null && (
@@ -86,7 +87,7 @@ const Process = ({ currentItem }) => (
         <Img alt="arrow" src={arrow} className="icon arrow" />
         {currentItem.processThree.cookingItem !== null && (
           <Link
-            to={currentItem.processThree.cookingItem.name}
+            to={removeSpace(currentItem.processThree.cookingItem.name)}
             key={currentItem.processThree.cookingItem.id}
           >
             {currentItem.processThree.cookingItem.image !== null && (
@@ -101,7 +102,7 @@ const Process = ({ currentItem }) => (
         )}
         {currentItem.processThree.needed !== null && (
           <Link
-            to={currentItem.processThree.needed.name}
+            to={removeSpace(currentItem.processThree.needed.name)}
             key={currentItem.processThree.needed.id}
           >
             {currentItem.processThree.needed.image !== null && (
@@ -124,7 +125,7 @@ const Process = ({ currentItem }) => (
         <Img alt="arrow" src={arrow} className="icon arrow" />
         {currentItem.processFour.cookingItem !== null && (
           <Link
-            to={currentItem.processFour.cookingItem.name}
+            to={removeSpace(currentItem.processFour.cookingItem.name)}
             key={currentItem.processFour.cookingItem.id}
           >
             {currentItem.processFour.cookingItem.image !== null && (
@@ -139,7 +140,7 @@ const Process = ({ currentItem }) => (
         )}
         {currentItem.processFour.needed !== null && (
           <Link
-            to={currentItem.processFour.needed.name}
+            to={removeSpace(currentItem.processFour.needed.name)}
             key={currentItem.processFour.needed.id}
           >
             {currentItem.processFour.needed.image !== null && (

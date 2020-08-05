@@ -7,11 +7,11 @@ import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
 import SearchBar from 'containers/SearchBar';
 import { Menu, Dropdown } from 'semantic-ui-react';
+import removeSpace from 'utils/removeSpace';
 import reducer from './reducer';
 import { currentNavChange } from './actions';
 import { makeSelectData, makeSelectShowMenu } from '../App/selectors';
 import { currentCategoryChange, showMenuChange } from '../App/actions';
-
 import { makeSelectCurrentNav } from './selectors';
 import Wrapper from './Wrapper';
 
@@ -68,7 +68,7 @@ export function Header({
                         <StyledLink
                           className="block"
                           key={subCategory.id}
-                          to={`/${subCategory.name}`}
+                          to={`/${removeSpace(subCategory.name)}`}
                           onClick={() => onCurrentCategoryChanged(subCategory)}
                         >
                           {subCategory.name}

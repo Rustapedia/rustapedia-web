@@ -5,6 +5,7 @@ import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import StyledLink from 'components/StyledLink';
 import arrow from 'images/arrow.png';
+import removeSpace from 'utils/removeSpace';
 
 const RecycleTable = ({ currentItem }) => (
   <Table>
@@ -19,7 +20,7 @@ const RecycleTable = ({ currentItem }) => (
             <span>
               <StyledLink
                 key={currentItem.recycle.recycler.id}
-                to={currentItem.recycle.recycler.name}
+                to={removeSpace(currentItem.recycle.recycler.name)}
               >
                 {currentItem.recycle.recycler.image !== null && (
                   <Img
@@ -43,7 +44,7 @@ const RecycleTable = ({ currentItem }) => (
             <Img alt="arrow" src={arrow} className="icon arrow" />
             {currentItem.recycle.yield.map(res => (
               <span key={res.id}>
-                <Link key={res.item.id} to={res.item.name}>
+                <Link key={res.item.id} to={removeSpace(res.item.name)}>
                   {res.item.image !== null && (
                     <Img
                       key={res.item.image.id}
@@ -73,7 +74,10 @@ const RecycleTable = ({ currentItem }) => (
           <tr key={items.id}>
             <td className="tableCell">
               <span key={items.item.id}>
-                <StyledLink key={items.item.id} to={items.item.name}>
+                <StyledLink
+                  key={items.item.id}
+                  to={removeSpace(items.item.name)}
+                >
                   {items.item.image !== null && (
                     <Img
                       key={items.item.image.id}
@@ -90,7 +94,7 @@ const RecycleTable = ({ currentItem }) => (
             <td className="tableCell center">
               {items.yield.map(res => (
                 <span key={res.id}>
-                  <Link key={res.item.id} to={res.item.name}>
+                  <Link key={res.item.id} to={removeSpace(res.item.name)}>
                     {res.item.image !== null && (
                       <Img
                         key={res.item.image.id}

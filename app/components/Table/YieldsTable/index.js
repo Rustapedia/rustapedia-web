@@ -4,6 +4,7 @@ import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const YieldsTable = ({ currentItem }) => (
   <Table>
@@ -20,7 +21,7 @@ const YieldsTable = ({ currentItem }) => (
           <tr key={items.id}>
             {items.resources.map(res => (
               <td className="tableCell" key={res.id}>
-                <StyledLink to={res.name}>
+                <StyledLink to={removeSpace(res.name)}>
                   {res.image !== null && (
                     <Img
                       className="ingredients"
@@ -35,7 +36,7 @@ const YieldsTable = ({ currentItem }) => (
             <td className="tableCell center">{items.amount}</td>
             <td className="tableCell center">{items.time}</td>
             <td className="tableCell center">
-              <Link to={items.fuel.item.name}>
+              <Link to={removeSpace(items.fuel.item.name)}>
                 {items.fuel.item.image !== null && (
                   <Img
                     className="ingredients"
@@ -61,7 +62,7 @@ const YieldsTable = ({ currentItem }) => (
         {currentItem.extractedBy.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.monument.name}>
+              <StyledLink to={removeSpace(items.monument.name)}>
                 {items.monument.image !== null && (
                   <Img
                     className="ingredients"
@@ -74,7 +75,7 @@ const YieldsTable = ({ currentItem }) => (
             </td>
             {items.resources.map(res => (
               <td className="tableCell center" key={res.id}>
-                <Link to={res.name}>
+                <Link to={removeSpace(res.name)}>
                   {res.image !== null && (
                     <Img
                       className="ingredients"
@@ -89,7 +90,7 @@ const YieldsTable = ({ currentItem }) => (
               </td>
             ))}
             <td className="tableCell center">
-              <Link to={items.fuel.item.name}>
+              <Link to={removeSpace(items.fuel.item.name)}>
                 {items.fuel.item.image !== null && (
                   <Img
                     className="ingredients"

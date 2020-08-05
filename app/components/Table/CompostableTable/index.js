@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
 import arrow from 'images/arrow.png';
+import removeSpace from 'utils/removeSpace';
 
 const CompostableTable = ({ currentItem }) => (
   <Table>
@@ -19,7 +20,7 @@ const CompostableTable = ({ currentItem }) => (
           <td className="tableCell">
             <StyledLink
               key={currentItem.compostable.tool.id}
-              to={currentItem.compostable.tool.name}
+              to={removeSpace(currentItem.compostable.tool.name)}
             >
               {currentItem.compostable.tool.image !== null && (
                 <Img
@@ -42,7 +43,7 @@ const CompostableTable = ({ currentItem }) => (
             <Img alt="arrow" src={arrow} className="icon arrow" />
             <Link
               key={currentItem.compostable.result.item.id}
-              to={currentItem.compostable.result.item.name}
+              to={removeSpace(currentItem.compostable.result.item.name)}
             >
               {currentItem.compostable.result.item.image !== null && (
                 <Img
@@ -71,7 +72,7 @@ const CompostableTable = ({ currentItem }) => (
         {currentItem.composter.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink key={items.item.id} to={items.item.name}>
+              <StyledLink key={items.item.id} to={removeSpace(items.item.name)}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.id}
@@ -84,7 +85,10 @@ const CompostableTable = ({ currentItem }) => (
               </StyledLink>
             </td>
             <td className="tableCell center">
-              <Link key={items.result.item.id} to={items.result.item.name}>
+              <Link
+                key={items.result.item.id}
+                to={removeSpace(items.result.item.name)}
+              >
                 {items.result.item.image !== null && (
                   <Img
                     key={items.result.item.image.id}
@@ -110,7 +114,7 @@ const CompostableTable = ({ currentItem }) => (
         {currentItem.composting.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <Link key={items.item.id} to={items.item.name}>
+              <Link key={items.item.id} to={removeSpace(items.item.name)}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.id}

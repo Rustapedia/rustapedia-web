@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Img from 'components/Img';
+import removeSpace from 'utils/removeSpace';
 import ItemsContainer from './ItemsContainer';
 import ListItem from './ListItem';
 import Wrapper from './Wrapper';
@@ -16,7 +17,7 @@ function ItemsPage({ currentCategory }) {
           <ListItem
             key={items.id}
             // href={item.name}
-            to={`/${items.name}`}
+            to={`/${removeSpace(items.name)}`}
           >
             {items.image !== null && (
               <Img

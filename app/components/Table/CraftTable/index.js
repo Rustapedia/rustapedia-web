@@ -19,7 +19,7 @@ const CraftTable = ({ currentItem }) => (
           </th>
           <th>Ingredients</th>
           <th>
-            <Link to="/Work%20Bench%20Level%201">
+            <Link to="/WorkBenchLevel1">
               <Img
                 className="ingredients"
                 alt={workbenchlevel1}
@@ -28,7 +28,7 @@ const CraftTable = ({ currentItem }) => (
             </Link>
           </th>
           <th>
-            <Link to="/Work%20Bench%20Level%202">
+            <Link to="/WorkBenchLevel2">
               <Img
                 className="ingredients"
                 alt={workbenchlevel2}
@@ -37,7 +37,7 @@ const CraftTable = ({ currentItem }) => (
             </Link>
           </th>
           <th>
-            <Link to="/Work%20Bench%20Level%203">
+            <Link to="/WorkBenchLevel3">
               <Img
                 className="ingredients"
                 alt={workbenchlevel3}

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import StyledLink from 'components/StyledLink';
 import arrow from 'images/arrow.png';
 import blueprint from 'images/blueprint.png';
+import removeSpace from 'utils/removeSpace';
 
 const ResearchTable = ({ currentItem }) => (
   <Table>
@@ -18,7 +19,9 @@ const ResearchTable = ({ currentItem }) => (
         <tr>
           <td className="tableCell">
             <span>
-              <StyledLink to={currentItem.research.researchTool.name}>
+              <StyledLink
+                to={removeSpace(currentItem.research.researchTool.name)}
+              >
                 {currentItem.research.researchTool.image !== null && (
                   <Img
                     className="ingredients"
@@ -36,7 +39,9 @@ const ResearchTable = ({ currentItem }) => (
               alt={currentItem.name}
               src={currentItem.image.publicUrl}
             />
-            <Link to={currentItem.research.researchNeeded.item.name}>
+            <Link
+              to={removeSpace(currentItem.research.researchNeeded.item.name)}
+            >
               {currentItem.research.researchNeeded.item.image !== null && (
                 <Img
                   className="ingredients"
@@ -71,7 +76,7 @@ const ResearchTable = ({ currentItem }) => (
           elems.item.map(item => (
             <tr key={item.id}>
               <td className="tableCell">
-                <StyledLink to={item.name}>
+                <StyledLink to={removeSpace(item.name)}>
                   {item.image !== null && (
                     <Img
                       className="ingredients"
@@ -85,7 +90,7 @@ const ResearchTable = ({ currentItem }) => (
               <td className="tableCell center">{item.subCategory.name}</td>
               <td className="tableCell center">
                 <span>
-                  <Link to={elems.researchNeeded.item.name}>
+                  <Link to={removeSpace(elems.researchNeeded.item.name)}>
                     {elems.researchNeeded.item.image !== null && (
                       <Img
                         className="ingredients"

@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
 import blueprint from 'images/blueprint.png';
+import removeSpace from 'utils/removeSpace';
 
 const Blueprint = ({ currentItem }) => (
   <tr>
     <td className="tableCell container">
-      <StyledLink key={currentItem.id} to={currentItem.name}>
+      <StyledLink key={currentItem.id} to={removeSpace(currentItem.name)}>
         {currentItem.image !== null && (
           <Img
             style={{
@@ -25,7 +26,11 @@ const Blueprint = ({ currentItem }) => (
           `x${currentItem.craftInfo.amount}`}
       </StyledLink>
       <div className="marginLeft">
-        <div>{currentItem.blueprint}</div>
+        <div>
+          <StyledLink to={removeSpace(currentItem.name)}>
+            {currentItem.blueprint}
+          </StyledLink>
+        </div>
         {currentItem.defaultKnow ? (
           <div className="small-font">(Know By Default)</div>
         ) : null}
@@ -37,7 +42,7 @@ const Blueprint = ({ currentItem }) => (
     <td className="tableCell center">
       {currentItem.craftInfo.requiredItemCounts.map(res => (
         <span key={res.id}>
-          <Link key={res.item.id} to={res.item.name}>
+          <Link key={res.item.id} to={removeSpace(res.item.name)}>
             {res.item.image !== null && (
               <Img
                 key={res.item.image.id}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const ModsTable = ({ currentItem }) => (
   <Table>
@@ -22,7 +23,7 @@ const ModsTable = ({ currentItem }) => (
           <tr key={items.id}>
             {items.modification !== null && (
               <td className="tableCell">
-                <StyledLink to={items.modification.name}>
+                <StyledLink to={removeSpace(items.modification.name)}>
                   {items.modification.image !== null && (
                     <Img
                       key={items.modification.image.id}
@@ -102,7 +103,7 @@ const ModsTable = ({ currentItem }) => (
         {currentItem.modsFor.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.weapon.name}>
+              <StyledLink to={removeSpace(items.weapon.name)}>
                 {items.weapon.image !== null && (
                   <Img
                     key={items.weapon.image.id}

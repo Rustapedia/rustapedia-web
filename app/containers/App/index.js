@@ -22,6 +22,7 @@ import Header from 'containers/Header';
 import ItemPage from 'containers/ItemPage';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingIndicator from 'components/LoadingIndicator';
+import removeSpace from 'utils/removeSpace';
 import { GET_DATA } from './constants';
 import { makeSelectData } from './selectors';
 import { loadData } from './actions';
@@ -77,7 +78,7 @@ function App({ onLoadData, categories }) {
                 <React.Fragment key={subCategory.id}>
                   <Route
                     key={subCategory.id}
-                    path={`/${subCategory.name}`}
+                    path={`/${removeSpace(subCategory.name)}`}
                     render={() => (
                       <ItemsPage
                         currentCategory={subCategory}
@@ -88,7 +89,7 @@ function App({ onLoadData, categories }) {
                   {subCategory.items.map(item => (
                     <Route
                       key={item.id}
-                      path={`/${item.name}`}
+                      path={`/${removeSpace(item.name)}`}
                       render={() => <ItemPage item={item} />}
                     />
                   ))}

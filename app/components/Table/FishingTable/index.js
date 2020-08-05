@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const FishingTable = ({ currentItem }) => (
   <Table>
@@ -17,7 +18,7 @@ const FishingTable = ({ currentItem }) => (
         {currentItem.fishing.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.catch.name}>
+              <StyledLink to={removeSpace(items.catch.name)}>
                 {items.catch.image !== null && (
                   <Img
                     className="ingredients"
@@ -32,7 +33,7 @@ const FishingTable = ({ currentItem }) => (
             <td className="tableCell center">{items.baitCalories}</td>
             <td className="tableCell center">
               Any food except
-              <StyledLink to={items.bait.name}>
+              <StyledLink to={removeSpace(items.bait.name)}>
                 {items.bait.image !== null && (
                   <Img
                     className="ingredients"
@@ -57,7 +58,7 @@ const FishingTable = ({ currentItem }) => (
         {currentItem.caughtBy.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.trap.name}>
+              <StyledLink to={removeSpace(items.trap.name)}>
                 {items.trap.image !== null && (
                   <Img
                     className="ingredients"
@@ -72,7 +73,7 @@ const FishingTable = ({ currentItem }) => (
             <td className="tableCell center">{items.baitCalories}</td>
             <td className="tableCell center">
               Any food except
-              <StyledLink to={items.bait.name}>
+              <StyledLink to={removeSpace(items.bait.name)}>
                 {items.bait.image !== null && (
                   <Img
                     className="ingredients"

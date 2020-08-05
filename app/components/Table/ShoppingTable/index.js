@@ -4,6 +4,7 @@ import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import Img from 'components/Img';
 import arrow from 'images/arrow.png';
+import removeSpace from 'utils/removeSpace';
 
 const ShoppingTable = ({ currentItem }) => (
   <Table>
@@ -20,7 +21,7 @@ const ShoppingTable = ({ currentItem }) => (
             </td>
             <td className="tableCell center">
               <span>
-                <Link to={elems.pay.item.name}>
+                <Link to={removeSpace(elems.pay.item.name)}>
                   {elems.pay.item.image !== null && (
                     <Img
                       className="ingredients"
@@ -33,7 +34,7 @@ const ShoppingTable = ({ currentItem }) => (
               </span>
               <Img alt="arrow" src={arrow} className="icon arrow" />
               <span>
-                <Link to={elems.receive.item.name}>
+                <Link to={removeSpace(elems.receive.item.name)}>
                   {elems.receive.item.image !== null && (
                     <Img
                       className="ingredients"

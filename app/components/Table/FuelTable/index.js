@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const FuelTable = ({ currentItem }) => (
   <Table>
@@ -15,7 +16,7 @@ const FuelTable = ({ currentItem }) => (
         {currentItem.fueledBy.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.fuel.name}>
+              <StyledLink to={removeSpace(items.fuel.name)}>
                 {items.fuel.image !== null && (
                   <Img
                     className="ingredients"
@@ -40,7 +41,7 @@ const FuelTable = ({ currentItem }) => (
         {currentItem.fuelFor.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.object.name}>
+              <StyledLink to={removeSpace(items.object.name)}>
                 {items.object.image !== null && (
                   <Img
                     className="ingredients"

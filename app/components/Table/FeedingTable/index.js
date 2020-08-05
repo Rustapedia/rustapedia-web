@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const FeedingTable = ({ currentItem }) => (
   <Table>
@@ -16,7 +17,7 @@ const FeedingTable = ({ currentItem }) => (
         {currentItem.feeding.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.food.name} key={items.food.id}>
+              <StyledLink to={removeSpace(items.food.name)} key={items.food.id}>
                 {items.food.image !== null && (
                   <Img
                     key={items.food.image.id}

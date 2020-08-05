@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const EquipmentTable = ({ currentItem }) => (
   <Table>
@@ -17,7 +18,7 @@ const EquipmentTable = ({ currentItem }) => (
         {currentItem.equipment.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink key={items.item.id} to={items.item.name}>
+              <StyledLink key={items.item.id} to={removeSpace(items.item.name)}>
                 {items.item.image !== null && (
                   <Img
                     key={items.item.id}
@@ -49,7 +50,7 @@ const EquipmentTable = ({ currentItem }) => (
           <td className="tableCell">
             <StyledLink
               key={currentItem.equipmentFor.animal.id}
-              to={currentItem.equipmentFor.animal.name}
+              to={removeSpace(currentItem.equipmentFor.animal.name)}
             >
               {currentItem.equipmentFor.animal.image !== null && (
                 <Img

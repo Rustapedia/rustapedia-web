@@ -4,6 +4,7 @@ import Img from 'components/Img';
 import Table from 'components/Table/Table';
 import { Link } from 'react-router-dom';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const RepairTable = ({ currentItem }) => (
   <Table>
@@ -19,7 +20,7 @@ const RepairTable = ({ currentItem }) => (
           <tr key={item.id}>
             <td className="tableCell">
               <span key={item.tool.id}>
-                <StyledLink key={item.tool.id} to={item.tool.name}>
+                <StyledLink key={item.tool.id} to={removeSpace(item.tool.name)}>
                   {item.tool.image !== null && (
                     <Img
                       key={item.tool.image.id}
@@ -35,7 +36,7 @@ const RepairTable = ({ currentItem }) => (
             <td className="tableCell center">
               {item.repairCoast.map(res => (
                 <span key={res.id}>
-                  <Link key={res.item.id} to={res.item.name}>
+                  <Link key={res.item.id} to={removeSpace(res.item.name)}>
                     {res.item.image !== null && (
                       <Img
                         key={res.item.image.id}
@@ -71,7 +72,7 @@ const RepairTable = ({ currentItem }) => (
           <tr key={tool.id}>
             <td className="tableCell">
               <span key={tool.item.id}>
-                <StyledLink key={tool.item.id} to={tool.item.name}>
+                <StyledLink key={tool.item.id} to={removeSpace(tool.item.name)}>
                   {tool.item.image !== null && (
                     <Img
                       key={tool.item.image.id}
@@ -87,7 +88,7 @@ const RepairTable = ({ currentItem }) => (
             <td className="tableCell center">
               {tool.repairCoast.map(res => (
                 <span key={res.id}>
-                  <Link key={res.item.id} to={res.item.name}>
+                  <Link key={res.item.id} to={removeSpace(res.item.name)}>
                     {res.item.image !== null && (
                       <Img
                         key={res.item.image.id}

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import blueprint from 'images/blueprint.png';
 import arrow from 'images/arrow.png';
+import removeSpace from 'utils/removeSpace';
 
 const ExperimentTable = ({ currentItem }) => (
   <Table>
@@ -20,7 +21,7 @@ const ExperimentTable = ({ currentItem }) => (
             <span key={currentItem.experiment.id}>
               <StyledLink
                 key={currentItem.experiment.workBench.id}
-                to={currentItem.experiment.workBench.name}
+                to={removeSpace(currentItem.experiment.workBench.name)}
               >
                 {currentItem.experiment.workBench.image !== null && (
                   <Img
@@ -37,7 +38,9 @@ const ExperimentTable = ({ currentItem }) => (
           <td className="tableCell center">
             <Link
               key={currentItem.experiment.experimentNeeded.id}
-              to={currentItem.experiment.experimentNeeded.item.name}
+              to={removeSpace(
+                currentItem.experiment.experimentNeeded.item.name,
+              )}
             >
               {currentItem.experiment.experimentNeeded.item.image !== null && (
                 <Img
@@ -76,7 +79,7 @@ const ExperimentTable = ({ currentItem }) => (
           elems.item.map(item => (
             <tr key={item.id}>
               <td className="tableCell">
-                <StyledLink key={item.id} to={item.name}>
+                <StyledLink key={item.id} to={removeSpace(item.name)}>
                   {item.image !== null && (
                     <Img
                       style={{
@@ -97,7 +100,7 @@ const ExperimentTable = ({ currentItem }) => (
                 <span key={elems.experimentNeeded.item.id}>
                   <Link
                     key={elems.experimentNeeded.item.id}
-                    to={elems.experimentNeeded.item.name}
+                    to={removeSpace(elems.experimentNeeded.item.name)}
                   >
                     {elems.experimentNeeded.item.image !== null && (
                       <Img

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const DamageTable = ({ currentItem }) => (
   <Table>
@@ -22,7 +23,7 @@ const DamageTable = ({ currentItem }) => (
           <tr key={items.id}>
             {items.ammunition !== null && (
               <td className="tableCell">
-                <StyledLink to={items.ammunition.name}>
+                <StyledLink to={removeSpace(items.ammunition.name)}>
                   {items.ammunition.image !== null && (
                     <Img
                       key={items.ammunition.image.id}
@@ -82,7 +83,7 @@ const DamageTable = ({ currentItem }) => (
         {currentItem.ammoFor.map(items => (
           <tr key={items.id}>
             <td className="tableCell">
-              <StyledLink to={items.weapon.name}>
+              <StyledLink to={removeSpace(items.weapon.name)}>
                 {items.weapon.image !== null && (
                   <Img
                     key={items.weapon.image.id}

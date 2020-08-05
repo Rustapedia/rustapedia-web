@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import StyledLink from 'components/StyledLink';
 import sulfur from 'images/sulfur.png';
 import fuel from 'images/lowgradefuel.png';
+import removeSpace from 'utils/removeSpace';
 
 const Item = ({ currentItem }) =>
   currentItem.map(item => (
     <tr key={item.id}>
       <td className="tableCell container">
-        <StyledLink key={item.item.id} to={item.item.name}>
+        <StyledLink key={item.item.id} to={removeSpace(item.item.name)}>
           {item.item.image !== null && (
             <Img
               key={item.item.image.id}
@@ -21,16 +22,16 @@ const Item = ({ currentItem }) =>
           )}
         </StyledLink>
         <div className="marginLeft">
-          <StyledLink key={item.item.id} to={item.item.name}>
+          <StyledLink key={item.item.id} to={removeSpace(item.item.name)}>
             <div>{item.item.name}</div>
           </StyledLink>
           {item.ammo !== null && (
-            <StyledLink key={item.ammo.id} to={item.ammo.name}>
+            <StyledLink key={item.ammo.id} to={removeSpace(item.ammo.name)}>
               <div className="small-font">{item.ammo.name}</div>
             </StyledLink>
           )}
           {item.weapon !== null && (
-            <StyledLink key={item.weapon.id} to={item.weapon.name}>
+            <StyledLink key={item.weapon.id} to={removeSpace(item.weapon.name)}>
               <div className="small-font">{item.weapon.name}</div>
             </StyledLink>
           )}
@@ -41,7 +42,7 @@ const Item = ({ currentItem }) =>
         {item.ammo !== null ? (
           <span>
             {' '}
-            <Link key={item.ammo.id} to={item.ammo.name}>
+            <Link key={item.ammo.id} to={removeSpace(item.ammo.name)}>
               <Img
                 key={item.ammo.image.id}
                 className="ingredients"
@@ -61,7 +62,7 @@ const Item = ({ currentItem }) =>
           '-'
         ) : (
           <div>
-            <Link to="/Low%20Grade%20Fuel">
+            <Link to="/LowGradeFuel">
               <Img className="ingredients" src={fuel} />
             </Link>
             <span>x{item.fuelNeeded}</span>

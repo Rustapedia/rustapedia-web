@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Table from 'components/Table/Table';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const DropTable = ({ currentItem }) => (
   <Table>
@@ -14,11 +15,11 @@ const DropTable = ({ currentItem }) => (
       <tr>
         <td className="tableCell">
           <StyledLink
-            to={
+            to={removeSpace(
               currentItem.droppedBy !== null
                 ? currentItem.droppedBy.vehicle.name
-                : currentItem.drops.crate.name
-            }
+                : currentItem.drops.crate.name,
+            )}
           >
             {currentItem.droppedBy !== null && (
               <Img

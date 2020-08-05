@@ -4,12 +4,13 @@ import React, { Component } from 'react';
 import Img from 'components/Img';
 import { Search, Grid } from 'semantic-ui-react';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 import Wrapper from './Wrapper';
 
 const initialState = { isLoading: false, results: [], value: '' };
 
 const resultRenderer = ({ title, image }) => (
-  <StyledLink className="block" to={`/${title}`}>
+  <StyledLink className="block" to={`/${removeSpace(title)}`}>
     {image !== null && <Img className="ingredients" alt={title} src={image} />}
     <span>{title}</span>
   </StyledLink>

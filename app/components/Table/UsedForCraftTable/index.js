@@ -7,6 +7,7 @@ import workbenchlevel2 from 'images/workbench2.png';
 import workbenchlevel3 from 'images/workbench3.png';
 import { Link } from 'react-router-dom';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 
 const UsedForCraftTable = ({ currentItem }) => (
   <Table>
@@ -21,7 +22,7 @@ const UsedForCraftTable = ({ currentItem }) => (
           </th>
           <th>Ingredients</th>
           <th>
-            <Link to="/Work%20Bench%20Level%201">
+            <Link to="/WorkBenchLevel1">
               <Img
                 className="ingredients"
                 alt={workbenchlevel1}
@@ -30,7 +31,7 @@ const UsedForCraftTable = ({ currentItem }) => (
             </Link>
           </th>
           <th>
-            <Link to="/Work%20Bench%20Level%202">
+            <Link to="/WorkBenchLevel2">
               <Img
                 className="ingredients"
                 alt={workbenchlevel2}
@@ -39,7 +40,7 @@ const UsedForCraftTable = ({ currentItem }) => (
             </Link>
           </th>
           <th>
-            <Link to="/Work%20Bench%20Level%203">
+            <Link to="/WorkBenchLevel3">
               <Img
                 className="ingredients"
                 alt={workbenchlevel3}
@@ -51,7 +52,7 @@ const UsedForCraftTable = ({ currentItem }) => (
         {currentItem.usedForCraft.map(items => (
           <tr key={items.item.id}>
             <td className="tableCell">
-              <StyledLink key={items.item.id} to={items.item.name}>
+              <StyledLink key={items.item.id} to={removeSpace(items.item.name)}>
                 {items.item.image !== null && (
                   <Img
                     className="ingredients"
@@ -66,7 +67,7 @@ const UsedForCraftTable = ({ currentItem }) => (
             <td className="tableCell center">
               {items.requiredItemCounts.map(res => (
                 <span key={res.id}>
-                  <Link key={res.item.id} to={res.item.name}>
+                  <Link key={res.item.id} to={removeSpace(res.item.name)}>
                     {res.item.image !== null && (
                       <Img
                         key={res.item.image.id}

@@ -4,6 +4,7 @@ import Table from 'components/Table/Table';
 import StyledLink from 'components/StyledLink';
 import Img from 'components/Img';
 import blueprint from 'images/blueprint.png';
+import removeSpace from 'utils/removeSpace';
 const blueprintStyle = {
   background: `url(${blueprint})`,
   backgroundSize: 'cover',
@@ -22,7 +23,7 @@ const LootTable = ({ currentItem }) => (
         {currentItem.loot.map(elems => (
           <tr key={elems.id}>
             <td className="tableCell">
-              <StyledLink to={elems.itemToLoot.name}>
+              <StyledLink to={removeSpace(elems.itemToLoot.name)}>
                 {elems.itemToLoot.image !== null && (
                   <Img
                     style={elems.isBlueprint ? blueprintStyle : null}
@@ -59,7 +60,7 @@ const LootTable = ({ currentItem }) => (
         {currentItem.lootInfo.map(elems => (
           <tr key={elems.container.id}>
             <td className="tableCell">
-              <StyledLink to={elems.container.name}>
+              <StyledLink to={removeSpace(elems.container.name)}>
                 {elems.container.image !== null && (
                   <Img
                     className="ingredients"

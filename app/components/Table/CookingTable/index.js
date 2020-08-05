@@ -3,6 +3,7 @@ import Table from 'components/Table/Table';
 import PropTypes from 'prop-types';
 import Img from 'components/Img';
 import StyledLink from 'components/StyledLink';
+import removeSpace from 'utils/removeSpace';
 import Process from './Process';
 
 const CookingTable = ({ currentItem }) => (
@@ -17,7 +18,7 @@ const CookingTable = ({ currentItem }) => (
           items.furnace.map(item => (
             <tr key={item.id}>
               <td key={item.id} className="tableCell">
-                <StyledLink to={item.name}>
+                <StyledLink to={removeSpace(item.name)}>
                   {item.image !== null && (
                     <Img
                       key={item.image.id}
