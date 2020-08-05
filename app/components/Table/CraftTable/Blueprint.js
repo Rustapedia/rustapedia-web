@@ -34,6 +34,9 @@ const Blueprint = ({ currentItem }) => (
         {currentItem.defaultKnow ? (
           <div className="small-font">(Know By Default)</div>
         ) : null}
+        {currentItem.steamItem ? (
+          <div className="small-font">(Requires Steam Item)</div>
+        ) : null}
       </div>
     </td>
     <td className="tableCell center">

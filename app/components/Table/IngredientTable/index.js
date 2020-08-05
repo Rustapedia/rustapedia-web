@@ -1,10 +1,7 @@
 import React from 'react';
-import Img from 'components/Img';
 import Table from 'components/Table/Table';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import StyledLink from 'components/StyledLink';
-import removeSpace from 'utils/removeSpace';
+import Ingredient from './Ingredient';
 
 const IngredientTable = ({ currentItem }) => (
   <Table>
@@ -15,40 +12,19 @@ const IngredientTable = ({ currentItem }) => (
           <th>Category</th>
           <th>Ingredients</th>
         </tr>
-        {currentItem.ingredientFor.map(items => (
-          <tr key={items.id}>
-            <td className="tableCell">
-              <StyledLink key={items.item.id} to={removeSpace(items.item.name)}>
-                {items.item.image !== null && (
-                  <Img
-                    className="ingredients"
-                    alt={items.item.name}
-                    src={items.item.image.publicUrl}
-                  />
-                )}
-                <span>{items.item.name}</span>
-              </StyledLink>
-            </td>
-            <td className="tableCell center">{items.item.subCategory.name}</td>
-            <td className="tableCell center">
-              {items.requiredItemCounts.map(res => (
-                <span key={res.id}>
-                  <Link key={res.item.id} to={removeSpace(res.item.name)}>
-                    {res.item.image !== null && (
-                      <Img
-                        key={res.item.image.id}
-                        className="ingredients"
-                        alt={res.item.name}
-                        src={res.item.image.publicUrl}
-                      />
-                    )}
-                  </Link>
-                  <span>x {res.count}</span>
-                </span>
-              ))}
-            </td>
-          </tr>
-        ))}
+        <Ingredient
+          currentItem={currentItem.ingredientFor}
+          key={currentItem.id}
+        />
+        {currentItem.ingredientFor.map(
+          items =>
+            items.item.ingredientFor.length > 0 && (
+              <Ingredient
+                currentItem={items.item.ingredientFor}
+                key={items.item.id}
+              />
+            ),
+        )}
       </tbody>
     )}
   </Table>

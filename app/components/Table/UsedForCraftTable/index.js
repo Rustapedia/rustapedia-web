@@ -60,6 +60,7 @@ const UsedForCraftTable = ({ currentItem }) => (
                     src={items.item.image.publicUrl}
                   />
                 )}
+                {items.amount !== null && `x${items.amount}`}
                 <span>{items.item.name}</span>
               </StyledLink>
             </td>

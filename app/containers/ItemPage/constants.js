@@ -24,6 +24,7 @@ export const GET_ITEM = gql`
       text
       blueprint
       defaultKnow
+      steamItem
       additionalText
       mainInfo {
         id
@@ -219,6 +220,7 @@ export const GET_ITEM = gql`
         time1
         time2
         time3
+        amount
         requiredItemCounts {
           id
           item {
