@@ -30,13 +30,10 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-const dotenv = require('dotenv');
-dotenv.config();
-
 const cache = new InMemoryCache();
 
 const link = new HttpLink({
-  uri: 'http://localhost:4301/admin/api',
+  uri: process.env.REACT_APP_API_KEY || 'http://localhost:4301/admin/api',
 });
 
 const client = new ApolloClient({

@@ -35,6 +35,10 @@ export const GET_ITEM = gql`
         stamina
         mainRotorHP
         tailRotorHP
+        generatesEnergy
+        consumption
+        outputs
+        inputs
       }
       itemInfo {
         id

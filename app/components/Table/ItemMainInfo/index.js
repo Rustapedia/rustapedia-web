@@ -53,6 +53,30 @@ const ItemMainInfo = ({ currentItem }) => (
           <td className="tableCell">{currentItem.tailRotorHP}</td>
         </tr>
       )}
+      {currentItem.generatesEnergy !== null && (
+        <tr>
+          <td className="tableCell">Generates Energy</td>
+          <td className="tableCell">{currentItem.generatesEnergy}</td>
+        </tr>
+      )}
+      {currentItem.consumption !== null && (
+        <tr>
+          <td className="tableCell">Consumption</td>
+          <td className="tableCell">{currentItem.consumption}</td>
+        </tr>
+      )}
+      {currentItem.outputs !== null && (
+        <tr>
+          <td className="tableCell">Outputs</td>
+          <td className="tableCell">{currentItem.outputs}</td>
+        </tr>
+      )}
+      {currentItem.inputs !== null && (
+        <tr>
+          <td className="tableCell">Inputs</td>
+          <td className="tableCell">{currentItem.inputs}</td>
+        </tr>
+      )}
     </tbody>
   </Table>
 );
