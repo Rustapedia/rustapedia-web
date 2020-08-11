@@ -5,6 +5,13 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 30px;
   background: rgb(45, 45, 45);
+  .fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
+  }
   .hidden-menu-ticker,
   .btn-menu {
     display: none;
@@ -89,6 +96,7 @@ const Wrapper = styled.div`
       padding: 5px;
     }
     .hidden-menu {
+      position: fixed;
       width: 100%;
       top: -120px;
       flex-direction: column;
@@ -154,6 +162,7 @@ const Wrapper = styled.div`
       top: 50px;
       width: 100%;
       height: 100vh;
+      overflow-y: hidden;
       background: rgb(45, 45, 45) !important;
     }
     .ui.menu .item,
