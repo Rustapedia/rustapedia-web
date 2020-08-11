@@ -89,7 +89,6 @@ const Wrapper = styled.div`
       padding: 5px;
     }
     .hidden-menu {
-      position: fixed;
       width: 100%;
       top: -120px;
       flex-direction: column;
@@ -156,7 +155,6 @@ const Wrapper = styled.div`
       width: 100%;
       height: 100vh;
       background: rgb(45, 45, 45) !important;
-      overflow-y: hidden;
     }
     .ui.menu .item,
     .ui.menu .active.item {
