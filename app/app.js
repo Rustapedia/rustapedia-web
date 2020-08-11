@@ -33,7 +33,9 @@ import { translationMessages } from './i18n';
 const cache = new InMemoryCache();
 
 const link = new HttpLink({
-  uri: process.env.REACT_APP_API_KEY || 'http://localhost:4301/admin/api',
+  uri:
+    process.env.REACT_APP_API_KEY ||
+    'http://mysterious-beyond-50794.herokuapp.com/admin/api',
 });
 
 const client = new ApolloClient({

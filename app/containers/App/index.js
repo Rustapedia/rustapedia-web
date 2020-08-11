@@ -8,7 +8,6 @@
  */
 
 import React, { memo, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -62,12 +61,6 @@ function App({ onLoadData, categories }) {
   }
   return (
     <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />

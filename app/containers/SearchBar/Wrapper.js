@@ -25,7 +25,8 @@ const Wrapper = styled.div`
   }
   @media (min-width: 481px) and (max-width: 768px) {
     .ui.category.search .results {
-      width: 22em;
+      width: 160%;
+      left: -30%;
     }
     .ui.category.search > .results .category > .name {
       padding: 0.3em 0.5em;
@@ -37,7 +38,8 @@ const Wrapper = styled.div`
   }
   @media (max-width: 480px) {
     .ui.category.search .results {
-      width: 180%;
+      width: 140%;
+      left: -20%;
     }
     .ui.category.search > .results .category > .name {
       padding: 0.2em 0.3em;

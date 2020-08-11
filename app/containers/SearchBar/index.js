@@ -73,7 +73,6 @@ export default class SearchBar extends Component {
         <Grid textAlign="center">
           <Search
             category
-            aligned="left"
             loading={isLoading}
             onSearchChange={_.debounce(this.handleSearchChange, 500, {
               leading: true,

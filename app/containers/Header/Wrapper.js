@@ -26,6 +26,10 @@ const Wrapper = styled.div`
   .ui.menu {
     min-height: 0;
   }
+  .ui.category.search .results {
+    width: 180%;
+    left: 0%;
+  }
   .ui.menu,
   .active.item:hover,
   .ui.vertical.menu .active.item:hover,

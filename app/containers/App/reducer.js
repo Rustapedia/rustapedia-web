@@ -32,6 +32,7 @@ const appReducer = (state = initialState, action) =>
     switch (action.type) {
       case CURRENT_ITEM_CHANGED:
         draft.currentItem = action.item;
+        draft.showMenu = false;
         break;
       case SHOW_MENU_CHANGED:
         draft.showMenu = !state.showMenu;
