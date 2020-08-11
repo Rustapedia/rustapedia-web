@@ -156,6 +156,7 @@ const Wrapper = styled.div`
       width: 100%;
       height: 100vh;
       background: rgb(45, 45, 45) !important;
+      overflow-y: hidden;
     }
     .ui.menu .item,
     .ui.menu .active.item {

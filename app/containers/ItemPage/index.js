@@ -82,7 +82,7 @@ function ItemPage({
     <div>
       {currentItem.lootInfo !== undefined && (
         <div>
-          <Wrapper className="itemInfo">
+          <Wrapper className="itemInfo padding">
             <div className="size250">
               {currentItem.image !== null && (
                 <div className="center">

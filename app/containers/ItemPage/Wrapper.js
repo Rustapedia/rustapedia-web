@@ -4,6 +4,9 @@ const Wrapper = styled.div`
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
+  &.padding {
+    padding: 0 2%;
+  }
   &.flex-wrap {
     display: flex;
     flex-flow: row wrap-reverse;
@@ -16,7 +19,7 @@ const Wrapper = styled.div`
     margin-top: 0;
   }
   .padding {
-    padding: 0 5%;
+    padding-left: 3%;
   }
   @media (min-width: 481px) and (max-width: 768px) {
     .padding {
