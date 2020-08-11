@@ -27,8 +27,12 @@ export function Header({
 }) {
   useInjectReducer({ key, reducer });
   return (
-    <Wrapper className={showMenu ? 'fixed' : ''}>
-      <div className="header gray-background">
+    <Wrapper>
+      <div
+        className={
+          showMenu ? 'header gray-background fixed' : 'header gray-background'
+        }
+      >
         <SearchBar className="header-search flex-1" data={categories} />
         <button
           type="button"

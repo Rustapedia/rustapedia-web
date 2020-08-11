@@ -5,14 +5,6 @@ const Wrapper = styled.div`
   width: 100%;
   margin-bottom: 30px;
   background: rgb(45, 45, 45);
-  .fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
-  }
-  .hidden-menu-ticker,
   .btn-menu {
     display: none;
   }
@@ -94,6 +86,13 @@ const Wrapper = styled.div`
     }
     .ui.menu.mobile {
       padding: 5px;
+    }
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      left: 0;
     }
     .hidden-menu {
       position: fixed;
