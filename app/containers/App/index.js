@@ -34,7 +34,7 @@ const AppWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   .ui.search > .results {
-    max-height: 35vh;
+    max-height: 30vh;
     overflow-y: auto;
   }
   button {
