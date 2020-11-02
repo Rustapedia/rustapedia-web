@@ -30,7 +30,7 @@ export function Header({
     <Wrapper>
       <div
         className={
-          showMenu ? 'header gray-background fixed' : 'header gray-background'
+          showMenu ? 'header gray-background' : 'header gray-background'
         }
       >
         <SearchBar className="header-search flex-1" data={categories} />

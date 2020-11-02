@@ -36,6 +36,7 @@ const link = new HttpLink({
   uri:
     process.env.REACT_APP_API_KEY ||
     'http://mysterious-beyond-50794.herokuapp.com/admin/api',
+  credentials: 'include',
 });
 
 const client = new ApolloClient({

@@ -7,7 +7,9 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     line-height: 1.5;
   }
-
+  .no-scroll {
+    overflow: hidden;
+  }
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }

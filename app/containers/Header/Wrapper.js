@@ -87,13 +87,6 @@ const Wrapper = styled.div`
     .ui.menu.mobile {
       padding: 5px;
     }
-    .fixed {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      left: 0;
-    }
     .hidden-menu {
       position: fixed;
       width: 100%;

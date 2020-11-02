@@ -33,17 +33,23 @@ const appReducer = (state = initialState, action) =>
       case CURRENT_ITEM_CHANGED:
         draft.currentItem = action.item;
         draft.showMenu = false;
+        document.body.classList.remove('no-scroll');
         break;
       case SHOW_MENU_CHANGED:
         draft.showMenu = !state.showMenu;
+        if (draft.showMenu) {
+          document.body.classList.add('no-scroll');
+        } else {
+          document.body.classList.remove('no-scroll');
+        }
         break;
       case CURRENT_ITEM_SET:
         draft.currentItem = action.item;
         break;
-
       case CURRENT_CATEGORY_CHANGED:
         draft.currentCategory = action.category;
         draft.showMenu = false;
+        document.body.classList.remove('no-scroll');
         break;
 
       case LOAD_DATA:
